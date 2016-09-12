@@ -1,1 +1,0 @@
-1. Creating an empty note, empty folders cannot be added to git repositories.
