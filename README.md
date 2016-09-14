@@ -4,18 +4,18 @@ Project repository for SE
 
 #Directory Structure
 
--SEProject
---Charts			
---Documents
-----Deliverables
-----Minutes Of Meetings
-----Reports
---Knowledge Sharing
---Notes
---Presentations
---Source
-----BackUp
-------WhatsUrSayUI
-----Main
-------WhatsUrSayUI
+-SEProject  
+--Charts  			
+--Documents  
+----Deliverables  
+----Minutes Of Meetings  
+----Reports  
+--Knowledge Sharing  
+--Notes  
+--Presentations  
+--Source  
+----BackUp  
+------WhatsUrSayUI  
+----Main  
+------WhatsUrSayUI  
 
