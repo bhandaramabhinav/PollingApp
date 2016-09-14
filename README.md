@@ -5,17 +5,17 @@ Project repository for SE
 #Directory Structure
 
 -SEProject  
----Charts  			
----Documents  
-------Deliverables  
-------Minutes Of Meetings  
-------Reports  
----Knowledge Sharing  
----Notes  
----Presentations  
----Source  
-------BackUp  
----------WhatsUrSayUI  
-------Main  
----------WhatsUrSayUI  
+---Charts  			(has all the chart files related to our project eg: PERT & GANT charts)		
+---Documents  			(All documents related to our projects)
+------Deliverables  		(All documents related to deliverables)
+------Minutes Of Meetings  	(All minutes of meetings)
+------Reports  			(All deliverable reports)
+---Knowledge Sharing  		(All documents, notes related to knowledge sharing like tutorial links etc..)
+---Notes  			(All notes related to our project eg: Steps on how VS 2015 works).
+---Presentations  		(All presentations)
+---Source  			(Source code folder)
+------DailyBackUp  		(Source code Back up folder)
+---------WhatsUrSayUI		(UI Source)  
+------Main  			(Source code main folder)
+---------WhatsUrSayUI  		(UI Source).
 
