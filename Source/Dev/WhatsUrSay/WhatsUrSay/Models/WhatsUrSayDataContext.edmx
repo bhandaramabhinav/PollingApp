@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="heading" Type="ntext" Nullable="false" />
+          <Property Name="description" Type="ntext" />
+          <Property Name="type" Type="ntext" Nullable="false" />
+          <Property Name="category" Type="ntext" Nullable="false" />
+          <Property Name="group_ids" Type="ntext" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DSE.dbo.Answer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="question_id" />
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="question_id" Type="int" Nullable="false" />
+          <Property Name="activity_id" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="ntext" Nullable="false" />
+          <Property Name="user_ids" Type="ntext" />
+          <Property Name="created_by" Type="ntext" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DSE.dbo.Question' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="description" />
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="description" Type="ntext" Nullable="false" />
+          <Property Name="activity_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="ntext" Nullable="false" />
+          <Property Name="role" Type="ntext" Nullable="false" />
+          <Property Name="emailId" Type="ntext" Nullable="false" />
+          <Property Name="pwd" Type="ntext" Nullable="false" />
+          <Property Name="status" Type="ntext" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DSE.dbo.User_Group' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="User_Group">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="group_ids" Type="ntext" />
+        </EntityType>
+        <EntityContainer Name="DSEModelStoreContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Answer" EntityType="Self.Answer" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Answer].[id] AS [id], 
+    [Answer].[question_id] AS [question_id], 
+    [Answer].[activity_id] AS [activity_id], 
+    [Answer].[count] AS [count]
+    FROM [dbo].[Answer] AS [Answer]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Question" EntityType="Self.Question" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Question].[id] AS [id], 
+    [Question].[description] AS [description], 
+    [Question].[activity_id] AS [activity_id]
+    FROM [dbo].[Question] AS [Question]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_Group" EntityType="Self.User_Group" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [User_Group].[id] AS [id], 
+    [User_Group].[user_id] AS [user_id], 
+    [User_Group].[group_ids] AS [group_ids]
+    FROM [dbo].[User_Group] AS [User_Group]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="heading" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="category" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="group_ids" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_ids" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="created_by" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pwd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="question_id" />
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="question_id" Type="Int32" Nullable="false" />
+          <Property Name="activity_id" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="description" />
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="activity_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Group">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="group_ids" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DSEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activities" EntityType="Self.Activity" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Answers" EntityType="Self.Answer" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="User_Group" EntityType="Self.User_Group" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DSEModelStoreContainer" CdmEntityContainer="DSEEntities">
+          <EntitySetMapping Name="Activities">
+            <EntityTypeMapping TypeName="DSEModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="heading" ColumnName="heading" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="group_ids" ColumnName="group_ids" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="DSEModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="user_ids" ColumnName="user_ids" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DSEModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="emailId" ColumnName="emailId" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="DSEModel.Answer">
+              <MappingFragment StoreEntitySet="Answer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
+                <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="DSEModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Group">
+            <EntityTypeMapping TypeName="DSEModel.User_Group">
+              <MappingFragment StoreEntitySet="User_Group">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="group_ids" ColumnName="group_ids" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
