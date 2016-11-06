@@ -14,6 +14,8 @@ namespace WhatsUrSay.Models
     
     public partial class Answer
     {
+        internal object description;
+
         public int id { get; set; }
         public int question_id { get; set; }
         public int activity_id { get; set; }
