@@ -1025,7 +1025,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="AnswerResp.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
+    <Compile Include="Controllers\GroupmvcController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
+    <Compile Include="Controllers\PollController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="IAnswer.cs" />
+    <Compile Include="Models\GroupDetails.cs" />
+    <Compile Include="Models\UserDetails.cs" />
+    <Compile Include="Repositories\PollRepository.cs" />
+    <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="SurveyResp.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1089,7 +1097,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61972</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
