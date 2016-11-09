@@ -262,6 +262,7 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           <Property Name="activity_id" Type="Int32" Nullable="false" />
           <Property Name="count" Type="Int32" />
           <NavigationProperty Name="Activity" Relationship="DSEModel.FK_Answer_Activity" FromRole="Answer" ToRole="Activity" />
+          <Property Name="description" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
