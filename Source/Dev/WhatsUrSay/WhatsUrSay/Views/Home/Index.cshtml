@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+@{
+    ViewBag.Title = "Home";
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/css/foundation.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="~/Content/css/foundation-icons/foundation-icons.css" rel="stylesheet" />
+</head>
+<body ng-app="app" ng-controller="HomeController">
+    <div class="top-bar">
+        <div class="row">
+            <div class="top-bar-left">
+                <ul class="menu">
+                    <li><a href="#">Create <i class="fi-plus"></i></a></li>
+                    <li><a href="#">Participate</a></li>
+                </ul>
+            </div>
+            <div class="top-bar-title" style="margin-left:20%">
+                <ul class="menu">
+                    <li class="menu-text">
+                        Whats Ur Say !!
+                    </li>
+                </ul>
+            </div>
+            <div class="top-bar-right">
+                <ul class="menu">
+                    <li><a href="#/join">Join</a></li>
+                    <li><a href="#/login">Log In</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row body-content" ng-view></div>
+    
+    <footer class="secondary callout">
+        <div class="row">
+            <div class="small-3 large-6 columns">&copy;DSE's</div>
+            <div class="small-3 large-6 columns">
+                <ul class="menu">
+                    <li>
+                        <a href="#">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#">Team</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/scripts/js/foundation.min.js"></script>
+    <script src="~/scripts/js/what-input.js"></script>
+    <script src="~/scripts/angular.min.js"></script>
+    <script src="~/scripts/angular-route.min.js"></script>
+    <script src="~/scripts/angular-animate.min.js"></script>
+    <script src="~/scripts/angular-aria.min.js"></script>
+    <script src="~/scripts/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="~/scripts/app/app.js"></script>
+    <script src="~/scripts/app/HomeController.js"></script>
+    <script>$(document).ready(function () { $(document).foundation(); });</script>
+</body>
+</html>
+
+
