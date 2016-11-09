@@ -17,6 +17,8 @@ namespace WhatsUrSay.Models
         public int id { get; set; }
         public string name { get; set; }
         public string user_ids { get; set; }
-        public string created_by { get; set; }
+        public int createdby { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }
