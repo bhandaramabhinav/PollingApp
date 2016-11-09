@@ -126,15 +126,13 @@ GO
 ALTER TABLE [dbo].[Question] CHECK CONSTRAINT [FK_Question_Activity]
 GO
 
-
-
-
 CREATE TABLE [dbo].[Answer](
 	[id] [int] NOT NULL,
+	[description] [ntext] NOT NULL,
 	[question_id] [int] NOT NULL,
 	[activity_id] [int] NOT NULL,
 	[count] [int] NULL
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
 
