@@ -6,7 +6,7 @@ using WhatsUrSay.Models;
 
 namespace WhatsUrSay
 {
-    public class AnswerResp
+    public class AnswerResp: IAnswer
     {
         DSEEntities Db2 = new DSEEntities();
 

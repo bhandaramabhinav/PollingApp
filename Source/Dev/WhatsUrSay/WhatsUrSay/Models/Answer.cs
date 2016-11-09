@@ -15,11 +15,12 @@ namespace WhatsUrSay.Models
     public partial class Answer
     {
         public int id { get; set; }
+        public string description { get; set; }
         public int question_id { get; set; }
         public int activity_id { get; set; }
         public Nullable<int> count { get; set; }
-        public string description { get; set; }
     
         public virtual Activity Activity { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

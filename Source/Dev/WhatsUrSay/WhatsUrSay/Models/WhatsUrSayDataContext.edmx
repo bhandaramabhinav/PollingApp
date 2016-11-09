@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="id" />
@@ -22,10 +22,9 @@ warning 6002: The table/view 'DSE.dbo.Answer' does not have a primary key define
         <EntityType Name="Answer">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="question_id" />
-            <PropertyRef Name="activity_id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="description" Type="ntext" Nullable="false" />
           <Property Name="question_id" Type="int" Nullable="false" />
           <Property Name="activity_id" Type="int" Nullable="false" />
           <Property Name="count" Type="int" />
@@ -63,7 +62,6 @@ warning 6002: The table/view 'DSE.dbo.User_Group' does not have a primary key de
         <EntityType Name="User_Group">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="user_id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
@@ -74,8 +72,6 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
         <EntityType Name="User_Request">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="user_id" />
-            <PropertyRef Name="status" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
@@ -103,6 +99,18 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
             </Principal>
             <Dependent Role="Answer">
               <PropertyRef Name="activity_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Answer_Question">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="question_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -162,6 +170,7 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           <EntitySet Name="Answer" EntityType="Self.Answer" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Answer].[id] AS [id], 
+    [Answer].[description] AS [description], 
     [Answer].[question_id] AS [question_id], 
     [Answer].[activity_id] AS [activity_id], 
     [Answer].[count] AS [count]
@@ -190,6 +199,10 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
             <End Role="Activity" EntitySet="Activity" />
             <End Role="Answer" EntitySet="Answer" />
           </AssociationSet>
+          <AssociationSet Name="FK_Answer_Question" Association="Self.FK_Answer_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
           <AssociationSet Name="FK_Group_User" Association="Self.FK_Group_User">
             <End Role="User" EntitySet="User" />
             <End Role="Group" EntitySet="Group" />
@@ -207,7 +220,8 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
             <End Role="User_Request" EntitySet="User_Request" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -222,9 +236,9 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           <Property Name="category" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="group_ids" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="createdby" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DSEModel.FK_Activity_User" FromRole="Activity" ToRole="User" />
-          <NavigationProperty Name="Answer" Relationship="DSEModel.FK_Answer_Activity" FromRole="Activity" ToRole="Answer" />
-          <NavigationProperty Name="Question" Relationship="DSEModel.FK_Question_Activity" FromRole="Activity" ToRole="Question" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Activity_User" FromRole="Activity" ToRole="User" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK_Answer_Activity" FromRole="Activity" ToRole="Answer" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Question_Activity" FromRole="Activity" ToRole="Question" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -234,7 +248,17 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="user_ids" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="createdby" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DSEModel.FK_Group_User" FromRole="Group" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Group_User" FromRole="Group" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="activity_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Question_Activity" FromRole="Question" ToRole="Activity" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK_Answer_Question" FromRole="Question" ToRole="Answer" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -242,97 +266,49 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="role" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="emailId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pwd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Activity" Relationship="DSEModel.FK_Activity_User" FromRole="User" ToRole="Activity" />
-          <NavigationProperty Name="Group" Relationship="DSEModel.FK_Group_User" FromRole="User" ToRole="Group" />
-          <NavigationProperty Name="User_Group" Relationship="DSEModel.FK_User_Group_User" FromRole="User" ToRole="User_Group" />
-          <NavigationProperty Name="User_Request" Relationship="DSEModel.FK_User_Request_User" FromRole="User" ToRole="User_Request" />
+          <NavigationProperty Name="Activities" Relationship="Self.FK_Activity_User" FromRole="User" ToRole="Activity" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_Group_User" FromRole="User" ToRole="Group" />
+          <NavigationProperty Name="User_Group" Relationship="Self.FK_User_Group_User" FromRole="User" ToRole="User_Group" />
+          <NavigationProperty Name="User_Request" Relationship="Self.FK_User_Request_User" FromRole="User" ToRole="User_Request" />
         </EntityType>
         <EntityType Name="Answer">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="question_id" />
-            <PropertyRef Name="activity_id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="question_id" Type="Int32" Nullable="false" />
-          <Property Name="activity_id" Type="Int32" Nullable="false" />
-          <Property Name="count" Type="Int32" />
-          <NavigationProperty Name="Activity" Relationship="DSEModel.FK_Answer_Activity" FromRole="Answer" ToRole="Activity" />
-          <Property Name="description" Type="String" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Question">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="description" />
-            <PropertyRef Name="activity_id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="question_id" Type="Int32" Nullable="false" />
           <Property Name="activity_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Activity" Relationship="DSEModel.FK_Question_Activity" FromRole="Question" ToRole="Activity" />
+          <Property Name="count" Type="Int32" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Answer_Activity" FromRole="Answer" ToRole="Activity" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Answer_Question" FromRole="Answer" ToRole="Question" />
         </EntityType>
         <EntityType Name="User_Group">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="user_id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="group_ids" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="DSEModel.FK_User_Group_User" FromRole="User_Group" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Group_User" FromRole="User_Group" ToRole="User" />
         </EntityType>
-        <EntityContainer Name="DSEEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Activities" EntityType="Self.Activity" />
-          <EntitySet Name="Groups" EntityType="Self.Group" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Answers" EntityType="Self.Answer" />
-          <EntitySet Name="Questions" EntityType="Self.Question" />
-          <EntitySet Name="User_Group" EntityType="Self.User_Group" />
-          <EntitySet Name="User_Request" EntityType="DSEModel.User_Request" />
-          <AssociationSet Name="FK_Activity_User" Association="DSEModel.FK_Activity_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Activity" EntitySet="Activities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Answer_Activity" Association="DSEModel.FK_Answer_Activity">
-            <End Role="Activity" EntitySet="Activities" />
-            <End Role="Answer" EntitySet="Answers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Question_Activity" Association="DSEModel.FK_Question_Activity">
-            <End Role="Activity" EntitySet="Activities" />
-            <End Role="Question" EntitySet="Questions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Group_User" Association="DSEModel.FK_Group_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Group" EntitySet="Groups" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Group_User" Association="DSEModel.FK_User_Group_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="User_Group" EntitySet="User_Group" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Request_User" Association="DSEModel.FK_User_Request_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="User_Request" EntitySet="User_Request" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="User_Request">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="user_id" />
-            <PropertyRef Name="status" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DSEModel.FK_User_Request_User" FromRole="User_Request" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Request_User" FromRole="User_Request" ToRole="User" />
         </EntityType>
         <Association Name="FK_Activity_User">
-          <End Type="DSEModel.User" Role="User" Multiplicity="1" />
-          <End Type="DSEModel.Activity" Role="Activity" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="id" />
@@ -343,8 +319,8 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answer_Activity">
-          <End Type="DSEModel.Activity" Role="Activity" Multiplicity="1" />
-          <End Type="DSEModel.Answer" Role="Answer" Multiplicity="*" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Activity">
               <PropertyRef Name="id" />
@@ -355,8 +331,8 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Question_Activity">
-          <End Type="DSEModel.Activity" Role="Activity" Multiplicity="1" />
-          <End Type="DSEModel.Question" Role="Question" Multiplicity="*" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Activity">
               <PropertyRef Name="id" />
@@ -367,8 +343,8 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Group_User">
-          <End Type="DSEModel.User" Role="User" Multiplicity="1" />
-          <End Type="DSEModel.Group" Role="Group" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="id" />
@@ -378,9 +354,21 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Answer_Question">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Group_User">
-          <End Type="DSEModel.User" Role="User" Multiplicity="1" />
-          <End Type="DSEModel.User_Group" Role="User_Group" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Group" Type="Self.User_Group" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="id" />
@@ -391,8 +379,8 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Request_User">
-          <End Type="DSEModel.User" Role="User" Multiplicity="1" />
-          <End Type="DSEModel.User_Request" Role="User_Request" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Request" Type="Self.User_Request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="id" />
@@ -402,6 +390,43 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="DSEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activities" EntityType="Self.Activity" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Answers" EntityType="Self.Answer" />
+          <EntitySet Name="User_Group" EntityType="Self.User_Group" />
+          <EntitySet Name="User_Request" EntityType="Self.User_Request" />
+          <AssociationSet Name="FK_Activity_User" Association="Self.FK_Activity_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Answer_Activity" Association="Self.FK_Answer_Activity">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Activity" Association="Self.FK_Question_Activity">
+            <End Role="Activity" EntitySet="Activities" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_User" Association="Self.FK_Group_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Answer_Question" Association="Self.FK_Answer_Question">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Group_User" Association="Self.FK_User_Group_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Group" EntitySet="User_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Request_User" Association="Self.FK_User_Request_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Request" EntitySet="User_Request" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -411,23 +436,32 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="DSEModel.Activity">
               <MappingFragment StoreEntitySet="Activity">
-                <ScalarProperty Name="createdby" ColumnName="createdby" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="heading" ColumnName="heading" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="group_ids" ColumnName="group_ids" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Groups">
             <EntityTypeMapping TypeName="DSEModel.Group">
               <MappingFragment StoreEntitySet="Group">
-                <ScalarProperty Name="createdby" ColumnName="createdby" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="user_ids" ColumnName="user_ids" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="DSEModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="activity_id" ColumnName="activity_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -447,18 +481,10 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
             <EntityTypeMapping TypeName="DSEModel.Answer">
               <MappingFragment StoreEntitySet="Answer">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="question_id" ColumnName="question_id" />
                 <ScalarProperty Name="activity_id" ColumnName="activity_id" />
                 <ScalarProperty Name="count" ColumnName="count" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Questions">
-            <EntityTypeMapping TypeName="DSEModel.Question">
-              <MappingFragment StoreEntitySet="Question">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="activity_id" ColumnName="activity_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -474,10 +500,10 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
           <EntitySetMapping Name="User_Request">
             <EntityTypeMapping TypeName="DSEModel.User_Request">
               <MappingFragment StoreEntitySet="User_Request">
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -495,7 +521,7 @@ warning 6002: The table/view 'DSE.dbo.User_Request' does not have a primary key 
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

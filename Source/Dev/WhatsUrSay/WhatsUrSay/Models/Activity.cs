@@ -17,8 +17,8 @@ namespace WhatsUrSay.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Activity()
         {
-            this.Answer = new HashSet<Answer>();
-            this.Question = new HashSet<Question>();
+            this.Answers = new HashSet<Answer>();
+            this.Questions = new HashSet<Question>();
         }
     
         public int id { get; set; }
@@ -31,8 +31,8 @@ namespace WhatsUrSay.Models
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answer> Answer { get; set; }
+        public virtual ICollection<Answer> Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Question> Question { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }
