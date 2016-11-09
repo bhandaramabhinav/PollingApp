@@ -11,6 +11,13 @@
         <EntityTypeShape EntityType="DSEModel.Answer" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DSEModel.Question" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DSEModel.User_Group" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DSEModel.User_Request" Width="1.5" PointX="3" PointY="7.25" />
+        <AssociationConnector Association="DSEModel.FK_Activity_User" />
+        <AssociationConnector Association="DSEModel.FK_Answer_Activity" />
+        <AssociationConnector Association="DSEModel.FK_Question_Activity" />
+        <AssociationConnector Association="DSEModel.FK_Group_User" />
+        <AssociationConnector Association="DSEModel.FK_User_Group_User" />
+        <AssociationConnector Association="DSEModel.FK_User_Request_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

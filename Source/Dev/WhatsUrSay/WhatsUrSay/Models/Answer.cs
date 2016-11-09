@@ -18,5 +18,7 @@ namespace WhatsUrSay.Models
         public int question_id { get; set; }
         public int activity_id { get; set; }
         public Nullable<int> count { get; set; }
+    
+        public virtual Activity Activity { get; set; }
     }
 }

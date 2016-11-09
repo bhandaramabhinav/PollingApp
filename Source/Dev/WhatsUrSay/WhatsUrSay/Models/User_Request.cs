@@ -12,12 +12,13 @@ namespace WhatsUrSay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Question
+    public partial class User_Request
     {
         public int id { get; set; }
+        public int user_id { get; set; }
         public string description { get; set; }
-        public int activity_id { get; set; }
+        public int status { get; set; }
     
-        public virtual Activity Activity { get; set; }
+        public virtual User User { get; set; }
     }
 }
