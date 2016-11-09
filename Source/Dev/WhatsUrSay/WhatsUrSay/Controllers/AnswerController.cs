@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WhatsUrSay.Models;
+using WhatsUrSay.Interfaces;
 
 namespace WhatsUrSay.Controllers
 {
