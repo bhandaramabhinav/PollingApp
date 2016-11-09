@@ -1,7 +1,7 @@
 USE [DSE]
 GO
 
-/****** Object:  Table [dbo].[User]    Script Date: 11/8/2016 11:30:51 PM ******/
+/****** Object:  Table [dbo].[User]    Script Date: 11/9/2016 1:40:56 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -46,10 +46,15 @@ ALTER TABLE [dbo].[Group] CHECK CONSTRAINT [FK_Group_User]
 GO
 
 
+
 CREATE TABLE [dbo].[User_Group](
 	[id] [int] NOT NULL,
 	[user_id] [int] NOT NULL,
-	[group_ids] [ntext] NULL
+	[group_ids] [ntext] NULL,
+ CONSTRAINT [PK_User_Group] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
@@ -63,11 +68,16 @@ GO
 
 
 
+
 CREATE TABLE [dbo].[User_Request](
 	[id] [int] NOT NULL,
 	[user_id] [int] NOT NULL,
 	[description] [ntext] NULL,
-	[status] [int] NOT NULL
+	[status] [int] NOT NULL,
+ CONSTRAINT [PK_User_Request] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
@@ -78,6 +88,7 @@ GO
 
 ALTER TABLE [dbo].[User_Request] CHECK CONSTRAINT [FK_User_Request_User]
 GO
+
 
 
 
@@ -105,8 +116,6 @@ GO
 ALTER TABLE [dbo].[Activity] CHECK CONSTRAINT [FK_Activity_User]
 GO
 
-
-
 CREATE TABLE [dbo].[Question](
 	[id] [int] NOT NULL,
 	[description] [ntext] NOT NULL,
@@ -131,7 +140,11 @@ CREATE TABLE [dbo].[Answer](
 	[description] [ntext] NOT NULL,
 	[question_id] [int] NOT NULL,
 	[activity_id] [int] NOT NULL,
-	[count] [int] NULL
+	[count] [int] NULL,
+ CONSTRAINT [PK_Answer] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
@@ -143,4 +156,9 @@ GO
 ALTER TABLE [dbo].[Answer] CHECK CONSTRAINT [FK_Answer_Activity]
 GO
 
+ALTER TABLE [dbo].[Answer]  WITH CHECK ADD  CONSTRAINT [FK_Answer_Question] FOREIGN KEY([question_id])
+REFERENCES [dbo].[Question] ([id])
+GO
 
+ALTER TABLE [dbo].[Answer] CHECK CONSTRAINT [FK_Answer_Question]
+GO
