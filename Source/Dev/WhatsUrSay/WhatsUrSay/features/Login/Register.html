@@ -1,0 +1,63 @@
+﻿<form data-abide novalidate>
+    
+    <div class="primary callout">
+        <div class="row">
+            <div class="large-12 columns">
+                <label for="emailId" class="error" role="alert">
+                    Email Id <small>required</small>
+                    <input type="text" placeholder="Email Id" name="emailId" id="emailId">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label for="password">
+                    Password <small>required</small>
+                    <input type="password" id="password" placeholder="Password" name="password" />
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label for="confirmPassword" class="">
+                    Confirm Password <small>required</small>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>
+                    Name <small>required</small>
+                    <input type="text" id="name" placeholder="Name" name="name">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>
+                    Role <small>required</small>
+                    <select id="role" name="role">
+                        <option ng-repeat="userRole in userRoles" value="userRole.id">{{userRole.name}}</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>
+                    Reason: <small>required</small>
+                    <textarea></textarea>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-3 columns">
+                <button type="button" class="button round">Register</button>
+                <a href="#/home" class="button round">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+</form>
+<script>$(document).foundation();</script>
