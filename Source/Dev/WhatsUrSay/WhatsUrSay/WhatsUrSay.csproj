@@ -164,15 +164,20 @@
     <Content Include="bin\Newtonsoft.Json.dll" />
     <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
     <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\csi.rsp" />
     <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
     <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
     <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
     <Content Include="bin\roslyn\System.AppContext.dll" />
     <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
     <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
@@ -180,7 +185,10 @@
     <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
     <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
     <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="bin\System.Net.Http.Formatting.dll" />
     <Content Include="bin\System.Net.Http.Formatting.xml" />
     <Content Include="bin\System.Web.Helpers.dll" />
@@ -200,6 +208,7 @@
     <Content Include="bin\System.Web.Webpages.Razor.xml" />
     <Content Include="bin\System.Web.Webpages.xml" />
     <Content Include="bin\WhatsUrSay.dll" />
+    <Content Include="bin\WhatsUrSay.dll.config" />
     <Content Include="bin\WhatsUrSay.pdb" />
     <Content Include="Content\css\app.css" />
     <Content Include="Content\css\foundation-icons\foundation-icons.css" />
@@ -1107,6 +1116,10 @@
     <Content Include="scripts\angular-touch.min.js" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />
+    <Content Include="scripts\app\app.js" />
+    <Content Include="scripts\app\HomeController.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\errors.json" />
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="scripts\angular-touch.min.js.map" />
@@ -1120,15 +1133,6 @@
     <Content Include="scripts\angular-cookies.min.js.map" />
     <Content Include="scripts\angular-aria.min.js.map" />
     <Content Include="scripts\angular-animate.min.js.map" />
-    <Content Include="bin\roslyn\csc.exe.config" />
-    <Content Include="bin\roslyn\csc.rsp" />
-    <Content Include="bin\roslyn\csi.rsp" />
-    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
-    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="bin\roslyn\vbc.exe.config" />
-    <Content Include="bin\roslyn\vbc.rsp" />
-    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="bin\WhatsUrSay.dll.config" />
     <EntityDeploy Include="Models\WhatsUrSayDataContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WhatsUrSayDataContext1.Designer.cs</LastGenOutput>
@@ -1155,6 +1159,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="scripts\i18n\angular-locale_aa-er.js" />
@@ -1900,35 +1905,52 @@
     <Content Include="scripts\i18n\angular-locale_zh.js" />
     <Content Include="scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="scripts\i18n\angular-locale_zu.js" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery-3.1.1.js" />
     <Content Include="scripts\jquery-3.1.1.min.js" />
     <Content Include="scripts\jquery-3.1.1.slim.js" />
     <Content Include="scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="scripts\js\app.js" />
+    <Content Include="scripts\js\foundation.js" />
+    <Content Include="scripts\js\foundation.min.js" />
+    <Content Include="scripts\js\vendor\foundation.js" />
+    <Content Include="scripts\js\vendor\foundation.min.js" />
+    <Content Include="scripts\js\vendor\jquery.js" />
+    <Content Include="scripts\js\vendor\what-input.js" />
+    <Content Include="scripts\js\what-input.js" />
+    <Content Include="Views\web.config" />
     <Content Include="Web.config" />
     <Content Include="scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="AnswerResp.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
-    <Compile Include="Controllers\GroupmvcController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
-    <Compile Include="IAnswer.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Interfaces\IAnswer.cs" />
     <Compile Include="Interfaces\ILoginRepository.cs" />
+    <Compile Include="Interfaces\ISurvey.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Models\GroupDetails.cs" />
     <Compile Include="Models\UserDetails.cs" />
+    <Compile Include="Models\User_Request.cs" />
+    <Compile Include="Repositories\AnswerResp.cs" />
+    <Compile Include="Repositories\GroupsRepository.cs" />
+    <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\PollRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
-    <Compile Include="SurveyResp.cs" />
+    <Compile Include="Repositories\SurveyResp.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ISurvey.cs" />
     <Compile Include="Models\Activity.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
@@ -1958,7 +1980,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="scripts\jquery-3.1.1.min.map" />
