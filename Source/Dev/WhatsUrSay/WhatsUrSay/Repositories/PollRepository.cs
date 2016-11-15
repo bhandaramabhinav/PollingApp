@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+Component :                             A class that does 'insert' and 'read' operations on the 'Activity' table of our project's database (DSE)
+Author:                                 Sreedevi Koppula
+Use of the component in system design:  Used for performing 'insert' and 'read' operations on the 'Activity' table 
+Written and revised:                    11/5/2016
+Reason for component existence:         To perform 'insert' and 'read' operations on the 'Activity' table 
+Component usage of data structures, algorithms and control(if any): 
+    Uses Entity framework class 'Activity.cs' to do 'insert' and 'read' operations on 'Activity' table
+    The component contains the below methods:
+        'GetAll()', 'Get(int id)', 'Add(Activity activity)'
+    These methods are invoked by 'PollController', a Web Api controller that serves the clients' requests
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,16 +22,25 @@ namespace WhatsUrSay.Repositories
     {
         private DSEEntities db = new DSEEntities();
 
+        //Purpose: Gets all the records of type 'poll' from the 'Activity' table
+        //Input: None
+        //Output: A list of poll records from the 'Activity' table
         public IEnumerable<Activity> GetAll()
         {
             return db.Activities.ToList();
         }
 
+        //Purpose: Gets a record from the 'Activity' table whose row id is 'id'
+        //Input: 'id' of the required record
+        //Output: a record from 'Activity' table whose key is 'id'
         public Activity Get(int id)
         {
             return db.Activities.Find(id);
         }
 
+        //Purpose: Adds an object 'activity' in the 'Activity' table
+        //Input: 'activity' object of type 'Activity.cs'
+        //Output: Returns the object 'activity' upon its successful addition in the table
         public Activity Add(Activity activity)
         {
             if (activity == null)
@@ -30,28 +51,5 @@ namespace WhatsUrSay.Repositories
             return activity;
         }
 
-        public bool Update(Activity updated)
-        {
-            if (updated == null)
-                throw new ArgumentNullException("updated");
-
-            var activity = db.Activities.Single(a => a.id == updated.id);
-            activity.heading = updated.heading;
-            activity.description = updated.description;
-            activity.category = updated.category;
-            activity.type = updated.type;
-            activity.group_ids = updated.group_ids;
-
-            db.SaveChanges();
-            return true;
-        }
-
-        public bool Delete(int id)
-        {
-            Activity activity = db.Activities.Find(id);
-            db.Activities.Remove(activity);
-            db.SaveChanges();
-            return true;
-        }
     }
 }

@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+Component :                             A class that does 'insert' operation on the 'Question' table of our project's database (DSE)
+Author:                                 Sreedevi Koppula
+Use of the component in system design:  Used for performing 'insert' operation on the 'Question' table 
+Written and revised:                    11/5/2016
+Reason for component existence:         To perform 'insert' operation on the 'Question' table 
+Component usage of data structures, algorithms and control(if any): 
+    Uses Entity framework class 'Question.cs' to do 'insert' operation on 'Question' table
+    The component contains the below method:
+        'Add(Question question)' 
+    These methods are invoked by 'QuestionController', a Web Api controller that serve the clients' requests
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +22,9 @@ namespace WhatsUrSay.Repositories
     {
         private DSEEntities db = new DSEEntities();
 
+        //Purpose: Adds an object 'question' in the 'Question' table
+        //Input: 'question' object of type 'Question.cs'
+        //Output: Returns the object 'question' upon its successful addition in the table
         public Question Add(Question question)
         {
             if (question == null)

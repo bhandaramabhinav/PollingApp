@@ -1,4 +1,18 @@
-﻿using System;
+﻿/* File Name :GroupsController.cs
+ * Created By: Raj 
+ * This File resides in Business Layer 
+ * 
+ * Change History
+ ************************
+ ** PR   Date        Author         Description 
+ ** --   --------   -------   ------------------------------------
+ ** 1    11/7/2016     Raj      Created GroupsController class and incuded methods  to create ,delete,edit group details
+ * This file hold business logic related to group related activities and provides services to UI layer up on request.
+ * 
+*/
+
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -9,46 +23,45 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WhatsUrSay.Models;
+using WhatsUrSay.Repositories;
 
 namespace WhatsUrSay.Controllers
 {
     public class GroupsController : ApiController
     {
-        private DSEEntities db = new DSEEntities();
+        GroupsRepository groupRepository = new GroupsRepository();
 
         // GET: api/Groups
+        /// <summary>
+        /// This method returns all groups listed in database
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Group> GetGroups()
         {
-            return db.Groups;
+           
+            return groupRepository.GetGroups();
         }
 
         // GET: api/Groups/5
+        /// <summary>
+        /// This method get specific group details 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>group details</returns>
         [ResponseType(typeof(GroupDetails))]
         public IHttpActionResult GetGroup([FromUri]int id)
         {
-            Group group = db.Groups.Find(id);
-            if (group == null)
-            {
-                return NotFound();
-            }
-            GroupDetails groupDetails = new GroupDetails();
-            groupDetails.group = group;
-            groupDetails.UserList = new List<UserDetails>();
-            string[] users = group.user_ids.Split(',');
 
-            foreach (var userId in users)
-            {
-                User user = db.Users.Find(Int32.Parse(userId));
-
-                groupDetails.UserList.Add(new UserDetails() { Id = user.id, Name = user.name });
-            }
-
-            
-
+            GroupDetails groupDetails = groupRepository.GetGroup(id);
             return Ok(groupDetails);
         }
 
-        // PUT: api/Groups/5
+        // PUT: api/Groups/5/
+        /// <summary>
+        /// This method updates specific group details
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns> status code</returns>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutGroup(Group group)
         {
@@ -56,14 +69,9 @@ namespace WhatsUrSay.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-         
-
-            db.Entry(group).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
+                groupRepository.UpdatGroup(group);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -76,6 +84,11 @@ namespace WhatsUrSay.Controllers
         }
 
         // POST: api/Groups
+        /// <summary>
+        /// This method  creates new group
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns>Route of created group</returns>
         [ResponseType(typeof(Group))]
         public IHttpActionResult PostGroup(Group group)
         {
@@ -84,55 +97,45 @@ namespace WhatsUrSay.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Groups.Add(group);
 
             try
             {
-                db.SaveChanges();
+                groupRepository.CreateGroup(group);
             }
             catch (DbUpdateException)
             {
-                if (GroupExists(group.id))
-                {
-                    return Conflict();
-                }
-                else
-                {
+                
                     throw;
-                }
             }
 
             return CreatedAtRoute("DefaultApi", new { id = group.id }, group);
         }
 
         // DELETE: api/Groups/5
+        /// <summary>
+        /// This method deletes specific group
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> deleted group details</returns>
         [ResponseType(typeof(Group))]
         public IHttpActionResult DeleteGroup([FromUri]int id)
         {
-            Group group = db.Groups.Find(id);
-            if (group == null)
+            Group group;
+            try
             {
-                return NotFound();
+                 group = groupRepository.DeleteGroup(id);
             }
+            catch (Exception)
+            {
 
-            db.Groups.Remove(group);
-            db.SaveChanges();
+                throw;
+            }
+           
 
             return Ok(group);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+      
 
-        private bool GroupExists(int id)
-        {
-            return db.Groups.Count(e => e.id == id) > 0;
-        }
     }
 }

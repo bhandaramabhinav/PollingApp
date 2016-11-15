@@ -6,8 +6,9 @@
             templateUrl: 'features/Login/Login.html',
         }).when('/join', {
             templateUrl:'features/Login/Register.html'
-        })
-        .otherwise({
+        }).when('/createPoll', {
+            templateUrl: 'features/Poll/CreatePoll.html'
+        }).otherwise({
             templateUrl:'features/Home/Home.html'
         })
 
