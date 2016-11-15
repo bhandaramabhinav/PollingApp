@@ -1074,6 +1074,7 @@
     <Content Include="Content\__MACOSX\foundation-icons\svgs\._fi-yen.svg" />
     <Content Include="Content\__MACOSX\foundation-icons\svgs\._fi-zoom-in.svg" />
     <Content Include="Content\__MACOSX\foundation-icons\svgs\._fi-zoom-out.svg" />
+    <Content Include="features\Error\Error.html" />
     <Content Include="features\Home\Home.html" />
     <Content Include="features\Login\Login.html" />
     <Content Include="features\Login\Register.html" />
@@ -1120,6 +1121,8 @@
     <Content Include="scripts\angular.min.js" />
     <Content Include="scripts\app\app.js" />
     <Content Include="scripts\app\HomeController.js" />
+    <Content Include="scripts\app\LoginController.js" />
+    <Content Include="scripts\app\RegisterController.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\errors.json" />
@@ -1932,6 +1935,7 @@
     <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
