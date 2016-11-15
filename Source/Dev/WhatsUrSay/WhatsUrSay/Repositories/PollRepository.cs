@@ -25,30 +25,59 @@ namespace WhatsUrSay.Repositories
         //Purpose: Gets all the records of type 'poll' from the 'Activity' table
         //Input: None
         //Output: A list of poll records from the 'Activity' table
+        //        If any exception occurs, the exception message is printed and the exception is thrown
         public IEnumerable<Activity> GetAll()
         {
-            return db.Activities.ToList();
+            try
+            {
+                return db.Activities.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error occured: " + e.Message);
+                throw e;
+            }
+            
         }
 
         //Purpose: Gets a record from the 'Activity' table whose row id is 'id'
         //Input: 'id' of the required record
         //Output: a record from 'Activity' table whose key is 'id'
+        //        If any exception occurs, the exception message is printed and the exception is thrown
         public Activity Get(int id)
         {
-            return db.Activities.Find(id);
+            try
+            {
+                return db.Activities.Find(id);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error occured: " + e.Message);
+                throw e;
+            }
+            
         }
 
         //Purpose: Adds an object 'activity' in the 'Activity' table
         //Input: 'activity' object of type 'Activity.cs'
         //Output: Returns the object 'activity' upon its successful addition in the table
+        //        If any exception occurs, the exception message is printed and the exception is thrown
         public Activity Add(Activity activity)
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
 
-            db.Activities.Add(activity);
-            db.SaveChanges();
-            return activity;
+            try
+            {
+                db.Activities.Add(activity);
+                db.SaveChanges();
+                return activity;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error occured: " + e.Message);
+                throw e;
+            }
         }
 
     }

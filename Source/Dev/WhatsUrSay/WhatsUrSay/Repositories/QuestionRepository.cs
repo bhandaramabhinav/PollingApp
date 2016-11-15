@@ -25,14 +25,23 @@ namespace WhatsUrSay.Repositories
         //Purpose: Adds an object 'question' in the 'Question' table
         //Input: 'question' object of type 'Question.cs'
         //Output: Returns the object 'question' upon its successful addition in the table
+        //        If any exception occurs, the exception message is printed and the exception is thrown
         public Question Add(Question question)
         {
             if (question == null)
                 throw new ArgumentNullException("question");
 
-            db.Questions.Add(question);
-            db.SaveChanges();
-            return question;
+            try
+            {
+                db.Questions.Add(question);
+                db.SaveChanges();
+                return question;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error occured: " + e.Message);
+                throw e;
+            }
         }
     }
 }
