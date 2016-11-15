@@ -25,15 +25,7 @@ namespace WhatsUrSay.Controllers
     public class UserController : ApiController
     {
         static readonly IUserRepository objRepository = new UserRepository();
-        // GET api/<controller>
-        //Purpose: Invokes 'Get()' method of UserRepository.cs that returns all the records of type 'user' from the 'User' table
-        //Input: None
-        //Output: A list of answer records from the 'Survey' table
-        public IEnumerable<User> Get()
-        {
-            //return new string[] { "value1", "value2" };
-            return null;
-        }
+        
 
         // GET api/<controller>/5
         //Purpose: Invokes 'Get(string uNmae)' method 
@@ -41,7 +33,7 @@ namespace WhatsUrSay.Controllers
         //Output: A list of answer records from the 'User' table
         public User Get(string uName)
         {
-            return objRepository.Find(uName);
+            return objUserRepository.Find(uName);
         }
 
         // POST api/<controller>
@@ -50,7 +42,7 @@ namespace WhatsUrSay.Controllers
         //Output: A list of answer records from the 'User' table
         public bool Post([FromBody]User user)
         {
-            User objUser = objRepository.Add(user);
+            User objUser = objUserRepository.Add(user);
             if (User != null)
             {
                 return true;
@@ -59,16 +51,6 @@ namespace WhatsUrSay.Controllers
             {
                 return false;
             }
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
         }
     }
 }
