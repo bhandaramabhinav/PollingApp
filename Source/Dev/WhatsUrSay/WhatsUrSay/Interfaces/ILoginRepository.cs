@@ -1,4 +1,17 @@
-﻿using System;
+﻿
+/*
+Component :                             An interface which declares the methods that need to be defined in 'ILoginRepository.cs'
+Author:                                 Abhinav Bhandaram
+Use of the component in system design:  Good coding practice
+Written and revised:                    11/14/2016
+Reason for component existence:         Acts as a contract that specifies the list of all methods that need to be defined in 'ILoginRespository.cs'
+Component usage of data structures, algorithms and control(if any):
+    The component contains the declaration of below methods:
+      Login(string uName, string uPassword)
+    Theis method is defined in 'ILoginRespository.cs'
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
