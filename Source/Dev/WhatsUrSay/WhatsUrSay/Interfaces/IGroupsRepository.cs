@@ -19,6 +19,7 @@ namespace WhatsUrSay.Interfaces
 {
     public interface IGroupsRepository
     {   
+
         /// <summary>
         /// Method definitions to force GroupRepository to implements  these methods
         /// </summary>
