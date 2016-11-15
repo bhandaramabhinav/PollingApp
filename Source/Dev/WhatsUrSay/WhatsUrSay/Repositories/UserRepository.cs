@@ -25,8 +25,8 @@ namespace WhatsUrSay.Repositories
             if (String.IsNullOrEmpty(uName))
             {
                 throw new ArgumentNullException("user name");
-            }
-            return objEntities.Users.Find(uName);
+            }            
+            return objEntities.Users.Where(user => user.emailId == uName).FirstOrDefault();
         }
     }
 }

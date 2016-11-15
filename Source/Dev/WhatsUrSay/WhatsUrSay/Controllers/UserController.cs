@@ -12,24 +12,17 @@ namespace WhatsUrSay.Controllers
 {
     public class UserController : ApiController
     {
-        static readonly IUserRepository objRepository = new UserRepository();
-        // GET api/<controller>
-        public IEnumerable<User> Get()
-        {
-            //return new string[] { "value1", "value2" };
-            return null;
-        }
-
+        static readonly IUserRepository objUserRepository = new UserRepository();
         // GET api/<controller>/5
         public User Get(string uName)
         {
-            return objRepository.Find(uName);
+            return objUserRepository.Find(uName);
         }
 
         // POST api/<controller>
         public bool Post([FromBody]User user)
         {
-            User objUser = objRepository.Add(user);
+            User objUser = objUserRepository.Add(user);
             if (User != null)
             {
                 return true;
@@ -38,16 +31,6 @@ namespace WhatsUrSay.Controllers
             {
                 return false;
             }
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
         }
     }
 }
