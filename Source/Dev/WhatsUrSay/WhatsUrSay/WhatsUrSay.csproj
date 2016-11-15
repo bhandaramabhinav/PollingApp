@@ -1077,6 +1077,7 @@
     <Content Include="features\Home\Home.html" />
     <Content Include="features\Login\Login.html" />
     <Content Include="features\Login\Register.html" />
+    <Content Include="features\Poll\CreatePoll.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Models\WhatsUrSayDataContext.Context.tt">
@@ -1934,6 +1935,7 @@
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Interfaces\IAnswer.cs" />
+    <Compile Include="Interfaces\IGroupsRepository.cs" />
     <Compile Include="Interfaces\ILoginRepository.cs" />
     <Compile Include="Interfaces\ISurvey.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
