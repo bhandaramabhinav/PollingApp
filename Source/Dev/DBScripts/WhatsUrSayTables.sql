@@ -1,7 +1,24 @@
+/*
+Component :                             Database script that is used for creating our project's database and necessary tables
+Author:                                 Sreedevi Koppula
+Use of the component in system design:  Specifies the structure of the database that stores our project's data
+Written and revised:                    11/9/2016
+Reason for component existence:         To create project's database and necessary tables 
+Component usage of data structures, algorithms and control(if any): 
+    Contains the SQL queries for performing the below actions:
+		Create Database - 'DSE' 
+		Create tables - User, Group, User_Group, User_Request, Activity, Question, Answer
+*/
+
+/* Creating our project's database. Name of the database - DSE */
+CREATE DATABASE [DSE]
+GO 
+
+/*Uses the database 'DSE' to perform the below SQL operations*/
 USE [DSE]
 GO
 
-/****** Object:  Table [dbo].[User]    Script Date: 11/9/2016 1:40:56 PM ******/
+/* Object:  Table [dbo].[User] */
 SET ANSI_NULLS ON
 GO
 
@@ -24,7 +41,7 @@ CREATE TABLE [dbo].[User](
 GO
 
 
-
+/* Object:  Table [dbo].[Group] */
 CREATE TABLE [dbo].[Group](
 	[id] [int] NOT NULL,
 	[name] [ntext] NOT NULL,
@@ -46,7 +63,7 @@ ALTER TABLE [dbo].[Group] CHECK CONSTRAINT [FK_Group_User]
 GO
 
 
-
+/* Object:  Table [dbo].[User_Group] */
 CREATE TABLE [dbo].[User_Group](
 	[id] [int] NOT NULL,
 	[user_id] [int] NOT NULL,
@@ -68,7 +85,7 @@ GO
 
 
 
-
+/* Object:  Table [dbo].[User_Request] */
 CREATE TABLE [dbo].[User_Request](
 	[id] [int] NOT NULL,
 	[user_id] [int] NOT NULL,
@@ -92,7 +109,7 @@ GO
 
 
 
-
+/* Object:  Table [dbo].[Activity] */
 CREATE TABLE [dbo].[Activity](
 	[id] [int] NOT NULL,
 	[heading] [ntext] NOT NULL,
@@ -116,6 +133,8 @@ GO
 ALTER TABLE [dbo].[Activity] CHECK CONSTRAINT [FK_Activity_User]
 GO
 
+
+/* Object:  Table [dbo].[Question] */
 CREATE TABLE [dbo].[Question](
 	[id] [int] NOT NULL,
 	[description] [ntext] NOT NULL,
@@ -135,6 +154,7 @@ GO
 ALTER TABLE [dbo].[Question] CHECK CONSTRAINT [FK_Question_Activity]
 GO
 
+/* Object:  Table [dbo].[Answer] */
 CREATE TABLE [dbo].[Answer](
 	[id] [int] NOT NULL,
 	[description] [ntext] NOT NULL,
