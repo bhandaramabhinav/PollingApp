@@ -16,7 +16,7 @@
     <RootNamespace>WhatsUrSay</RootNamespace>
     <AssemblyName>WhatsUrSay</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -1084,11 +1084,13 @@
     <Content Include="Global.asax" />
     <Content Include="Models\WhatsUrSayDataContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WhatsUrSayDataContext.Context1.cs</LastGenOutput>
+      <DependentUpon>WhatsUrSayDataContext.edmx</DependentUpon>
+      <LastGenOutput>WhatsUrSayDataContext.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\WhatsUrSayDataContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WhatsUrSayDataContext1.cs</LastGenOutput>
+      <DependentUpon>WhatsUrSayDataContext.edmx</DependentUpon>
+      <LastGenOutput>WhatsUrSayDataContext.cs</LastGenOutput>
     </Content>
     <Content Include="scripts\ai.0.22.19-build00125.js" />
     <Content Include="scripts\ai.0.22.19-build00125.min.js" />
@@ -1138,13 +1140,6 @@
     <Content Include="scripts\angular-cookies.min.js.map" />
     <Content Include="scripts\angular-aria.min.js.map" />
     <Content Include="scripts\angular-animate.min.js.map" />
-    <EntityDeploy Include="Models\WhatsUrSayDataContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WhatsUrSayDataContext1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\WhatsUrSayDataContext.edmx.diagram">
-      <DependentUpon>WhatsUrSayDataContext.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\css\foundation-icons\.DS_Store" />
     <Content Include="Content\css\foundation-icons\.fontcustom-data" />
     <Content Include="Content\css\foundation-icons\foundation-icons.eot" />
@@ -1163,8 +1158,16 @@
     <Content Include="Content\__MACOSX\foundation-icons\._foundation-icons.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <EntityDeploy Include="Models\WhatsUrSayDataContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WhatsUrSayDataContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WhatsUrSayDataContext.edmx.diagram">
+      <DependentUpon>WhatsUrSayDataContext.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\WhatsUrSay.pubxml" />
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="scripts\i18n\angular-locale_aa-er.js" />
@@ -1926,8 +1929,13 @@
     <Content Include="scripts\js\vendor\what-input.js" />
     <Content Include="scripts\js\what-input.js" />
     <Content Include="Views\web.config" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="scripts\version.json" />
+    <None Include="Web.WhatsUrSay.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -1940,12 +1948,54 @@
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Interfaces\IAnswer.cs" />
+    <Compile Include="Interfaces\IGroupsRepository.cs" />
     <Compile Include="Interfaces\ILoginRepository.cs" />
+    <Compile Include="Interfaces\IPollRepository.cs" />
+    <Compile Include="Interfaces\IQuestionRepository.cs" />
     <Compile Include="Interfaces\ISurvey.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
+    <Compile Include="Models\Activity.cs">
+      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Answer.cs">
+      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Group.cs">
+      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GroupDetails.cs" />
+    <Compile Include="Models\Question.cs">
+      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserDetails.cs" />
-    <Compile Include="Models\User_Request.cs" />
+    <Compile Include="Models\UserInput.cs" />
+    <Compile Include="Models\User_Group.cs">
+      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User_Request.cs">
+      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User_Roles.cs">
+      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WhatsUrSayDataContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhatsUrSayDataContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WhatsUrSayDataContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WhatsUrSayDataContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhatsUrSayDataContext.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AnswerResp.cs" />
     <Compile Include="Repositories\GroupsRepository.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
@@ -1956,29 +2006,6 @@
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Activity.cs">
-      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Answer.cs">
-      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Group.cs">
-      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Question.cs">
-      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User_Group.cs">
-      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WhatsUrSayDataContext.Context.cs" />
-    <Compile Include="Models\WhatsUrSayDataContext.cs" />
-    <Compile Include="Models\WhatsUrSayDataContext.Designer.cs">
-      <DependentUpon>WhatsUrSayDataContext.cs</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -2017,11 +2044,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61972</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61972/</IISUrl>
+          <IISUrl>http://localhost/WhatsUrSay</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

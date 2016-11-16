@@ -7,30 +7,23 @@
 
 
 <!--The login has the fields email id, password, Login and Cancel buttons-->
-<form>
-    <div class="primary callout">
-        <div class="row">
-            <div class="large-12 columns">
+
+    <div class="medium-6 medium-centered large-4 large-centered columns">
+
+        <form>
+            <div class="row log-in-form">
+                <h4 class="text-center">Log in with you email account</h4>
                 <label>
-                    Email Id
-                    <input type="text" placeholder="Email Id" ng-model="userName" />
+                    Email
+                    <input type="text" placeholder="somebody@example.com" ng-model="userName">
                 </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="large-12 columns">
                 <label>
                     Password
-                    <input type="password" placeholder="Password" ng-model="password" />
-                </label>
+                    <input type="password" placeholder="Password" ng-model="password">
+                </label>                
+                <p><a class="button expanded" ng-disabled="!(userName && password)" ng-click="Login($event)">Log In</a></p>
+                <p class="text-center"><a href="#">Cancel</a></p>
             </div>
-        </div>
-        <div class="row">
-            <div class="large-3 columns">
-                <a href="#" class="button round" ng-disabled="!(userName && password)" ng-click="Login($event)">Login</a>
-                <a href="#" class="button radius round">Cancel</a>
-            </div>
-        </div>
+        </form>
+
     </div>
-    
-</form>

@@ -24,7 +24,7 @@ namespace WhatsUrSay.Controllers
 {
     public class UserController : ApiController
     {
-        static readonly IUserRepository objRepository = new UserRepository();
+        static readonly IUserRepository objUserRepository = new UserRepository();
         
 
         // GET api/<controller>/5

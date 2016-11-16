@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 @{
-    ViewBag.Title = "Home";
+    
     Layout = null;
 }
 <html>
@@ -19,34 +19,22 @@
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="~/Content/css/foundation-icons/foundation-icons.css" rel="stylesheet" />
 </head>
-<body ng-app="app" ng-controller="HomeController">
-    <div class="top-bar">
-        <div class="row">
-            <div class="top-bar-left">
-                <ul class="menu">
-                    <li><a href="#/createPoll">Create <i class="fi-plus"></i></a></li>
-                    <li><a href="#">Participate</a></li>
-                </ul>
-            </div>
-            <div class="top-bar-title" style="margin-left:20%">
-                <ul class="menu">
-                    <li class="menu-text">
-                        Whats Ur Say !!
-                    </li>
-                </ul>
-            </div>
-            <div class="top-bar-right">
-                <ul class="menu">
-                    <li><a href="#/join">Join</a></li>
-                    <li><a href="#/login">Log In</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<body ng-app="app" ng-controller="HomeController">     
     <div id="popupContainer"></div>
-    <div class="row body-content" ng-view></div>
+    <div class="main">
+        <header class="header">
+            <h1 class="headline">Whats Ur Say!!</h1>
+            <ul class="header-subnav">
+                <li><a href="#/createPoll">Create!</a></li>
+                <li><a href="#" class="is-active">Participate!</a></li>
+                <li><a href="#/login">Login!</a></li>
+                <li><a href="#/join">Join!</a></li>
+            </ul>
+        </header>  
+        <div class="row main" ng-view></div>    
+    </div>
     
-    <footer class="secondary callout">
+    <footer class="footer" style="height:10%">
         <div class="row">
             <div class="small-3 large-6 columns">&copy;DSE's</div>
             <div class="small-3 large-6 columns">

@@ -13,15 +13,15 @@ Reason for component existence:         Angular JS application definition..
     //Defining the routes identified in the application.
     app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/login', {
-            templateUrl: 'features/Login/Login.html',
+            templateUrl: 'WhatsUrSay/features/Login/Login.html',
             controller:'LoginController'
         }).when('/join', {
-            templateUrl:'features/Login/Register.html'
+            templateUrl:'WhatsUrSay/features/Login/Register.html'
         }).when('/error', {
-            templateUrl:'features/Error/Error.html',
+            templateUrl:'WhatsUrSay/features/Error/Error.html',
         })
         .otherwise({
-            templateUrl: 'features/Home/Home.html',
+            templateUrl: 'WhatsUrSay/features/Home/Home.html',
             controller:'HomeController'
         })
 
