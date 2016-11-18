@@ -12,6 +12,8 @@ Component usage of data structures, algorithms and control(if any):
 */
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using WhatsUrSay.Models;
@@ -73,7 +75,21 @@ namespace WhatsUrSay.Repositories
                 db.SaveChanges();
                 return activity;
             }
-            catch(Exception e)
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Error occured: " + e.Message);
                 throw e;
