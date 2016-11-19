@@ -19,22 +19,24 @@ namespace WhatsUrSay.Models
         {
             this.Activities = new HashSet<Activity>();
             this.Groups = new HashSet<Group>();
+            this.User_Answer = new HashSet<User_Answer>();
             this.User_Group = new HashSet<User_Group>();
             this.User_Request = new HashSet<User_Request>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
-        public Nullable<int> role { get; set; }
+        public string role { get; set; }
         public string emailId { get; set; }
         public string pwd { get; set; }
-        public int status { get; set; }
+        public string status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Activity> Activities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Group> Groups { get; set; }
-        public virtual User_Roles User_Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Answer> User_Answer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Group> User_Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

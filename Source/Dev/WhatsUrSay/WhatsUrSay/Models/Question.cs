@@ -18,6 +18,7 @@ namespace WhatsUrSay.Models
         public Question()
         {
             this.Answers = new HashSet<Answer>();
+            this.User_Answer = new HashSet<User_Answer>();
         }
     
         public int id { get; set; }
@@ -27,5 +28,7 @@ namespace WhatsUrSay.Models
         public virtual Activity Activity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Answer> User_Answer { get; set; }
     }
 }

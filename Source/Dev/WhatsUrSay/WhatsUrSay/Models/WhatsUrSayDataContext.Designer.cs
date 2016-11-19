@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\abhinav3\Source\Repos\SEProject\Source\Dev\WhatsUrSay\WhatsUrSay\Models\WhatsUrSayDataContext.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\siri\Documents\GitHub\SEProject\Source\Dev\WhatsUrSay\WhatsUrSay\Models\WhatsUrSayDataContext.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

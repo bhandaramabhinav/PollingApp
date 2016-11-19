@@ -12,13 +12,17 @@ namespace WhatsUrSay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User_Group
+    public partial class User_Answer
     {
         public int id { get; set; }
         public int user_id { get; set; }
-        public int group_id { get; set; }
+        public int activity_id { get; set; }
+        public int question_id { get; set; }
+        public int answer_id { get; set; }
     
-        public virtual Group Group { get; set; }
+        public virtual Activity Activity { get; set; }
+        public virtual Answer Answer { get; set; }
+        public virtual Question Question { get; set; }
         public virtual User User { get; set; }
     }
 }

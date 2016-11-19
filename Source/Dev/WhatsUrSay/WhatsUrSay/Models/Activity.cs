@@ -17,24 +17,29 @@ namespace WhatsUrSay.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Activity()
         {
+            this.Activity_Group = new HashSet<Activity_Group>();
             this.Answers = new HashSet<Answer>();
             this.Questions = new HashSet<Question>();
+            this.User_Answer = new HashSet<User_Answer>();
         }
     
         public int id { get; set; }
         public string heading { get; set; }
         public string description { get; set; }
-        public string type { get; set; }
-        public string category { get; set; }
-        public string group_ids { get; set; }
+        public int type { get; set; }
+        public int category { get; set; }
         public int createdby { get; set; }
-        public System.DateTime createddate { get; set; }
-        public System.DateTime expirationdate { get; set; }
     
+        public virtual Category Category1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Activity_Group> Activity_Group { get; set; }
+        public virtual Type Type1 { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Question> Questions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Answer> User_Answer { get; set; }
     }
 }

@@ -12,19 +12,18 @@ namespace WhatsUrSay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User_Roles
+    public partial class Type
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User_Roles()
+        public Type()
         {
-            this.Users = new HashSet<User>();
+            this.Activities = new HashSet<Activity>();
         }
     
         public int id { get; set; }
-        public string role { get; set; }
-        public string description { get; set; }
+        public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Activity> Activities { get; set; }
     }
 }

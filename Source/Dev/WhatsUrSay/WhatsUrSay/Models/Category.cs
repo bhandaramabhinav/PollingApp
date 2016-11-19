@@ -12,13 +12,18 @@ namespace WhatsUrSay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User_Group
+    public partial class Category
     {
-        public int id { get; set; }
-        public int user_id { get; set; }
-        public int group_id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Category()
+        {
+            this.Activities = new HashSet<Activity>();
+        }
     
-        public virtual Group Group { get; set; }
-        public virtual User User { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Activity> Activities { get; set; }
     }
 }
