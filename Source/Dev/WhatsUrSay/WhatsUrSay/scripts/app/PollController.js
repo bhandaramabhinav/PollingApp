@@ -18,21 +18,36 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.title = 'Poll';
         $scope.pollTitle = "";
         $scope.description = "";
+        $scope.question = "";
         $scope.pollType = "";
         $scope.groupNames = "";
-
+        
         activate();
 
         function activate() {
 
         }
+
+        $scope.options = [];
+
+        $scope.AddOption = function (option) {
+            if (option == undefined)
+            {
+                $scope.options.push({});
+            } else {
+                var opt = { description: option.description };
+                $scope.options.push(opt);
+            } 
+        }
+
         //Purpose: To proces the create poll request of clients of our application.
         //Input: $event to prevent the default JS behaviour of the link button.
         //Output: An alert showing the 'create poll' status .
         $scope.CreatePoll = function ($event) {
             $event.preventDefault();
-            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 'poll', group_ids: $scope.groupNames, createdby: 1 };
+            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 'poll', group_ids: $scope.groupNames, createdby: 1, Questions: [{ description: $scope.question }], Answers : $scope.options};
             $scope.LoginStatus = $http.post('api/Poll/PostPoll', activity).then(function success(response) {
+                alert(response);
                 var alert_text = "";
                 if (response.data) {
                     alert_text = "Poll is created Successfully";
@@ -49,8 +64,9 @@ Reason for component existence:         Used for creating a poll and getting the
                       .ok('Ok')
                   );
             }, function error(response) {
+                alert(response);
                 $location.path('/error');
             });
-        }
+        };
     }
 })();

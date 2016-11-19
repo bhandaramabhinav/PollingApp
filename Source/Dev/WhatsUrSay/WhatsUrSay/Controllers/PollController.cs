@@ -45,7 +45,13 @@ namespace WhatsUrSay.Controllers
         //Output: Returns the object 'activity' upon its successful addition in the table
         public Activity PostPoll(Activity activity)
         {
-            return repo.Add(activity);
+            try
+            {
+                return repo.Add(activity);
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

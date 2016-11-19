@@ -28,6 +28,29 @@ Component usage of data structures, algorithms and control (if any):
                 </label>
             </div>
         </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>
+                    Poll Question <small>required</small>
+                    <input type="text" placeholder="Enter the poll question" ng-model="question" />
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>
+                    Poll Options (At least 2 Poll options need to be associated) <small>required</small>
+                </label>
+                <ul>     
+                    <li ng-repeat="option in options track by $index">
+                        <input type="text" ng-model="option.description" />
+                    </li>
+                    <li>
+                        <button ng-click="AddOption(option)">Add</button>
+                    </li>             
+                </ul>
+            </div>
+        </div>
         <div ng-app="myApp">
             <div class="row">
                 <div class="large-12 columns">
@@ -52,7 +75,7 @@ Component usage of data structures, algorithms and control (if any):
         </div>
         <div class="row">
             <div class="large-3 columns">
-                <a href="#" class="button round" ng-disabled="(!(pollTitle && description && (pollType=='private') && groupNames) && !(pollTitle && description && (pollType=='public')))" ng-click="CreatePoll($event)">Create Poll</a>
+                <a href="#" class="button round" ng-disabled="(!(pollTitle && description && (pollType=='private') && groupNames && (options.length>1)) && !(pollTitle && description && (options.length>1) && (pollType=='public')))" ng-click="CreatePoll($event)">Create Poll</a>
                 <a href="#" class="button radius round">Cancel</a>
             </div>
         </div>
