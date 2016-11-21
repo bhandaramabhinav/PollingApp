@@ -34,18 +34,31 @@ Reason for component existence:         Used for creating a poll and getting the
             if (option == undefined)
             {
                 $scope.options.push({});
-            } else {
-                var opt = { description: option.description };
-                $scope.options.push(opt);
+            }
+        }
+
+        $scope.groups = [];
+
+        $scope.AddGroup = function (group) {
+            if (group == undefined) {
+                $scope.groups.push({});
             } 
         }
+
 
         //Purpose: To proces the create poll request of clients of our application.
         //Input: $event to prevent the default JS behaviour of the link button.
         //Output: An alert showing the 'create poll' status .
+
+        //Hardcoded the following data entries: pollType, category, createdby
         $scope.CreatePoll = function ($event) {
             $event.preventDefault();
-            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 'poll', group_ids: $scope.groupNames, createdby: 1, Questions: [{ description: $scope.question }], Answers : $scope.options};
+            if ($scope.pollType == "public") {
+                $scope.pollType = 1;
+            } else if ($scope.pollType == "private") {
+                $scope.pollType = 2;
+            }
+            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: 1, Questions: [{ description: $scope.question }], Answers : $scope.options, Groups:$scope.groups};
             $scope.LoginStatus = $http.post('api/Poll/PostPoll', activity).then(function success(response) {
                 alert(response);
                 var alert_text = "";

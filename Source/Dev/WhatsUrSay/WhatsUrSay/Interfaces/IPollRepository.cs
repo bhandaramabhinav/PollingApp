@@ -22,6 +22,7 @@ namespace WhatsUrSay.Interfaces
 
         IEnumerable<Activity> GetAll();
         Activity Get(int id);
-        Activity Add(Activity activity);
+        //Activity Add(Activity activity);
+        Activity Add(ActivityGroupDetails activity);
     }
 }

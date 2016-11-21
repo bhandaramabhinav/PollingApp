@@ -64,15 +64,36 @@ namespace WhatsUrSay.Repositories
         //Input: 'activity' object of type 'Activity.cs'
         //Output: Returns the object 'activity' upon its successful addition in the table
         //        If any exception occurs, the exception message is printed and the exception is thrown
-        public Activity Add(Activity activity)
+        public Activity Add(ActivityGroupDetails act)
         {
-            if (activity == null)
+            if (act == null)
                 throw new ArgumentNullException("activity");
 
             try
             {
+                LinkedList<Activity_Group> grps = new LinkedList<Activity_Group>();
+                //Activity_Group ag = new Activity_Group();
+                foreach (Group g in act.Groups)
+                {
+                    Activity_Group ag = new Activity_Group();
+                    ag.group_id = (db.Groups.Where(group => group.name == g.name).FirstOrDefault()).id;
+                    grps.AddLast(ag);
+                    //grps.Add(ag);
+                }
+
+                Activity activity = new Activity();
+                activity.heading = act.heading;
+                activity.description = act.description;
+                activity.type = act.type;
+                activity.category = act.category;
+                activity.createdby = act.createdby;
+                activity.Questions = act.Questions;
+                activity.Answers = act.Answers;
+                activity.Activity_Group = grps;
                 db.Activities.Add(activity);
                 db.SaveChanges();
+
+                
                 return activity;
             }
             catch (DbEntityValidationException e)
@@ -95,6 +116,5 @@ namespace WhatsUrSay.Repositories
                 throw e;
             }
         }
-
     }
 }

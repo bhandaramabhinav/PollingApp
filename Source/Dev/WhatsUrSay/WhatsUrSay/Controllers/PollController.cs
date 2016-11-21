@@ -43,10 +43,14 @@ namespace WhatsUrSay.Controllers
         //Purpose: Invokes 'Add(Activity activity) method of 'PollRepository.cs' that adds an object 'activity' in the 'Activity' table
         //Input: 'activity' object of type 'Activity.cs'
         //Output: Returns the object 'activity' upon its successful addition in the table
-        public Activity PostPoll(Activity activity)
+        public Activity PostPoll(ActivityGroupDetails activity)
         {
             try
             {
+                //Activity act = new Activity();
+                
+               // Console.WriteLine(activity);
+                //return act;
                 return repo.Add(activity);
             }catch(Exception ex)
             {
