@@ -21,6 +21,8 @@ Reason for component existence:         Angular JS application definition..
             templateUrl:'features/Error/Error.html',
         }).when('/createPoll', {
             templateUrl: 'features/Poll/CreatePoll.html',
+        }).when('/createGroup', {
+            templateUrl: 'features/Group/CreateGroup.html',
         }).otherwise({
             templateUrl: 'features/Home/Home.html',
             controller:'HomeController'

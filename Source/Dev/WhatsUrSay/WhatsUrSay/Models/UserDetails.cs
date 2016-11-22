@@ -21,8 +21,8 @@ namespace WhatsUrSay.Models
         /// <summary>
         /// Properties to hold user data
         /// </summary>
-       public string Name { get; set; }
-       public int Id { get; set; }
+       public string emailId { get; set; }
+       //public int Id { get; set; }
  
     }
 }

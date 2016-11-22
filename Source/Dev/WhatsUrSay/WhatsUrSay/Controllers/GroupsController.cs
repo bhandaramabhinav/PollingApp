@@ -89,7 +89,7 @@ namespace WhatsUrSay.Controllers
         /// </summary>
         /// <param name="group"></param>
         /// <returns>Route of created group</returns>
-        [ResponseType(typeof(Group))]
+       /* [ResponseType(typeof(Group))]
         public IHttpActionResult PostGroup(Group group)
         {
             if (!ModelState.IsValid)
@@ -109,6 +109,11 @@ namespace WhatsUrSay.Controllers
             }
 
             return CreatedAtRoute("DefaultApi", new { id = group.id }, group);
+        }*/
+
+        public Group PostGroup(GroupDetails gd)
+        {
+            return groupRepository.CreateGroup(gd);
         }
 
         // DELETE: api/Groups/5

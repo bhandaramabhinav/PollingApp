@@ -48,7 +48,8 @@ namespace WhatsUrSay.Repositories
             {
                 throw new ArgumentNullException("Group not found");
             }
-            GroupDetails groupDetails;
+            GroupDetails groupDetails = null;
+            /*
             try
             {
             groupDetails = new GroupDetails();
@@ -67,7 +68,7 @@ namespace WhatsUrSay.Repositories
             {
 
                 throw;
-            }
+            }*/
             return groupDetails;
         }
 
@@ -99,7 +100,7 @@ namespace WhatsUrSay.Repositories
         /// </summary>
         /// <param name="group"></param>
         /// <returns> created group  object</returns>
-        public Group CreateGroup(Group group)
+      /*  public Group CreateGroup(Group group)
         {
             
 
@@ -122,8 +123,31 @@ namespace WhatsUrSay.Repositories
             }
 
             return group;
-        }
+        }*/
 
+
+        public Group CreateGroup(GroupDetails gd)
+        {
+            LinkedList<User_Group> grps = new LinkedList<User_Group>();
+            //Activity_Group ag = new Activity_Group();
+            foreach (UserDetails ud in gd.UserList)
+            {
+                User_Group userGrp = new User_Group();
+                userGrp.user_id = (db.Users.Where(user => user.emailId == ud.emailId).FirstOrDefault()).id;
+                grps.AddLast(userGrp);
+                //grps.Add(ag);
+            }
+
+            Group group = new Group();
+            group.name = gd.group.name;
+            group.createdby = gd.group.createdby;
+            group.User_Group = grps;
+
+            db.Groups.Add(group);
+            db.SaveChanges();
+
+            return group;
+        }
         /// <summary>
         /// Deletes group
         /// </summary>

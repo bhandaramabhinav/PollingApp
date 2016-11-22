@@ -79,7 +79,7 @@ namespace WhatsUrSay
                 Survey1.description= Act.description;
                 Survey1.type= Act.type;
                 Survey1.category = Act.category;
-                Survey1.group_ids = Act.group_ids;
+               // Survey1.group_ids = Act.group_ids;
                 Db1.SaveChanges();
             
                 return true;

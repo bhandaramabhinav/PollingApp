@@ -27,7 +27,8 @@ namespace WhatsUrSay.Interfaces
         IQueryable<Group> GetGroups();
         GroupDetails GetGroup(int groupId);
         bool UpdatGroup(Group group);
-        Group CreateGroup(Group group);
+        //Group CreateGroup(Group group);
+        Group CreateGroup(GroupDetails gd);
         Group DeleteGroup(int id);
     }
 }
