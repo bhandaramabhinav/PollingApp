@@ -29,7 +29,7 @@ namespace WhatsUrSay.Controllers
         //Output: a boolean variable representing the status of the login request.
         public bool Login(UserInput userInfo)
         {
-            ILoginRepository objLoginRepository = new LoginRepository();
+            ILoginRepository objLoginRepository = new LoginRepository();            
             return objLoginRepository.Login(userInfo.uName, userInfo.uPassword);
         }
 
