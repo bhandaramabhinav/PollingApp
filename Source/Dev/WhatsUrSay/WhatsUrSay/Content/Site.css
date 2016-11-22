@@ -10,7 +10,7 @@ html, body {
 }
 .main{
     overflow:auto;
-    padding-bottom:10%;
+    padding-bottom:5%;
     margin-top:1.0rem;
 }
 .header {
@@ -117,13 +117,22 @@ textarea {
     padding: 0.875rem 0;
     border-top: 1px solid #999;
     border-bottom: 1px solid #999; }
+  .website-example-div {
+    font-size: 0.875rem;
+    line-height: 1.2rem;
+    margin: 0;
+    padding: 0.875rem 0;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999; }
   .website-example .button {
     font-weight: bold;
     color: #2BA6CB;
     background: transparent;
     padding-left: 0;
     margin-bottom: 0;
-    box-shadow: none; }
+    box-shadow: none; 
+    padding-right:0;
+  }
 
 .row.wide {
   max-width: rem-calc(1200); }

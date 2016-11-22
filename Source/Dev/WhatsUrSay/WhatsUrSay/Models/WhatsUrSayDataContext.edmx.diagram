@@ -32,6 +32,8 @@
         <AssociationConnector Association="DSEModel.FK_User_Answer_User" ManuallyRouted="false" />
         <AssociationConnector Association="DSEModel.FK_User_Group_User" ManuallyRouted="false" />
         <AssociationConnector Association="DSEModel.FK_User_Request_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DSEModel.User_Roles" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="DSEModel.FK__User__role__412EB0B6" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

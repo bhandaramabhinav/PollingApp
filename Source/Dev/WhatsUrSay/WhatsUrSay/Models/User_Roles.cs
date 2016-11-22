@@ -21,8 +21,7 @@ namespace WhatsUrSay.Models
         }
     
         public int id { get; set; }
-        public string role { get; set; }
-        public string description { get; set; }
+        public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }

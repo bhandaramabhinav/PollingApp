@@ -23,7 +23,7 @@ Reason for component existence:         To serve Login page and client side func
         activate();
 
         function activate() {
-            alert("Login Controller");
+            
 
         }
         //Purpose: To proces the login requests of clients into our application.
@@ -32,7 +32,7 @@ Reason for component existence:         To serve Login page and client side func
         $scope.Login = function ($event) {
             $event.preventDefault();
             var userInfo = { uName: $scope.userName, uPassword: $scope.password }
-            $scope.LoginStatus = $http.post('WhatsUrSay/api/Login/Login', userInfo).then(function success(response) {
+            $scope.LoginStatus = $http.post('api/Login/Login', userInfo).then(function success(response) {
                 var alert_text = "";
                 if (response.data) {
                     alert_text = "Login Successfull.";
