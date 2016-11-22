@@ -24,6 +24,17 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+CREATE TABLE [dbo].[User_Roles](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
 CREATE TABLE [dbo].[Category](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](50) NOT NULL,
@@ -50,7 +61,7 @@ GO
 CREATE TABLE [dbo].[User](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](100) NOT NULL,
-	[role] [nvarchar](50) NOT NULL,
+	[role] [int] NOT NULL,
 	[emailId] [nvarchar](50) NOT NULL,
 	[pwd] [nvarchar](50) NOT NULL,
 	[status] [nvarchar](50) NULL,
@@ -60,6 +71,19 @@ CREATE TABLE [dbo].[User](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+GO
+
+ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_User_Roles] FOREIGN KEY([role])
+REFERENCES [dbo].[User_Roles] ([id])
+GO
+
+ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK_User_User_Roles]
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [Unique_User] ON [dbo].[User]
+(
+	[emailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
 GO
 
 
