@@ -40,7 +40,7 @@ Component usage of data structures, algorithms and control (if any):
             <div class="large-12 columns">
                 <label>
                     Poll Options <small>required</small><br />
-                    (At least 2 Poll options are required. Click on the '+' to add Poll Options)
+                    (At least 2 Poll options are required. Click on the '+' to add Poll Options)<br />
                 </label>
                 <ul>     
                     <li ng-repeat="option in options track by $index" style="list-style-type:none;">
@@ -63,12 +63,12 @@ Component usage of data structures, algorithms and control (if any):
                         </select>
                     </label>
                 </div>
-            
+         </div>   
             <div class="row" ng-show="(pollType=='private')">
                 <div class="large-12 columns">
                     <label>
-                        Groups' Names <small>required</small>
-                        (At least 1 group name is required. Click on the '+' to add group name)
+                        Groups' Names <small>required</small><br/>
+                        (At least 1 group name is required. Click on the '+' to add group name)<br/>
                         <!--<input type="text" placeholder="Enter the names of groups" ng-model="groupNames"/>-->
                     </label>
                     <ul>
