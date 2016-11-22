@@ -238,6 +238,7 @@ ALTER TABLE [dbo].[User_Answer] CHECK CONSTRAINT [FK_User_Answer_User_Question]
 GO
 
 
+
 CREATE TABLE [dbo].[User_Group](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[user_id] [int] NOT NULL,
