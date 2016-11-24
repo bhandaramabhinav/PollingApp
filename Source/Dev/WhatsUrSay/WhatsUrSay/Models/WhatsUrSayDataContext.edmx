@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DSEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="id" />
@@ -70,7 +70,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="role" Type="int" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="emailId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="status" Type="nvarchar" MaxLength="50" />
@@ -102,25 +102,6 @@
           <Property Name="description" Type="nvarchar" MaxLength="1000" />
           <Property Name="status" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="User_Roles">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <Association Name="FK__User__role__412EB0B6">
-          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User_Roles">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="role" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Activity_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
@@ -325,11 +306,6 @@
           <EntitySet Name="User_Answer" EntityType="Self.User_Answer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Group" EntityType="Self.User_Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Request" EntityType="Self.User_Request" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User_Roles" EntityType="Self.User_Roles" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__User__role__412EB0B6" Association="Self.FK__User__role__412EB0B6">
-            <End Role="User_Roles" EntitySet="User_Roles" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
           <AssociationSet Name="FK_Activity_Category" Association="Self.FK_Activity_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Activity" EntitySet="Activity" />
@@ -395,7 +371,8 @@
             <End Role="User_Request" EntitySet="User_Request" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -484,7 +461,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="role" Type="Int32" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="emailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -493,7 +470,6 @@
           <NavigationProperty Name="User_Answer" Relationship="Self.FK_User_Answer_User" FromRole="User" ToRole="User_Answer" />
           <NavigationProperty Name="User_Group" Relationship="Self.FK_User_Group_User" FromRole="User" ToRole="User_Group" />
           <NavigationProperty Name="User_Request" Relationship="Self.FK_User_Request_User" FromRole="User" ToRole="User_Request" />
-          <NavigationProperty Name="User_Roles" Relationship="DSEModel.FK__User__role__412EB0B6" FromRole="User" ToRole="User_Roles" />
         </EntityType>
         <EntityType Name="User_Answer">
           <Key>
@@ -797,32 +773,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="User_Request" EntitySet="User_Request" />
           </AssociationSet>
-          <EntitySet Name="User_Roles" EntityType="DSEModel.User_Roles" />
-          <AssociationSet Name="FK__User__role__412EB0B6" Association="DSEModel.FK__User__role__412EB0B6">
-            <End Role="User_Roles" EntitySet="User_Roles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="User_Roles">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Users" Relationship="DSEModel.FK__User__role__412EB0B6" FromRole="User_Roles" ToRole="User" />
-        </EntityType>
-        <Association Name="FK__User__role__412EB0B6">
-          <End Type="DSEModel.User_Roles" Role="User_Roles" Multiplicity="0..1" />
-          <End Type="DSEModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User_Roles">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="role" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -934,14 +885,6 @@
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User_Roles">
-            <EntityTypeMapping TypeName="DSEModel.User_Roles">
-              <MappingFragment StoreEntitySet="User_Roles">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

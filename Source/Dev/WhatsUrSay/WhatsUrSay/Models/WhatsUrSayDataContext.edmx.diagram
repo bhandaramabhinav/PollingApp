@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7c5b618d92834247985001298d150452" Name="Diagram1">
+      <Diagram DiagramId="861d16d5bf2e4916b9c92b088fce5aa8" Name="Diagram1">
         <EntityTypeShape EntityType="DSEModel.Activity" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DSEModel.Activity_Group" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DSEModel.Answer" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
@@ -32,8 +32,6 @@
         <AssociationConnector Association="DSEModel.FK_User_Answer_User" ManuallyRouted="false" />
         <AssociationConnector Association="DSEModel.FK_User_Group_User" ManuallyRouted="false" />
         <AssociationConnector Association="DSEModel.FK_User_Request_User" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DSEModel.User_Roles" Width="1.5" PointX="0.75" PointY="0.75" />
-        <AssociationConnector Association="DSEModel.FK__User__role__412EB0B6" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

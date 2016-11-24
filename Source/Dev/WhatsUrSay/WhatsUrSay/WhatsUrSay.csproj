@@ -1086,6 +1086,7 @@
     <Content Include="features\Login\Register.html" />
     <Content Include="features\Poll\CreatePoll.html" />
     <Content Include="features\Poll\ParticipateInPoll.html" />
+    <Content Include="features\Survey\CreateSurvey.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Models\WhatsUrSayDataContext.Context.tt">
@@ -1133,6 +1134,7 @@
     <Content Include="scripts\app\LoginController.js" />
     <Content Include="scripts\app\PollController.js" />
     <Content Include="scripts\app\RegisterController.js" />
+    <Content Include="scripts\app\SurveyController.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\errors.json" />
@@ -1982,6 +1984,7 @@
     <Compile Include="Models\Question.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SurveyDetails.cs" />
     <Compile Include="Models\Type.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
@@ -1997,9 +2000,6 @@
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User_Request.cs">
-      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User_Roles.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WhatsUrSayDataContext.Context.cs">

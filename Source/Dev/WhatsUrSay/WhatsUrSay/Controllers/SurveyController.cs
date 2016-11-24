@@ -39,9 +39,9 @@ namespace WhatsUrSay.Controllers
         //Purpose: Invokes 'PostSurvey(Activity Act) method of 'ActivityRepo.cs' that adds an object 'activity' in the 'Activity' table
         //Input: 'activity' object of type 'Activity.cs'
         //Output: Returns the object 'activity' upon its successful addition in the table
-        public Activity PostSurvey(Activity Act)
+        public Activity PostSurvey(Activity newSurvey)
             {
-                return Survey1.Add(Act);
+                return Survey1.Add(newSurvey);
             }
         
 

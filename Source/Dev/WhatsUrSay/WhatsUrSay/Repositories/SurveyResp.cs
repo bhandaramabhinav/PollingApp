@@ -58,6 +58,27 @@ namespace WhatsUrSay
 
                 // TO DO : Code to save record into database
                 Db1.Activities.Add(Act);
+            foreach (var question in Act.Questions)
+                 {
+                    question.activity_id = Act.id;
+                    Db1.Questions.Add(question);
+                foreach(var answer in question.Answers )
+                {
+                    answer.question_id = question.id;
+                    answer.activity_id = question.activity_id;
+                    Db1.Answers.Add(answer);
+
+                }
+
+                 }
+            if (Act.Activity_Group != null)
+            {
+                foreach (var group in Act.Activity_Group)
+                {
+                    group.activity_id = Act.id;
+                    Db1.Activity_Group.Add(group);
+                }
+            }
                 Db1.SaveChanges();
                 return Act;
             }
