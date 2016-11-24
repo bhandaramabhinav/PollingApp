@@ -15,8 +15,8 @@ namespace WhatsUrSay.Models
         public int category { get; set; }
         public int createdby { get; set; }
 
-        public HashSet<Question> Questions { get; set; } 
-        public HashSet<Answer> Answers { get; set; }
-        public HashSet<Group> Groups { get; set; }
+        public ICollection<Question> Questions { get; set; } 
+        public ICollection<Answer> Answers { get; set; }
+        public ICollection<Group> Groups { get; set; }
     }
 }

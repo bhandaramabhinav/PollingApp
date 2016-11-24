@@ -20,7 +20,7 @@
         $scope.members = [];
 
         $scope.AddMember = function (member) {
-            alert("inside AddMember function");
+           // alert("inside AddMember function");
             if (member == undefined) {
                 $scope.members.push({});
             }
