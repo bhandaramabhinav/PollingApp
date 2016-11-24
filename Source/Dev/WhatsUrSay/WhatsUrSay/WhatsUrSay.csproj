@@ -1957,6 +1957,7 @@
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DTO\ActivityDTO.cs" />
     <Compile Include="Interfaces\IAnswer.cs" />
     <Compile Include="Interfaces\IGroupsRepository.cs" />
     <Compile Include="Interfaces\ILoginRepository.cs" />
@@ -2002,6 +2003,7 @@
     <Compile Include="Models\User_Request.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User_Roles.cs" />
     <Compile Include="Models\WhatsUrSayDataContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
