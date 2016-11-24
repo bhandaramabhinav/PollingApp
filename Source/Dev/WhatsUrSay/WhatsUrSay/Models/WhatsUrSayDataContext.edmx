@@ -70,7 +70,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="int" Nullable="false" />
           <Property Name="emailId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="status" Type="nvarchar" MaxLength="50" />
@@ -101,6 +101,13 @@
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="1000" />
           <Property Name="status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Activity_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -294,6 +301,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_User_Roles">
+          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DSEModelStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Activity_Group" EntityType="Self.Activity_Group" Schema="dbo" store:Type="Tables" />
@@ -306,6 +325,7 @@
           <EntitySet Name="User_Answer" EntityType="Self.User_Answer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Group" EntityType="Self.User_Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Request" EntityType="Self.User_Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Roles" EntityType="Self.User_Roles" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Activity_Category" Association="Self.FK_Activity_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Activity" EntitySet="Activity" />
@@ -369,6 +389,10 @@
           <AssociationSet Name="FK_User_Request_User" Association="Self.FK_User_Request_User">
             <End Role="User" EntitySet="User" />
             <End Role="User_Request" EntitySet="User_Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_Roles" Association="Self.FK_User_User_Roles">
+            <End Role="User_Roles" EntitySet="User_Roles" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -461,7 +485,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role" Type="Int32" Nullable="false" />
           <Property Name="emailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -470,6 +494,7 @@
           <NavigationProperty Name="User_Answer" Relationship="Self.FK_User_Answer_User" FromRole="User" ToRole="User_Answer" />
           <NavigationProperty Name="User_Group" Relationship="Self.FK_User_Group_User" FromRole="User" ToRole="User_Group" />
           <NavigationProperty Name="User_Request" Relationship="Self.FK_User_Request_User" FromRole="User" ToRole="User_Request" />
+          <NavigationProperty Name="User_Roles" Relationship="Self.FK_User_User_Roles" FromRole="User" ToRole="User_Roles" />
         </EntityType>
         <EntityType Name="User_Answer">
           <Key>
@@ -504,6 +529,14 @@
           <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Request_User" FromRole="User_Request" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User_Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_User_Roles" FromRole="User_Roles" ToRole="User" />
         </EntityType>
         <Association Name="FK_Activity_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -697,6 +730,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_User_Roles">
+          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DSEEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Activities" EntityType="Self.Activity" />
           <EntitySet Name="Activity_Group" EntityType="Self.Activity_Group" />
@@ -709,6 +754,7 @@
           <EntitySet Name="User_Answer" EntityType="Self.User_Answer" />
           <EntitySet Name="User_Group" EntityType="Self.User_Group" />
           <EntitySet Name="User_Request" EntityType="Self.User_Request" />
+          <EntitySet Name="User_Roles" EntityType="Self.User_Roles" />
           <AssociationSet Name="FK_Activity_Category" Association="Self.FK_Activity_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Activity" EntitySet="Activities" />
@@ -772,6 +818,10 @@
           <AssociationSet Name="FK_User_Request_User" Association="Self.FK_User_Request_User">
             <End Role="User" EntitySet="Users" />
             <End Role="User_Request" EntitySet="User_Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_Roles" Association="Self.FK_User_User_Roles">
+            <End Role="User_Roles" EntitySet="User_Roles" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -885,6 +935,14 @@
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Roles">
+            <EntityTypeMapping TypeName="DSEModel.User_Roles">
+              <MappingFragment StoreEntitySet="User_Roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

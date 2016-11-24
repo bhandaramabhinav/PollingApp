@@ -1,1 +1,30 @@
-﻿
+﻿<form>
+    <div class="primary callout" ng-controller="PollController" ng-model="ViewPoll($event)">
+        <div class="row">   
+             <div class="medium-2 columns">Poll Title :</div>    <div class="medium-10 columns">{{pollTitle}}</div> 
+        </div>
+        <br/>
+        <div class="row">
+            <div class="medium-2 columns">Description : </div>    <div class="medium-10 columns">{{pollDescription}}</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="medium-2 columns">Question :</div>    <div class="medium-10 columns">{{pollQuestion}}</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="medium-12 columns">Options :</div>
+        </div>
+        <br/>
+        <label ng-repeat="pollOption in pollOptions">
+            <input type="radio" name="optionsGroup" />{{pollOption}}
+        </label>
+        <br />
+        <div class="row">
+            <div class="large-3 columns">
+                <button type="button" class="button round" ng-click="ParticipatePoll($event)">Participate In Poll</button>
+                <a href="#/" class="button round">Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>

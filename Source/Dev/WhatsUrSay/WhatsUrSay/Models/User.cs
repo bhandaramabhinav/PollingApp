@@ -26,20 +26,21 @@ namespace WhatsUrSay.Models
     
         public int id { get; set; }
         public string name { get; set; }
-        public string role { get; set; }
+        public int role { get; set; }
         public string emailId { get; set; }
         public string pwd { get; set; }
         public string status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Activity> Activities { get; set; }
+        public ICollection<Activity> Activities { get; set; }//virtual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Group> Groups { get; set; }
+        public ICollection<Group> Groups { get; set; }//virtual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_Answer> User_Answer { get; set; }
+        public ICollection<User_Answer> User_Answer { get; set; }//virtual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_Group> User_Group { get; set; }
+        public ICollection<User_Group> User_Group { get; set; }//virtual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_Request> User_Request { get; set; }
+        public ICollection<User_Request> User_Request { get; set; }//virtual
+        public User_Roles User_Roles { get; set; }//virtual
     }
 }

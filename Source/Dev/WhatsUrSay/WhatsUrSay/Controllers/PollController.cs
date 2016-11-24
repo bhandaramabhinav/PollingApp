@@ -17,6 +17,7 @@ using System.Net.Http;
 using System.Web.Http;
 using WhatsUrSay.Models;
 using WhatsUrSay.Repositories;
+using WhatsUrSay.DTO;
 
 namespace WhatsUrSay.Controllers
 {
@@ -27,17 +28,19 @@ namespace WhatsUrSay.Controllers
         //Purpose: Invokes 'GetAll()' method of PollRepository.cs that returns all the records of type 'poll' from the 'Activity' table
         //Input: None
         //Output: A list of poll records from the 'Activity' table
-        public IEnumerable<Activity> GetAllPolls()
+        public IQueryable<ActivityDTO> GetAllPolls()
         {
-             return repo.GetAll();
+            // return repo.GetAll();
+            return repo.GetPolls();
         }
 
         //Purpose: Invokes 'Get(int id)' method of PollRepository.cs that returns a record from the 'Activity' table whose key is 'id'
         //Input: 'id' of the required record
         //Output: a record from 'Activity' table whose key is 'id'
-        public Activity GetPoll(int id)
+        public IQueryable<ActivityDTO> GetPoll(int id)
         {
-            return repo.Get(id);
+            // return repo.Get(id);
+            return repo.GetPoll(id);
         }
 
         //Purpose: Invokes 'Add(Activity activity) method of 'PollRepository.cs' that adds an object 'activity' in the 'Activity' table
