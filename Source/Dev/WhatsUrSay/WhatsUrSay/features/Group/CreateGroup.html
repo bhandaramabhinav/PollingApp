@@ -4,7 +4,7 @@
             <div class="large-12 columns">
                 <label>
                     Group Name <small>required</small>
-                    <input type="text" placeholder="Enter Group Name" ng-model="groupTitle" />
+                    <input type="text" placeholder="Enter Group Name" ng-model="groupTitle" ng-required="true"/>
                 </label>
             </div>
         </div>
@@ -16,10 +16,13 @@
                 </label>
                 <ul>
                     <li ng-repeat="member in members track by $index" style="list-style-type:none;">
-                        <input type="text" placeholder="Enter person emailId (abc@xyz.com)" ng-model="member.emailId" />
+                        <input type="text" placeholder="Enter person emailId (abc@xyz.com)" ng-model="member.emailId" ng-required="true"/>
                     </li>
                     <li style="list-style-type:none;">
-                        <i class="fi-plus" ng-click="AddMember(member)"></i>
+                       Add Member <i class="fi-plus" ng-click="AddMember(member)"></i>
+                    </li>
+                    <li ng-show="(members.length>1)" style="list-style-type:none;">
+                        Remove Member  <i class="fi-minus" ng-click="RemoveMember(member)"></i>
                     </li>
                 </ul>
             </div>

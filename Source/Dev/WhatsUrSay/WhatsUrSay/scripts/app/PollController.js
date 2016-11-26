@@ -19,7 +19,7 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.pollTitle = "";
         $scope.description = "";
         $scope.question = "";
-        $scope.pollType = "";
+        $scope.pollType = "Private";
         $scope.groupNames = "";
 
         $scope.userId = "1";
@@ -30,7 +30,7 @@ Reason for component existence:         Used for creating a poll and getting the
 
         }
 
-        $scope.options = [];
+        $scope.options = [{ description: "" }, { description: "" }];
 
         $scope.AddOption = function (option) {
             if (option == undefined)
@@ -47,7 +47,17 @@ Reason for component existence:         Used for creating a poll and getting the
             } 
         }
 
+        $scope.RemoveOption = function (option) {
 
+            $scope.options.pop();
+
+        }
+
+        $scope.RemoveGroup = function (group) {
+
+            $scope.groups.pop();
+
+        }
         //Purpose: To proces the create poll request of clients of our application.
         //Input: $event to prevent the default JS behaviour of the link button.
         //Output: An alert showing the 'create poll' status .
@@ -59,6 +69,8 @@ Reason for component existence:         Used for creating a poll and getting the
                 $scope.pollType = 1;
             } else if ($scope.pollType == "private") {
                 $scope.pollType = 2;
+
+               
             }
             var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: 1, Questions: [{ description: $scope.question }], Answers : $scope.options, Groups:$scope.groups};
             $scope.CreatePollStatus = $http.post('api/ActivityGroupDetails/PostPoll', activity).then(function success(response) {
@@ -92,8 +104,8 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.pollQuestion = "";
         $scope.pollOptions = [];
        
-        $scope.ViewPoll = function ($event) {
-            $event.preventDefault();
+        $scope.ViewPoll = function () {
+            //$event.preventDefault();
             alert("View Poll");
             
             $scope.ViewStatus = $http.get('api/ActivityDTO/GetPoll/' + $scope.pollId).then(function success(response) {

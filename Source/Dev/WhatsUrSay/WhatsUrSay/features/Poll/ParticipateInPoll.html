@@ -1,5 +1,5 @@
-﻿<form>
-    <div class="primary callout" ng-controller="PollController">
+﻿<form name="pollForm">
+    <div class="primary callout" ng-controller="PollController" ng-init="ViewPoll()">
         <div class="row">   
              <div class="medium-2 columns">Poll Title :</div>    <div class="medium-10 columns">{{pollTitle}}</div> 
         </div>
@@ -16,17 +16,24 @@
             <div class="medium-12 columns">Options :</div>
         </div>
         <br/>
+        <ul>
+            <li ng-repeat="pollOption in pollOptions track by $index" style="list-style-type:none;">
+                <p>
+                    {{$index+1}}) <input type="radio" name="optionsGroup" ng-required="true" ng-model="$parent.result" ng-value="pollOption" />{{pollOption}}
+                </p>
+            </li>
+        </ul>
+        <!--
         <label ng-repeat="pollOption in pollOptions">
-            <input type="radio" name="optionsGroup" ng-model="$parent.result" ng-value="pollOption"/>{{pollOption}}
+            <p> <label>{{$index+1}}</label> </p>
            <!-- <label ng-repeat="n in [0,1]">
                 <input type="radio" name="pageSet" ng-model="$parent.pageSet" ng-value="n" />{{n}}
-            </label>-->
-        </label>
+            </label>
+        </label>-->
         <br />
         <div class="row">
             <div class="large-3 columns">
-                <button type="button" class="button round" ng-click="ViewPoll($event)">View Poll</button>
-                <button type="button" class="button round" ng-click="ParticipatePoll(result)">Participate In Poll</button>
+                <button type="button" class="button round" ng-disabled="(pollForm.$invalid)" ng-click="ParticipatePoll(result)">Participate In Poll</button>
                 <a href="#/" class="button round">Cancel</a>
             </div>
         </div>
