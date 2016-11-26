@@ -53,6 +53,7 @@ namespace WhatsUrSay.Repositories
                         {
                             heading = b.heading,
                             description = b.description,
+                            questionId = b.Questions.FirstOrDefault().id,
                             question = b.Questions.FirstOrDefault().description,
                             options = (HashSet<string>)b.Answers.Select(x => x.description)
                         };
@@ -66,6 +67,7 @@ namespace WhatsUrSay.Repositories
                         {
                             heading = b.heading,
                             description = b.description,
+                            questionId = b.Questions.FirstOrDefault().id,
                             question = b.Questions.FirstOrDefault().description,
                             options = (HashSet<string>)b.Answers.Select(x => x.description)
                         };

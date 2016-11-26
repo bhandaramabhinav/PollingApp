@@ -14,6 +14,7 @@ namespace WhatsUrSay.DTO
         }
         public string heading { get; set; }
         public string description { get; set; }
+        public int questionId { get; set; }
         public string question { get; set; }
         public HashSet<string> options { get; set; }
     }
