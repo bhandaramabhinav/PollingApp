@@ -32,8 +32,10 @@ Component usage of data structures, algorithms and control (if any):
             <div class="large-12 columns">
                 <label>
 
-                    Add Question <i class="fi-plus" ng-click="AddQuestion()"></i>
+                    Add Question <i class="fi-plus" ng-click="AddQuestion()"></i> 
+                    
                     </label>
+                <label ng-show="(questions.length>1)">Remove Question <i class="fi-minus" ng-click="RemoveQuestion()"></i></label>
                     <ul>
                        
                         <li ng-repeat="question in questions track by $index" style="list-style-type:none;">
@@ -54,7 +56,11 @@ Component usage of data structures, algorithms and control (if any):
                                         </li>
                                         <li style="list-style-type:none;">
                                         
-                                          Add Option  <i class="fi-plus" ng-click="AddOption(question)"></i> <!--<button ng-click="AddOption(option)">Add</button>-->
+                                          Add Option  <i class="fi-plus" ng-click="AddOption(question)"></i> 
+                                        </li>
+                                        <li ng-show="(question.Answers.length>2)" style="list-style-type:none;">
+
+                                            Remove Option  <i class="fi-minus" ng-click="RemoveOption(question)"></i>
                                         </li>
                                     </ul>
                                 </div>

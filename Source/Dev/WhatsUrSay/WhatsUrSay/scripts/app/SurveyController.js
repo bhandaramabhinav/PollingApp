@@ -30,6 +30,11 @@ Reason for component existence:         Used for creating a survey and getting t
             $scope.questions.push({ description: "", Answers: [{ description: "", count: 0 }, { description: "", count: 0 }] });
                 //$scope.Invalid = true;
         }
+
+        $scope.RemoveQuestion=function()
+        {
+            $scope.questions.pop();
+        }
        
         $scope.Invalid=true;
         $scope.AddOption = function (question) {
@@ -43,6 +48,11 @@ Reason for component existence:         Used for creating a survey and getting t
                 //$scope.Invalid = false;
             }
             
+        }
+        $scope.RemoveOption = function (question) {
+       
+                question.Answers.pop();
+
         }
         $scope.select=[];
         $scope.selectedGroups = [];
