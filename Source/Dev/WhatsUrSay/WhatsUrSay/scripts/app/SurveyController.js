@@ -56,30 +56,32 @@ Reason for component existence:         Used for creating a survey and getting t
         }
         $scope.select=[];
         $scope.selectedGroups = [];
-        $scope.groups = [{ Id: "1", Name: "DSE" }, { Id: "3", Name: "CS" }];
+        $scope.groups = [];
+        //$scope.LoadGroups = function () {
+
+        //    $scope.groups = [{ Id: "1", Name: "DSE" }, { Id: "3", Name: "CS" }];
+        //}
 
         $scope.TypeChanged=function()
         {
             $scope.select = [];
         }
 
-        //$scope.groupsDetails = function () {
-        //    $http.get('api/Groups')
-        //    .success(function (data, status, headers, config) {
-        //        for (var i = 0; i < data.count; i++) {
+        $scope.LoadGroups = function () {
+            $http.get('api/Groups/GetGroups')
+            .then(function success(response) {
+                var data = response.data;
+                for (var i = 0; i < data.length; i++) {
 
-        //            $scope.groupss.push({ Id: data[i].id,Name: data[i].name })
+                    $scope.groups.push({ Id: data[i].id,Name: data[i].name })
 
-        //        }
+                }
                
-        //    })
-        //    .error(function (data, status, header, config) {
-        //        $scope.ResponseDetails = "Data: " + data +
-        //            "<br />status: " + status +
-        //            "<br />headers: " + jsonFilter(header) +
-        //            "<br />config: " + jsonFilter(config);
-        //    });
-        //};
+            }
+            ,function error(response) {
+                $location.path('/error');
+            });
+        }
 
        
 
