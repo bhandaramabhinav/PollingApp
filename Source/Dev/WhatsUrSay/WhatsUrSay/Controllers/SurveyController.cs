@@ -35,6 +35,17 @@ namespace WhatsUrSay.Controllers
                 return Survey1.GetAll();
             }
 
+        /// <summary>
+        /// Return Activity for given activity Id
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
+        public Activity GetSurvey([FromUri]int activityId)
+        {           
+            Activity activity = Survey1.GetAll().First(e => e.id == activityId);
+            return activity;
+        }
+
         //PostSurvey api/<controller>
         //Purpose: Invokes 'PostSurvey(Activity Act) method of 'ActivityRepo.cs' that adds an object 'activity' in the 'Activity' table
         //Input: 'activity' object of type 'Activity.cs'
@@ -43,7 +54,9 @@ namespace WhatsUrSay.Controllers
             {
                 return Survey1.Add(newSurvey);
             }
-        
+
+       
+
 
     }
 }

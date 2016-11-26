@@ -48,6 +48,11 @@ Reason for component existence:         Used for creating a survey and getting t
         $scope.selectedGroups = [];
         $scope.groups = [{ Id: "1", Name: "DSE" }, { Id: "3", Name: "CS" }];
 
+        $scope.TypeChanged=function()
+        {
+            $scope.select = [];
+        }
+
         //$scope.groupsDetails = function () {
         //    $http.get('api/Groups')
         //    .success(function (data, status, headers, config) {

@@ -1086,7 +1086,10 @@
     <Content Include="features\Login\Register.html" />
     <Content Include="features\Poll\CreatePoll.html" />
     <Content Include="features\Poll\ParticipateInPoll.html" />
+    <Content Include="features\Poll\ViewPoll.html" />
     <Content Include="features\Survey\CreateSurvey.html" />
+    <Content Include="features\Survey\ParticpateSurvey.html" />
+    <Content Include="features\Survey\ViewSurveyResults.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Models\WhatsUrSayDataContext.Context.tt">
@@ -1132,6 +1135,7 @@
     <Content Include="scripts\app\GroupController.js" />
     <Content Include="scripts\app\HomeController.js" />
     <Content Include="scripts\app\LoginController.js" />
+    <Content Include="scripts\app\ParticipateSurveyController.js" />
     <Content Include="scripts\app\PollController.js" />
     <Content Include="scripts\app\RegisterController.js" />
     <Content Include="scripts\app\SurveyController.js" />
@@ -1956,6 +1960,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\UserAnswerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DTO\ActivityDTO.cs" />
     <Compile Include="Interfaces\IAnswer.cs" />
@@ -1964,6 +1969,7 @@
     <Compile Include="Interfaces\IPollRepository.cs" />
     <Compile Include="Interfaces\IQuestionRepository.cs" />
     <Compile Include="Interfaces\ISurvey.cs" />
+    <Compile Include="Interfaces\IUserAnswerRespository.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Models\Activity.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
@@ -1992,6 +1998,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserAnswersList.cs" />
     <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Models\UserInput.cs" />
     <Compile Include="Models\User_Answer.cs">
@@ -2034,6 +2041,7 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\UserAnswerRespository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -38,7 +38,7 @@ namespace WhatsUrSay.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public ICollection<Answer> Answers { get; set; } //virtual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<Question> Questions { get; set; } //virtual
+        public  ICollection<Question> Questions { get; set; } //virtual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public ICollection<User_Answer> User_Answer { get; set; } //virtual
     }

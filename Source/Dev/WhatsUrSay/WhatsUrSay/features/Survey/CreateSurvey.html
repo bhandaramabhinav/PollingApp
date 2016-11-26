@@ -70,7 +70,7 @@ Component usage of data structures, algorithms and control (if any):
             <div class="large-12 columns">
                 <label>
                     Survey Type <small>required</small>
-                    <select id="surveyType" name="surveyType"  ng-model="surveyType">
+                    <select id="surveyType" name="surveyType"  ng-change="TypeChanged()" ng-model="surveyType">
                         <option value="Public">Public</option>
                         <option value="Private">Private</option>
                     </select>
@@ -85,7 +85,7 @@ Component usage of data structures, algorithms and control (if any):
                     (At least 1 group name is required. Use ctrl to select multiple)<br />
                     <!--<input type="text" placeholder="Enter the names of groups" ng-model="groupNames"/>-->
                 </label>
-                <select ng-required="true" name="multipleSelect" id="multipleSelect" ng-model="select"  multiple >
+                <select ng-required="(surveyType=='Private')" name="multipleSelect" id="multipleSelect" ng-model="select"  multiple >
                     <option ng-repeat="group in groups" value="{{group.Id}}">{{group.Name}}</option>
                 </select>
                

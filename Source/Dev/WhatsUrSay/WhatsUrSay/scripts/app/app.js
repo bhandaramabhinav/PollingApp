@@ -29,6 +29,10 @@ Reason for component existence:         Angular JS application definition..
             templateUrl: 'features/Poll/ParticipateInPoll.html',
         }).when('/viewPoll', {
             templateUrl: 'features/Poll/ViewPoll.html',
+        }).when('/participateSurvey', {
+            templateUrl: 'features/Survey/ParticpateSurvey.html',
+        }).when('/viewSurveyResults', {
+            templateUrl: 'features/Survey/ViewSurveyResults.html',
         }).otherwise({
             templateUrl: 'features/Home/Home.html',
             controller:'HomeController'

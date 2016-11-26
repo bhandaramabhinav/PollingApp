@@ -24,6 +24,7 @@ namespace WhatsUrSay
         IEnumerable<Answer> GetAll();
         Answer Get(int id);
         Answer Add(Answer Act);
-     
+        bool Update(Answer Act,int Userid);
+
     }
 }

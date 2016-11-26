@@ -20,6 +20,7 @@ using System.Web.Http;
 //It includes all the models from the WhatsUrSay
 using WhatsUrSay.Models;
 using WhatsUrSay.Interfaces;
+using System.Web.Http.Description;
 
 namespace WhatsUrSay.Controllers
 {
@@ -44,6 +45,25 @@ namespace WhatsUrSay.Controllers
         public Answer PostSurvey(Answer Act)
         {
             return Answer1.Add(Act);
+        }
+
+     
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PostSurveyAnswers(UserAnswersList UserAnswers)
+        {
+            try
+            {
+                foreach (var answer in UserAnswers.Answers)
+                {
+                    Answer1.Update(answer, UserAnswers.UserId);
+                }
+            }
+
+            catch
+            {
+                StatusCode(HttpStatusCode.InternalServerError);
+            }
+            return StatusCode(HttpStatusCode.OK);
         }
 
     }
