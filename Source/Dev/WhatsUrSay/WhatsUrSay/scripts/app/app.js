@@ -20,9 +20,17 @@ Reason for component existence:         Angular JS application definition..
         }).when('/error', {
             templateUrl:'features/Error/Error.html',
         }).when('/createPoll', {
-            templateUrl: 'features/Poll/CreatePoll.html',
+            templateUrl: 'features/Poll/CreatePoll.html'
+        }).when('/createSurvey', {
+            templateUrl: 'features/Survey/CreateSurvey.html'
         }).when('/createGroup', {
             templateUrl: 'features/Group/CreateGroup.html',
+        }).when('/participatePoll', {
+            templateUrl: 'features/Poll/ParticipateInPoll.html',
+        }).when('/participateSurvey', {
+            templateUrl: 'features/Survey/ParticpateSurvey.html',
+        }).when('/viewSurveyResults', {
+            templateUrl: 'features/Survey/ViewSurveyResults.html',
         }).otherwise({
             templateUrl: 'features/Home/Home.html',
             controller:'HomeController'

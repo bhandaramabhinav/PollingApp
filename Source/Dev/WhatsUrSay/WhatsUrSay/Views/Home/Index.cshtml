@@ -26,10 +26,13 @@
             <h1 class="headline">Whats Ur Say!!</h1>
             <ul class="header-subnav">
                 <li><a href="#/createPoll">Create!</a></li>
+                <li><a href="#/createSurvey">Create Survey!</a></li>
                 <li><a href="#/createGroup">Create Group!</a></li>
-                <li><a href="#" class="is-active">Participate!</a></li>
+                <li><a href="#/participatePoll" class="is-active">Participate!</a></li>
                 <li><a href="#/login">Login!</a></li>
                 <li><a href="#/join">Join!</a></li>
+                <li><a href="#/participateSurvey">Participate Survey</a></li>
+                <li><a href="#/viewSurveyResults">View Survey Results</a></li>
             </ul>
         </header>  
         <div class="row main" ng-view></div>    
@@ -65,6 +68,8 @@
     <script src="~/scripts/app/LoginController.js"></script>
     <script src="~/scripts/app/PollController.js"></script>
     <script src="~/scripts/app/GroupController.js"></script>
+    <script src="~/scripts/app/SurveyController.js"></script>
+    <script src="~/scripts/app/ParticipateSurveyController.js"></script>
     <script>$(document).ready(function () { $(document).foundation(); });</script>
 </body>
 </html>

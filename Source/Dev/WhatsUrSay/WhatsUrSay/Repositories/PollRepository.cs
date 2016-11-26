@@ -13,10 +13,13 @@ Component usage of data structures, algorithms and control(if any):
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using WhatsUrSay.DTO;
 using WhatsUrSay.Models;
+using System.Collections;
 
 namespace WhatsUrSay.Repositories
 {
@@ -30,9 +33,10 @@ namespace WhatsUrSay.Repositories
         //        If any exception occurs, the exception message is printed and the exception is thrown
         public IEnumerable<Activity> GetAll()
         {
+            Console.WriteLine("<<<<<<Inside GetAll method in controller");
             try
             {
-                return db.Activities.ToList();
+                return db.Activities.Include(b => b.Answers).Include(b=>b.Questions);
             }
             catch (Exception e)
             {
@@ -42,15 +46,56 @@ namespace WhatsUrSay.Repositories
             
         }
 
+        public IQueryable<ActivityDTO> GetPolls()
+        {
+            var polls = from b in db.Activities
+                        select new ActivityDTO()
+                        {
+                            heading = b.heading,
+                            description = b.description,
+                            questionId = b.Questions.FirstOrDefault().id,
+                            question = b.Questions.FirstOrDefault().description,
+                            options = (HashSet<string>)b.Answers.Select(x => x.description)
+                        };
+            return polls;
+    }
+
+        public IQueryable<ActivityDTO> GetPoll(int id)
+        {
+            var poll = from b in db.Activities where(b.id == id)
+                        select new ActivityDTO()
+                        {
+                            heading = b.heading,
+                            description = b.description,
+                            questionId = b.Questions.FirstOrDefault().id,
+                            question = b.Questions.FirstOrDefault().description,
+                            options = (HashSet<string>)b.Answers.Select(x => x.description)
+                        };
+            return poll;
+        }
+
         //Purpose: Gets a record from the 'Activity' table whose row id is 'id'
         //Input: 'id' of the required record
         //Output: a record from 'Activity' table whose key is 'id'
         //        If any exception occurs, the exception message is printed and the exception is thrown
-        public Activity Get(int id)
+        public ActivityGroupDetails Get(int id)
         {
             try
             {
-                return db.Activities.Find(id);
+                //Activity act = db.Activities.Find(id);
+                ActivityGroupDetails agd = new ActivityGroupDetails();
+               
+                Activity act = db.Activities.Find(id);
+                agd.heading = act.heading;
+                agd.description = act.description;
+                agd.type = act.type;
+                agd.category = act.category;
+                agd.Questions = act.Questions;
+                agd.Answers = act.Answers;
+
+                return agd;
+                // return db.Activities.Find(id);
+                //return db.Activities.Include(a => a);
             }
             catch(Exception e)
             {
