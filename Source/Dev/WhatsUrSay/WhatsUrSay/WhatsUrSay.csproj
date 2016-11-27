@@ -1081,6 +1081,7 @@
     <Content Include="Content\__MACOSX\foundation-icons\svgs\._fi-zoom-out.svg" />
     <Content Include="features\Error\Error.html" />
     <Content Include="features\Group\CreateGroup.html" />
+    <Content Include="features\Home\Dashboard.html" />
     <Content Include="features\Home\Home.html" />
     <Content Include="features\Login\Login.html" />
     <Content Include="features\Login\Register.html" />
