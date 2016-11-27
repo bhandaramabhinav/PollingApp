@@ -17,13 +17,18 @@
 
         }
 
-        $scope.members = [];
+        $scope.members = [{ emailId: "" }];
 
         $scope.AddMember = function (member) {
-            alert("inside AddMember function");
+           // alert("inside AddMember function");
             if (member == undefined) {
                 $scope.members.push({});
             }
+        }
+
+        $scope.RemoveMember = function (member) {
+            // alert("inside AddMember function");
+            $scope.members.pop();
         }
 
 

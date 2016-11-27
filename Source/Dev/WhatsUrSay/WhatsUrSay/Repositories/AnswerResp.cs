@@ -12,10 +12,13 @@ Component usage of data structures, algorithms and control(if any):
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 //includes all the models from the WhatsUrSay
 using WhatsUrSay.Models;
+using WhatsUrSay.DTO;
 
 namespace WhatsUrSay
 {
@@ -33,6 +36,20 @@ namespace WhatsUrSay
         }
 
 
+        public IQueryable<AnswerDTO> GetAnswersForCount(int activityId)
+        {
+            var answer = from b in Db2.Answers
+                         where (b.activity_id == activityId)
+                         select new AnswerDTO()
+                         {
+                             id = b.id,
+                             description = b.description,
+                             question_id = b.question_id,
+                             count = (int)b.count
+                         };
+            return answer;
+        }
+
         //Purpose: Gets a record from the 'Answer' table whose row id is 'id'
         //Input: 'id' of the required record
         //Output: a record from 'Answer' table whose key is 'id'
@@ -41,7 +58,6 @@ namespace WhatsUrSay
             // TO DO : Code to find a record in database
             return Db2.Answers.Find(id);
         }
-
 
         //Purpose: Adds an object 'answer' in the 'Answer' table
         //Input: 'answer' object of type 'Answer.cs'
@@ -55,8 +71,31 @@ namespace WhatsUrSay
 
             // TO DO : Code to save record into database
             Db2.Answers.Add(Ans);
+           
             Db2.SaveChanges();
             return Ans;
+        }
+
+    
+        public bool Update(Answer Ans,int userId)
+        {
+            if (Ans == null)
+            {
+                throw new ArgumentNullException("Answer");
+            }
+
+            // TO DO : Code to save record into database
+            try
+            {
+                Db2.Entry(Ans).State = EntityState.Modified;
+                Db2.User_Answer.Add(new User_Answer() { activity_id = Ans.activity_id, question_id = Ans.question_id, user_id = userId, answer_id = Ans.id });
+                Db2.SaveChanges();
+            }
+            catch(DbUpdateException ex)
+            {
+                throw ex;
+            }
+            return true;
         }
        
     }

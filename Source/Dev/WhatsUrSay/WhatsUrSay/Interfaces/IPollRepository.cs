@@ -21,7 +21,8 @@ namespace WhatsUrSay.Interfaces
     {
 
         IEnumerable<Activity> GetAll();
-        Activity Get(int id);
+        IEnumerable<Activity> GetPoll(int id);
+        //ActivityGroupDetails Get(int id);
         //Activity Add(Activity activity);
         Activity Add(ActivityGroupDetails activity);
     }

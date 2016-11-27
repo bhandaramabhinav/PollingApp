@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WhatsUrSay.Models;
+using System.Data.Entity;
 
 namespace WhatsUrSay
 {
@@ -30,8 +31,19 @@ namespace WhatsUrSay
         //Output: A list of poll records from the 'Activity' table
         public IEnumerable<Activity> GetAll()
             {
-                // TO DO : Code to get the list of all the records in database
-                return Db1.Activities;
+            Db1.Configuration.LazyLoadingEnabled = false;
+            // TO DO : Code to get the list of all the records in database
+            foreach (var act in Db1.Activities)
+            {
+                Db1.Entry(act).Collection(p => p.Questions).Load();
+                 foreach (var question in act.Questions )
+                {
+                    Db1.Entry(question).Collection(p => p.Answers).Load();
+                }
+
+
+            }
+            return Db1.Activities;
             }
 
 
@@ -58,6 +70,27 @@ namespace WhatsUrSay
 
                 // TO DO : Code to save record into database
                 Db1.Activities.Add(Act);
+            foreach (var question in Act.Questions)
+                 {
+                    question.activity_id = Act.id;
+                    Db1.Questions.Add(question);
+                foreach(var answer in question.Answers )
+                {
+                    answer.question_id = question.id;
+                    answer.activity_id = question.activity_id;
+                    Db1.Answers.Add(answer);
+
+                }
+
+                 }
+            if (Act.Activity_Group != null)
+            {
+                foreach (var group in Act.Activity_Group)
+                {
+                    group.activity_id = Act.id;
+                    Db1.Activity_Group.Add(group);
+                }
+            }
                 Db1.SaveChanges();
                 return Act;
             }

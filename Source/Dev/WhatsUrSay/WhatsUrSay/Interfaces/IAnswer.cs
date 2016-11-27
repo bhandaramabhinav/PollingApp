@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 //It includes all the models from the project WhatsUrSay
 using WhatsUrSay.Models;
+using WhatsUrSay.DTO;
 
 namespace WhatsUrSay
 {
@@ -24,6 +25,7 @@ namespace WhatsUrSay
         IEnumerable<Answer> GetAll();
         Answer Get(int id);
         Answer Add(Answer Act);
-     
+        bool Update(Answer Act,int Userid);
+        IQueryable<AnswerDTO> GetAnswersForCount(int activityId);
     }
 }

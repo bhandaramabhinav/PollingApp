@@ -36,6 +36,5 @@ namespace WhatsUrSay.Models
         public virtual DbSet<User_Answer> User_Answer { get; set; }
         public virtual DbSet<User_Group> User_Group { get; set; }
         public virtual DbSet<User_Request> User_Request { get; set; }
-        public virtual DbSet<User_Roles> User_Roles { get; set; }
     }
 }

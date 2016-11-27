@@ -30,16 +30,16 @@ namespace WhatsUrSay.Models
         public int category { get; set; }
         public int createdby { get; set; }
     
-        public virtual Category Category1 { get; set; }
+        public Category Category1 { get; set; } //virtual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Activity_Group> Activity_Group { get; set; }
-        public virtual Type Type1 { get; set; }
-        public virtual User User { get; set; }
+        public ICollection<Activity_Group> Activity_Group { get; set; } //virtual
+        public Type Type1 { get; set; } //virtual
+        public User User { get; set; } //virtual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answer> Answers { get; set; }
+        public ICollection<Answer> Answers { get; set; } //virtual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Question> Questions { get; set; }
+        public  ICollection<Question> Questions { get; set; } //virtual
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_Answer> User_Answer { get; set; }
+        public ICollection<User_Answer> User_Answer { get; set; } //virtual
     }
 }

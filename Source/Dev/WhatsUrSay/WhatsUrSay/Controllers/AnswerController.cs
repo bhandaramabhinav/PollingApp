@@ -20,13 +20,15 @@ using System.Web.Http;
 //It includes all the models from the WhatsUrSay
 using WhatsUrSay.Models;
 using WhatsUrSay.Interfaces;
+using System.Web.Http.Description;
+using WhatsUrSay.DTO;
 
 namespace WhatsUrSay.Controllers
 {
     public class AnswerController : ApiController
     {
         //  It reads the IAnswer interface.
-        static readonly IAnswer Answer1 = new AnswerResp();
+         AnswerResp Answer1 = new AnswerResp();
 
         //GETAnswers api/<controller>
         //Purpose: Invokes 'GetAnswers()' method of AnswerRepo.cs that returns all the records of type 'answer' from the 'Answer' table
@@ -37,6 +39,11 @@ namespace WhatsUrSay.Controllers
             return Answer1.GetAll();
         }
 
+        public IQueryable<AnswerDTO> GetAnswersForCount(int id)
+        {
+            return Answer1.GetAnswersForCount(id);
+        }
+
         //PostSurvey api/<controller>
         //Purpose: Invokes 'PostSurvey(Answer Act) method of 'AnswerRepo.cs' that adds an object 'answer' in the 'Answer' table
         //Input: 'activity' object of type 'Answer.cs'
@@ -44,6 +51,25 @@ namespace WhatsUrSay.Controllers
         public Answer PostSurvey(Answer Act)
         {
             return Answer1.Add(Act);
+        }
+
+     
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PostSurveyAnswers(UserAnswersList UserAnswers)
+        {
+            try
+            {
+                foreach (var answer in UserAnswers.Answers)
+                {
+                    Answer1.Update(answer, UserAnswers.UserId);
+                }
+            }
+
+            catch
+            {
+                StatusCode(HttpStatusCode.InternalServerError);
+            }
+            return StatusCode(HttpStatusCode.OK);
         }
 
     }
