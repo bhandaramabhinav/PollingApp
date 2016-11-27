@@ -47,15 +47,11 @@ Reason for component existence:         Used for creating a poll and getting the
         }
 
         $scope.RemoveOption = function (option) {
-
             $scope.options.pop();
-
         }
 
         $scope.RemoveGroup = function (group) {
-
             $scope.groups.pop();
-
         }
 
         //Purpose: To proces the create poll request of clients of our application.
@@ -69,12 +65,10 @@ Reason for component existence:         Used for creating a poll and getting the
                 $scope.pollType = 1;
             } else if ($scope.pollType == "private") {
                 $scope.pollType = 2;
-
-
             }
             var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: 1, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.groups };
             $scope.CreatePollStatus = $http.post('api/ActivityGroupDetails/PostPoll', activity).then(function success(response) {
-                alert(response);
+                //alert(response);
                 var alert_text = "";
                 if (response.data) {
                     alert_text = "Poll is created Successfully";
@@ -106,9 +100,6 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.pollOptionCounts = [];
 
         $scope.ViewPoll = function () {
-            //$event.preventDefault();
-           // alert("View Poll");
-
             $scope.ViewStatus = $http.get('api/ActivityDTO/GetPoll/' + $scope.pollId).then(function success(response) {
                 //alert(response);
                 $scope.data = response.data;
@@ -117,7 +108,6 @@ Reason for component existence:         Used for creating a poll and getting the
                 $scope.pollQuestionId = response.data[0].questionId;
                 $scope.pollQuestion = response.data[0].question;
                 $scope.pollOptions = response.data[0].options;
-                //$scope.pollOptionCounts = response.data[0].counts;
             }, function error(response) {
                 alert(response);
                 $location.path('/error');
@@ -127,13 +117,11 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.result = "";
 
         $scope.ParticipatePoll = function (result) {
-            alert("In participatePoll function");
-            alert($scope.pollId);
-            alert($scope.result);
+            //alert("In participatePoll function");
             var pollAnswerDetails = { userId: $scope.userId, activityId: $scope.pollId, questionId: $scope.pollQuestionId, answerDesc: $scope.result };
 
             $scope.ParticipatePollStatus = $http.post('api/PollAnswerDetails/PostPollAnswer', pollAnswerDetails).then(function success(response) {
-                alert(response);
+                
                 var alert_text = "";
                 if (response.data) {
                     alert_text = "Poll Answer is posted Successfully";
@@ -156,7 +144,6 @@ Reason for component existence:         Used for creating a poll and getting the
         }
         
         $scope.PollResults = function () {
-            alert("Inside poll results");
             $scope.ViewPoll();
             $http.get('api/UserAnswer/GetUsersParticipated?activityId=' + $scope.pollId).then(function success(response) {
                 $scope.usersParticipated = response.data;
@@ -164,8 +151,20 @@ Reason for component existence:         Used for creating a poll and getting the
                 alert(response);
                 $location.path('/error');
             });
+            $scope.answers = [];
+            $scope.counts = [];
+            $http.get('api/Answer/GetAnswersForCount/' + $scope.pollId).then(function success(response) {
+                $scope.ansLength = response.data.length;
+                for(var i=0;i<response.data.length;i++){
+                    $scope.answers.push(response.data[i].description);
+                    $scope.counts.push(response.data[i].count);
+                }
+                $scope.answersResult = response.data;
+            }, function error(response) {
+                alert(response);
+                $location.path('/error');
+            });
         }
-
     }
 }());
 

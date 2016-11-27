@@ -18,6 +18,7 @@ using System.Linq;
 using System.Web;
 //includes all the models from the WhatsUrSay
 using WhatsUrSay.Models;
+using WhatsUrSay.DTO;
 
 namespace WhatsUrSay
 {
@@ -34,6 +35,20 @@ namespace WhatsUrSay
             return Db2.Answers;
         }
 
+
+        public IQueryable<AnswerDTO> GetAnswersForCount(int activityId)
+        {
+            var answer = from b in Db2.Answers
+                         where (b.activity_id == activityId)
+                         select new AnswerDTO()
+                         {
+                             id = b.id,
+                             description = b.description,
+                             question_id = b.question_id,
+                             count = (int)b.count
+                         };
+            return answer;
+        }
 
         //Purpose: Gets a record from the 'Answer' table whose row id is 'id'
         //Input: 'id' of the required record

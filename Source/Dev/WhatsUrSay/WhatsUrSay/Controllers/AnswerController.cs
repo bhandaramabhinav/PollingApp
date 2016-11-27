@@ -21,13 +21,14 @@ using System.Web.Http;
 using WhatsUrSay.Models;
 using WhatsUrSay.Interfaces;
 using System.Web.Http.Description;
+using WhatsUrSay.DTO;
 
 namespace WhatsUrSay.Controllers
 {
     public class AnswerController : ApiController
     {
         //  It reads the IAnswer interface.
-        static readonly IAnswer Answer1 = new AnswerResp();
+         AnswerResp Answer1 = new AnswerResp();
 
         //GETAnswers api/<controller>
         //Purpose: Invokes 'GetAnswers()' method of AnswerRepo.cs that returns all the records of type 'answer' from the 'Answer' table
@@ -36,6 +37,11 @@ namespace WhatsUrSay.Controllers
         public IEnumerable<Answer> GetAnswers()
         {
             return Answer1.GetAll();
+        }
+
+        public IQueryable<AnswerDTO> GetAnswersForCount(int id)
+        {
+            return Answer1.GetAnswersForCount(id);
         }
 
         //PostSurvey api/<controller>
