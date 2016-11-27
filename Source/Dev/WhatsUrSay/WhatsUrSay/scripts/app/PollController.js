@@ -33,8 +33,7 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.options = [{ description: "" }, { description: "" }];
 
         $scope.AddOption = function (option) {
-            if (option == undefined)
-            {
+            if (option == undefined) {
                 $scope.options.push({});
             }
         }
@@ -44,7 +43,7 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.AddGroup = function (group) {
             if (group == undefined) {
                 $scope.groups.push({});
-            } 
+            }
         }
 
         $scope.RemoveOption = function (option) {
@@ -58,6 +57,7 @@ Reason for component existence:         Used for creating a poll and getting the
             $scope.groups.pop();
 
         }
+
         //Purpose: To proces the create poll request of clients of our application.
         //Input: $event to prevent the default JS behaviour of the link button.
         //Output: An alert showing the 'create poll' status .
@@ -70,9 +70,9 @@ Reason for component existence:         Used for creating a poll and getting the
             } else if ($scope.pollType == "private") {
                 $scope.pollType = 2;
 
-               
+
             }
-            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: 1, Questions: [{ description: $scope.question }], Answers : $scope.options, Groups:$scope.groups};
+            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: 1, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.groups };
             $scope.CreatePollStatus = $http.post('api/ActivityGroupDetails/PostPoll', activity).then(function success(response) {
                 alert(response);
                 var alert_text = "";
@@ -97,17 +97,18 @@ Reason for component existence:         Used for creating a poll and getting the
         };
 
         $scope.pollId = '10';
-            
+
         $scope.pollTitle = "";
         $scope.pollDescription = "";
         $scope.pollQuestionId = "";
         $scope.pollQuestion = "";
         $scope.pollOptions = [];
-       
+        $scope.pollOptionCounts = [];
+
         $scope.ViewPoll = function () {
             //$event.preventDefault();
-            alert("View Poll");
-            
+           // alert("View Poll");
+
             $scope.ViewStatus = $http.get('api/ActivityDTO/GetPoll/' + $scope.pollId).then(function success(response) {
                 //alert(response);
                 $scope.data = response.data;
@@ -116,46 +117,13 @@ Reason for component existence:         Used for creating a poll and getting the
                 $scope.pollQuestionId = response.data[0].questionId;
                 $scope.pollQuestion = response.data[0].question;
                 $scope.pollOptions = response.data[0].options;
-
-               // window.location.href = '#/participatePoll';
-
-                /*alert("<<<")
-                alert(response.data.options);
-                alert(">>>")
-                //$scope.pollOptions = [0, 1, 2, 3];
-
-                $scope.pollOptions = response.data[0].options;
-
-                //alert($scope.pollDescription);
-                //window.location.href = '#/participatePoll';
-                //$window.location.href = '/participatePoll';
-                //window.location = "#/ParticipateInPoll.html";
-                //window.location = "#/participatePoll";
-               // $location.path('/participatePoll');
-                //window.location.href = '#/participatePoll';
-               // $location.url('/participatePoll');
-                // $scope.option1 = response.data[0].options[0];
-                /*var alert_text = "";
-                if (response.data) {
-                    alert_text = "Participate in Poll";
-                } else {
-                    alert_text = "Poll participation failed";
-                }
-                $mdDialog.show(
-                    $mdDialog.alert()
-                      .parent(angular.element(document.querySelector('#popupContainer')))
-                      .clickOutsideToClose(true)
-                      .title('Poll participation')
-                      .textContent(alert_text)
-                      .ariaLabel('alert')
-                      .ok('Ok')
-                  );*/
+                //$scope.pollOptionCounts = response.data[0].counts;
             }, function error(response) {
                 alert(response);
                 $location.path('/error');
-            });         
+            });
         };
-        
+
         $scope.result = "";
 
         $scope.ParticipatePoll = function (result) {
@@ -186,40 +154,18 @@ Reason for component existence:         Used for creating a poll and getting the
                 $location.path('/error');
             });
         }
-      /*  $scope.ParticipatePoll = function ($scope) {
-            //var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: 1, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.groups };
-            $scope.LoginStatus = $http.get('api/Poll/GetPoll/10').then(function success(response) {
-                //alert(response);
-                $scope.data = response.data;
-                $scope.pollTitle = response.data[0].heading;
-                $scope.pollDescription = response.data[0].description;
-                $scope.pollQuestion = response.data[0].question;
-                /*alert("<<<")
-                alert(response.data.options);
-                alert(">>>")
-                //$scope.pollOptions = [0, 1, 2, 3];
-
-                $scope.pollOptions = response.data[0].options;
-                // $scope.option1 = response.data[0].options[0];
-                var alert_text = "";
-                if (response.data) {
-                    alert_text = "Participate in Poll";
-                } else {
-                    alert_text = "Poll participation failed";
-                }
-                $mdDialog.show(
-                    $mdDialog.alert()
-                      .parent(angular.element(document.querySelector('#popupContainer')))
-                      .clickOutsideToClose(true)
-                      .title('Poll participation')
-                      .textContent(alert_text)
-                      .ariaLabel('alert')
-                      .ok('Ok')
-                  );
+        
+        $scope.PollResults = function () {
+            alert("Inside poll results");
+            $scope.ViewPoll();
+            $http.get('api/UserAnswer/GetUsersParticipated?activityId=' + $scope.pollId).then(function success(response) {
+                $scope.usersParticipated = response.data;
             }, function error(response) {
                 alert(response);
                 $location.path('/error');
             });
-        };*/
+        }
+
     }
-})();
+}());
+

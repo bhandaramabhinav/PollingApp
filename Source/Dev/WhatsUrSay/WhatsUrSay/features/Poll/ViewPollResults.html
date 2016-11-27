@@ -1,17 +1,42 @@
-﻿<form onload="viewPoll()">
-    <div class="primary callout" ng-controller="PollController">
+﻿<form name="pollForm" >
+    <div class="primary callout" ng-controller="PollController" ng-init="PollResults()">
         <div class="row">
             <div class="large-12 columns">
                 <label>
-                    Poll <small>required</small>
-                    <input type="text" placeholder="Title" ng-model="pollTitle" />
+                    Number of Users Participated :{{usersParticipated}}
                 </label>
+            </div>
+            <div class="large-12 columns">
+                <label>
+                    Poll Title :{{pollTitle}}
+                 </label>
+            </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>
+                    Description :{{pollDescription}}
+                </label>
+            </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>
+                    Question :{{pollQuestion}}
+                </label>
+            </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <ul>
+                    <li ng-repeat="pollOption in pollOptions track by $index" style="list-style-type:none;">
+                        <p>
+
+                        </p>
+
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="row">
             <div class="large-3 columns">
-               <!-- <a href="#/participatePoll" class="is-active" ng-click="ViewPoll($event)">View Poll!</a>-->
-               <button type="button" class="button round" ng-click="ViewPoll($event)">View Poll</button>
                 <a href="#/" class="button round">Cancel</a>
             </div>
         </div>
