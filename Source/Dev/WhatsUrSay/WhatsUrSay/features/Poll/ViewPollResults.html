@@ -6,29 +6,35 @@
                     Number of Users Participated :{{usersParticipated}}
                 </label>
             </div>
+        </div><br />
+        <div class="row">
             <div class="large-12 columns">
                 <label>
                     Poll Title :{{pollTitle}}
                  </label>
             </div>
+        </div><br />
         <div class="row">
             <div class="large-12 columns">
                 <label>
                     Description :{{pollDescription}}
                 </label>
             </div>
+        </div><br />
         <div class="row">
             <div class="large-12 columns">
                 <label>
                     Question :{{pollQuestion}}
                 </label>
             </div>
+        </div><br />
         <div class="row">
             <div class="small-12 columns">
                 <ul>
                     <li ng-repeat="pollOption in pollOptions track by $index" style="list-style-type:none;">
                         <p>
 
+                            {{$index+1}})  {{pollOption}} &nbsp; &nbsp; count :{{10}}
                         </p>
 
                     </li>
