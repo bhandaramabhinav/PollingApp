@@ -311,3 +311,18 @@ ALTER TABLE [dbo].[User_Request] CHECK CONSTRAINT [FK_User_Request_User]
 GO
 
 
+insert into dbo.[user_roles] values ('basicUser')
+insert into dbo.[user_roles] values ('groupLeader')
+insert into dbo.[user_roles] values ('admin')
+
+
+insert into dbo.[category] values('Poll')
+insert into dbo.[category] values('Survey')
+
+insert into dbo.[type] values('Public')
+insert into dbo.[type] values('Private')
+
+alter table dbo.[activity] add results_published integer
+
+
+
