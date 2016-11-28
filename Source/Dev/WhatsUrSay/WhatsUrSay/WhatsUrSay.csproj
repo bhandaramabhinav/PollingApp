@@ -1088,6 +1088,7 @@
     <Content Include="features\Poll\CreatePoll.html" />
     <Content Include="features\Poll\ParticipateInPoll.html" />
     <Content Include="features\Poll\ViewPoll.html" />
+    <Content Include="features\Poll\ViewPollResults.html" />
     <Content Include="features\Survey\CreateSurvey.html" />
     <Content Include="features\Survey\ParticpateSurvey.html" />
     <Content Include="features\Survey\ViewSurveyResults.html" />
@@ -1955,15 +1956,21 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActivityDTOController.cs" />
+    <Compile Include="Controllers\ActivityGroupDetailsController.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PollAnswerDetailsController.cs" />
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\UserAnswerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DTO\ActivityDTO.cs" />
+    <Compile Include="DTO\AnswerDTO.cs" />
+    <Compile Include="Interfaces\IActivityDTORepository.cs" />
+    <Compile Include="Interfaces\IActivityGroupDetailsRepository.cs" />
     <Compile Include="Interfaces\IAnswer.cs" />
     <Compile Include="Interfaces\IGroupsRepository.cs" />
     <Compile Include="Interfaces\ILoginRepository.cs" />
@@ -1989,9 +1996,11 @@
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GroupDetails.cs" />
+    <Compile Include="Models\PollAnswerDetails.cs" />
     <Compile Include="Models\Question.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RequestInput.cs" />
     <Compile Include="Models\SurveyDetails.cs" />
     <Compile Include="Models\Type.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
@@ -2027,9 +2036,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WhatsUrSayDataContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\ActivityDTORespository.cs" />
+    <Compile Include="Repositories\ActivityGroupDetailsRepository.cs" />
     <Compile Include="Repositories\AnswerResp.cs" />
     <Compile Include="Repositories\GroupsRepository.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
+    <Compile Include="Repositories\PollAnswerDetailsRepository.cs" />
     <Compile Include="Repositories\PollRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\SurveyResp.cs" />

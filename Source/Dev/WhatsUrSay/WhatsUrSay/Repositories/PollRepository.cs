@@ -118,12 +118,15 @@ namespace WhatsUrSay.Repositories
             {
                 LinkedList<Activity_Group> grps = new LinkedList<Activity_Group>();
                 //Activity_Group ag = new Activity_Group();
-                foreach (Group g in act.Groups)
+                if (act.Groups != null)
                 {
-                    Activity_Group ag = new Activity_Group();
-                    ag.group_id = (db.Groups.Where(group => group.name == g.name).FirstOrDefault()).id;
-                    grps.AddLast(ag);
-                    //grps.Add(ag);
+                    foreach (Group g in act.Groups)
+                    {
+                        Activity_Group ag = new Activity_Group();
+                        ag.group_id = (db.Groups.Where(group => group.name == g.name).FirstOrDefault()).id;
+                        grps.AddLast(ag);
+                        //grps.Add(ag);
+                    }
                 }
 
                 Activity activity = new Activity();
