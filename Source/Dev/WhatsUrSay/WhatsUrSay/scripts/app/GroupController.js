@@ -21,7 +21,7 @@
         $scope.members = [{ emailId: "" }];
 
         $scope.AddMember = function (member) {
-           // alert("inside AddMember function");
+            // alert("inside AddMember function");
             if (member == undefined) {
                 $scope.members.push({});
             }
@@ -62,8 +62,12 @@
                     return;
                 }
             }*/
+            $scope.uL = [];
             var Group = { name: $scope.groupTitle, createdby: 1 };
-            var groupDetails = { group: Group, UserList:$scope.select};
+            for (var i=0; i < $scope.select.length; i++) {
+                $scope.uL.push({ emailId: $scope.select[i] });
+            }
+            var groupDetails = { group: Group, UserList:$scope.uL};
             $scope.CreateGroupStatus = $http.post('api/Groups/PostGroup', groupDetails).then(function success(response) {
                 //alert(response);
                 var alert_text = "";

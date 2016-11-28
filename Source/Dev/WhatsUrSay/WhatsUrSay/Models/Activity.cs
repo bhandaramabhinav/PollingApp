@@ -31,16 +31,16 @@ namespace WhatsUrSay.Models
         public int createdby { get; set; }
         public Nullable<int> results_published { get; set; }
     
-        public virtual Category Category1 { get; set; }
+        public  Category Category1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Activity_Group> Activity_Group { get; set; }
-        public virtual Type Type1 { get; set; }
-        public virtual User User { get; set; }
+        public  ICollection<Activity_Group> Activity_Group { get; set; }
+        public  Type Type1 { get; set; }
+        public  User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answer> Answers { get; set; }
+        public  ICollection<Answer> Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Question> Questions { get; set; }
+        public  ICollection<Question> Questions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_Answer> User_Answer { get; set; }
+        public  ICollection<User_Answer> User_Answer { get; set; }
     }
 }

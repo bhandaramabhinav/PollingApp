@@ -15,8 +15,9 @@
                     (At least 1 member must be added. Use ctrl to select multiple)<br />
                 </label>
                 <select ng-required="true" name="multipleSelect" id="multipleSelect" ng-model="select" multiple>
-                    <option ng-repeat="member in userDetails" value="{{member.id}}">{{member.emailId}}</option>
+                    <option ng-repeat="member in userDetails" value="{{member.emailId}}">{{member.emailId}}</option>
                 </select>
+                {{select}}
                 <!--<ul>
                     <li ng-repeat="member in members track by $index" style="list-style-type:none;">
                         <input type="email" placeholder="Enter person emailId (abc@xyz.com)" ng-model="member.emailId" ng-required="true"/>
