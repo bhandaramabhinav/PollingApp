@@ -785,7 +785,6 @@
     <Content Include="Content\foundation-icons\svgs\fi-yen.svg" />
     <Content Include="Content\foundation-icons\svgs\fi-zoom-in.svg" />
     <Content Include="Content\foundation-icons\svgs\fi-zoom-out.svg" />
-    <Content Include="Content\img\business-poll-survey2-2401.jpg" />
     <Content Include="Content\img\demonstrated-results.jpg" />
     <Content Include="Content\img\groups.png" />
     <Content Include="Content\img\polls.jpg" />
@@ -1087,7 +1086,6 @@
     <Content Include="features\Login\Register.html" />
     <Content Include="features\Poll\CreatePoll.html" />
     <Content Include="features\Poll\ParticipateInPoll.html" />
-    <Content Include="features\Poll\ViewPoll.html" />
     <Content Include="features\Poll\ViewPollResults.html" />
     <Content Include="features\Survey\CreateSurvey.html" />
     <Content Include="features\Survey\ParticpateSurvey.html" />
@@ -2020,7 +2018,9 @@
     <Compile Include="Models\User_Request.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User_Roles.cs" />
+    <Compile Include="Models\User_Roles.cs">
+      <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WhatsUrSayDataContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

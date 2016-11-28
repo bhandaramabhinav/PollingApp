@@ -12,9 +12,9 @@ Reason for component existence:         To serve Login page and client side func
         .module('app')
         .controller('LoginController', LoginController);
     //Injecting the Angular JS Scope and required modules to be used for model binding between the view and the controller, making http requests etc.
-    LoginController.$inject = ['$scope', '$http','$location','$mdDialog'];
+    LoginController.$inject = ['$scope', '$http','$location','$mdDialog','$localStorage','$sessionStorage','$window'];
 
-    function LoginController($scope, $http,$location,$mdDialog) {
+    function LoginController($scope, $http, $location, $mdDialog, $localStorage, $sessionStorage, $window) {
         $scope.title = 'Login';
         $scope.userRoles = [{ id: 0, name: "Basic User" }, { id: 1, name: "Group Leader" }, { id: 3, name: "Admin" }];
         $scope.userName = "";
@@ -26,6 +26,11 @@ Reason for component existence:         To serve Login page and client side func
             
 
         }
+        $scope.$watch(function () { return $sessionStorage.userLoginInfo }, function (newVal, oldVal) {
+            if (oldVal !== newVal) {
+                $scope.userInfo = $sessionStorage.userLoginInfo;
+            }
+        })
         //Purpose: To proces the login requests of clients into our application.
         //Input: $event to prevent the default JS behaviour of the link button.
         //Output: An alert showing the login status of the user.
@@ -36,6 +41,9 @@ Reason for component existence:         To serve Login page and client side func
                 var alert_text = "";
                 if (response.data) {
                     alert_text = "Login Successfull.";
+                    $sessionStorage.userLoginInfo = { isAuth: true, emailId: $scope.userName, userId: response.data.id };
+                    //alert($sessionStorage.userLoginInfo.userId);
+                    $location.path('/');
                 } else {
                     alert_text = "Please enter valid username and password.";
                 }

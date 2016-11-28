@@ -32,15 +32,15 @@ namespace WhatsUrSay.Models
         public string status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<Activity> Activities { get; set; }//virtual
+        public virtual ICollection<Activity> Activities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<Group> Groups { get; set; }//virtual
+        public virtual ICollection<Group> Groups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<User_Answer> User_Answer { get; set; }//virtual
+        public virtual ICollection<User_Answer> User_Answer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<User_Group> User_Group { get; set; }//virtual
+        public virtual ICollection<User_Group> User_Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<User_Request> User_Request { get; set; }//virtual
-        public User_Roles User_Roles { get; set; }//virtual
+        public virtual ICollection<User_Request> User_Request { get; set; }
+        public virtual User_Roles User_Roles { get; set; }
     }
 }

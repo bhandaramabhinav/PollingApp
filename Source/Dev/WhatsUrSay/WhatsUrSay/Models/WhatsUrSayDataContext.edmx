@@ -15,6 +15,7 @@
           <Property Name="type" Type="int" Nullable="false" />
           <Property Name="category" Type="int" Nullable="false" />
           <Property Name="createdby" Type="int" Nullable="false" />
+          <Property Name="results_published" Type="int" />
         </EntityType>
         <EntityType Name="Activity_Group">
           <Key>
@@ -410,6 +411,7 @@
           <Property Name="type" Type="Int32" Nullable="false" />
           <Property Name="category" Type="Int32" Nullable="false" />
           <Property Name="createdby" Type="Int32" Nullable="false" />
+          <Property Name="results_published" Type="Int32" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Activity_Category" FromRole="Activity" ToRole="Category" />
           <NavigationProperty Name="Activity_Group" Relationship="Self.FK_Activity_Group_Activity" FromRole="Activity" ToRole="Activity_Group" />
           <NavigationProperty Name="Type1" Relationship="Self.FK_Activity_Type" FromRole="Activity" ToRole="Type" />
@@ -839,6 +841,7 @@
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="results_published" ColumnName="results_published" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

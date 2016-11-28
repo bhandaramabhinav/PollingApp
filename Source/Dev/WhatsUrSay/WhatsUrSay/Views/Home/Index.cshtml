@@ -25,15 +25,16 @@
         <header class="header">
             <h1 class="headline">Whats Ur Say!!</h1>
             <ul class="header-subnav">
-                <li><a href="#/createPoll">Create Poll!</a></li>
-                <li><a href="#/createSurvey">Create Survey!</a></li>
-                <li><a href="#/createGroup">Create Group!</a></li>
-                <li><a href="#/participatePoll" class="is-active">Participate Poll!</a></li>
-                <li><a href="#/login">Login!</a></li>
-                <li><a href="#/join">Join!</a></li>
-                <li><a href="#/participateSurvey">Participate Survey</a></li>
-                <li><a href="#/viewSurveyResults">View Survey Results</a></li>
-                <li><a href="#/viewPollResults">View Poll Results</a></li>
+                <li ng-if="userInfo.isAuth"><a href="#/createPoll">Create Poll!</a></li>
+                <li ng-if="userInfo.isAuth"><a href="#/createSurvey">Create Survey!</a></li>
+                <li ng-if="userInfo.isAuth"><a href="#/createGroup">Create Group!</a></li>
+                <li ng-if="userInfo.isAuth"><a href="#/participatePoll" class="is-active">Participate Poll!</a></li>
+                <li ng-if="!userInfo.isAuth"><a href="#/login">Login!</a></li>
+                <li ng-if="userInfo.isAuth"><a ng-click="LogOut()">Log Out!</a></li>
+                <li ng-if="!userInfo.isAuth"><a href="#/join">Join!</a></li>
+                <li ng-if="userInfo.isAuth"><a href="#/participateSurvey">Participate Survey</a></li>
+                <li ng-if="userInfo.isAuth"><a href="#/viewSurveyResults">View Survey Results</a></li>
+                <li ng-if="userInfo.isAuth"><a href="#/viewPollResults">View Poll Results</a></li>
             </ul>
         </header>  
         <div class="row main" ng-view></div>    
@@ -64,6 +65,7 @@
     <script src="~/scripts/angular-aria.min.js"></script>
     <script src="~/scripts/angular-messages.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
     <script src="~/scripts/app/app.js"></script>
     <script src="~/scripts/app/HomeController.js"></script>
     <script src="~/scripts/app/LoginController.js"></script>

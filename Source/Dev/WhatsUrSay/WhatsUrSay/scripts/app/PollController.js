@@ -12,9 +12,9 @@ Reason for component existence:         Used for creating a poll and getting the
         .module('app')
         .controller('PollController', PollController);
     //Injecting the Angular JS Scope and required modules to be used for model binding between the view and the controller, making http requests etc.
-    PollController.$inject = ['$scope', '$http', '$location', '$mdDialog'];
+    PollController.$inject = ['$scope', '$http', '$location', '$mdDialog', '$localStorage','$sessionStorage', '$window'];
 
-    function PollController($scope, $http, $location, $mdDialog) {
+    function PollController($scope, $http, $location, $mdDialog, $localStorage, $sessionStorage, $window) {
         $scope.title = 'Poll';
         $scope.pollTitle = "";
         $scope.description = "";
@@ -23,11 +23,17 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.groupNames = "";
 
         $scope.userId = "1";
+        $scope.$watch(function () { return $sessionStorage.userLoginInfo }, function (newVal, oldVal) {
+            if (oldVal !== newVal) {
+                $scope.userInfo = $sessionStorage.userLoginInfo;
+                $scope.userId = $scope.userInfo;
+            }
+        })
 
         activate();
 
         function activate() {
-
+            $scope.userId = $scope.userInfo.userId;
         }
 
         $scope.options = [{ description: "" }, { description: "" }];
@@ -81,7 +87,7 @@ Reason for component existence:         Used for creating a poll and getting the
             } else if ($scope.pollType == "private") {
                 $scope.pollType = 2;
             }
-            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: 1, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.select };
+            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: $scope.userId, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.select };
             $scope.CreatePollStatus = $http.post('api/ActivityGroupDetails/PostPoll', activity).then(function success(response) {
                 //alert(response);
                 var alert_text = "";

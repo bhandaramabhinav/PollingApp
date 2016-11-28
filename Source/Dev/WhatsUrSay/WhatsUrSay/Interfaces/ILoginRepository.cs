@@ -22,6 +22,6 @@ namespace WhatsUrSay.Interfaces
 {
     interface ILoginRepository
     {
-        bool Login(string uName, string uPassword);
+        User Login(string uName, string uPassword);
     }
 }
