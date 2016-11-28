@@ -48,7 +48,7 @@
             else {
                 alert("Group name doesn't exist");
             }*/
-            for (var grp in $scope.groups_details) {
+           /* for (var grp in $scope.groups_details) {
                 if ($scope.groups_details[grp].name == $scope.groupTitle) {
                     $mdDialog.show(
                     $mdDialog.alert()
@@ -61,7 +61,7 @@
                   );
                     return;
                 }
-            }
+            }*/
             var Group = { name: $scope.groupTitle, createdby: 1 };
             var groupDetails = { group: Group, UserList:$scope.select};
             $scope.CreateGroupStatus = $http.post('api/Groups/PostGroup', groupDetails).then(function success(response) {
@@ -97,12 +97,12 @@
                 $location.path('/error');
             });
 
-            $http.get('api/Groups/GetGroups').then(function success(response) {
+           /* $http.get('api/Groups/GetGroups').then(function success(response) {
                 $scope.groups_details = response.data;
             }, function error(response) {
                 alert(response);
                 $location.path('/error');
-            });
+            });*/
         }
     }
 })();

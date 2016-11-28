@@ -79,13 +79,13 @@ Reason for component existence:         Used for creating a survey and getting t
 
                 //Also getting the Survey details 
 
-                $http.get('api/Survey/GetAllSurveys')
+               /* $http.get('api/Survey/GetAllSurveys')
             .then(function success(response) {
                 $scope.surveysFromDb = response.data;
             }
             , function error(response) {
                 $location.path('/error');
-            });
+            });*/
             }
             ,function error(response) {
                 $location.path('/error');
@@ -97,7 +97,7 @@ Reason for component existence:         Used for creating a survey and getting t
         $scope.CreateSurvey = function ($event) {
             var alert_text = "";
             $event.preventDefault();
-            for (var p in $scope.surveysFromDb) {
+            /*for (var p in $scope.surveysFromDb) {
                 if ($scope.surveysFromDb[p].heading == $scope.surveyTitle) {
                     $mdDialog.show(
                     $mdDialog.alert()
@@ -110,7 +110,7 @@ Reason for component existence:         Used for creating a survey and getting t
                   );
                     return;
                 }
-            }
+            }*/
             if ($scope.surveyType == "Public") {
                 $scope.surveyType = 1;
             } else if ($scope.surveyType == "Private") {
@@ -122,7 +122,7 @@ Reason for component existence:         Used for creating a survey and getting t
 
                 }
             }
-            var activity = { heading: $scope.surveyTitle, description: $scope.description, type: $scope.surveyType, category: 1, createdby: 1, Questions: $scope.questions, Activity_Group: $scope.selectedGroups };
+            var activity = { heading: $scope.surveyTitle, description: $scope.description, type: $scope.surveyType, category: 2, createdby: 1, Questions: $scope.questions, Activity_Group: $scope.selectedGroups };
             $scope.LoginStatus = $http.post('api/Survey/PostSurvey', activity).then(function success(response) {
                 console.log("success");
                 //alert(response);

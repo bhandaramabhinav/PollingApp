@@ -26,7 +26,7 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.$watch(function () { return $sessionStorage.userLoginInfo }, function (newVal, oldVal) {
             if (oldVal !== newVal) {
                 $scope.userInfo = $sessionStorage.userLoginInfo;
-                $scope.userId = $scope.userInfo;
+                $scope.userId = $scope.userInfo.userId;
             }
         })
 
@@ -38,9 +38,11 @@ Reason for component existence:         Used for creating a poll and getting the
 
         $scope.options = [{ description: "" }, { description: "" }];
 
-        $scope.AddOption = function (option) {
+       
+
+        $scope.AddOption = function (option) {      
             if (option == undefined) {
-                $scope.options.push({});
+                    $scope.options.push({});    
             }
         }
 
@@ -68,7 +70,7 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.CreatePoll = function ($event) {
             var alert_text = "";
             $event.preventDefault();
-            for (var p in $scope.pollsFromDb) {
+            /*for (var p in $scope.pollsFromDb) {
                 if ($scope.pollsFromDb[p].heading == $scope.pollTitle) {
                     $mdDialog.show(
                     $mdDialog.alert()
@@ -81,12 +83,14 @@ Reason for component existence:         Used for creating a poll and getting the
                   );
                     return;
                 }
-            }
+            }*/
             if ($scope.pollType == "public") {
                 $scope.pollType = 1;
             } else if ($scope.pollType == "private") {
                 $scope.pollType = 2;
             }
+            if ($scope.select == undefined)
+                $scope.select = [];
             var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: $scope.userId, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.select };
             $scope.CreatePollStatus = $http.post('api/ActivityGroupDetails/PostPoll', activity).then(function success(response) {
                 //alert(response);
@@ -197,13 +201,13 @@ Reason for component existence:         Used for creating a poll and getting the
                 $location.path('/error');
             });
 
-            $http.get('api/Poll/GetAllPolls')
+            /*$http.get('api/Poll/GetAllPolls')
             .then(function success(response) {
                 $scope.pollsFromDb = response.data;
             }
             , function error(response) {
                 $location.path('/error');
-            });
+            });*/
         }
     }
 }());
