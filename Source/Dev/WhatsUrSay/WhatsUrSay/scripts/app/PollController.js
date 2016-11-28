@@ -65,7 +65,7 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.CreatePoll = function ($event) {
             var alert_text = "";
             $event.preventDefault();
-            for (var p in $scope.pollsFromDb) {
+            /*for (var p in $scope.pollsFromDb) {
                 if ($scope.pollsFromDb[p].heading == $scope.pollTitle) {
                     $mdDialog.show(
                     $mdDialog.alert()
@@ -78,7 +78,7 @@ Reason for component existence:         Used for creating a poll and getting the
                   );
                     return;
                 }
-            }
+            }*/
             if ($scope.pollType == "public") {
                 $scope.pollType = 1;
             } else if ($scope.pollType == "private") {
@@ -196,13 +196,13 @@ Reason for component existence:         Used for creating a poll and getting the
                 $location.path('/error');
             });
 
-            $http.get('api/Poll/GetAllPolls')
+            /*$http.get('api/Poll/GetAllPolls')
             .then(function success(response) {
                 $scope.pollsFromDb = response.data;
             }
             , function error(response) {
                 $location.path('/error');
-            });
+            });*/
         }
     }
 }());
