@@ -122,7 +122,7 @@ Reason for component existence:         Used for creating a survey and getting t
 
                 }
             }
-            var activity = { heading: $scope.surveyTitle, description: $scope.description, type: $scope.surveyType, category: 1, createdby: 1, Questions: $scope.questions, Activity_Group: $scope.selectedGroups };
+            var activity = { heading: $scope.surveyTitle, description: $scope.description, type: $scope.surveyType, category: 2, createdby: 1, Questions: $scope.questions, Activity_Group: $scope.selectedGroups };
             $scope.LoginStatus = $http.post('api/Survey/PostSurvey', activity).then(function success(response) {
                 console.log("success");
                 //alert(response);

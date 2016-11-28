@@ -15,6 +15,7 @@ Reason for component existence:         Used for creating a poll and getting the
     PollController.$inject = ['$scope', '$http', '$location', '$mdDialog'];
 
     function PollController($scope, $http, $location, $mdDialog) {
+        var alert_text = "";
         $scope.title = 'Poll';
         $scope.pollTitle = "";
         $scope.description = "";
@@ -32,9 +33,11 @@ Reason for component existence:         Used for creating a poll and getting the
 
         $scope.options = [{ description: "" }, { description: "" }];
 
-        $scope.AddOption = function (option) {
+       
+
+        $scope.AddOption = function (option) {      
             if (option == undefined) {
-                $scope.options.push({});
+                    $scope.options.push({});    
             }
         }
 
@@ -81,6 +84,8 @@ Reason for component existence:         Used for creating a poll and getting the
             } else if ($scope.pollType == "private") {
                 $scope.pollType = 2;
             }
+            if ($scope.select == undefined)
+                $scope.select = [];
             var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: 1, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.select };
             $scope.CreatePollStatus = $http.post('api/ActivityGroupDetails/PostPoll', activity).then(function success(response) {
                 //alert(response);
