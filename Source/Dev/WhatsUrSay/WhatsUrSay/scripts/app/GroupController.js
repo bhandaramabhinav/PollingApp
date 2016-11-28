@@ -10,7 +10,8 @@
     function GroupController($scope, $http, $location, $mdDialog) {
         $scope.title = 'Group';
         $scope.groupTitle = "";
-
+        $scope.userDetails = "";
+        $scope.groups_details
         activate();
 
         function activate() {
@@ -31,6 +32,7 @@
             $scope.members.pop();
         }
 
+        $scope.select = [];
 
         //Purpose: To proces the create poll request of clients of our application.
         //Input: $event to prevent the default JS behaviour of the link button.
@@ -38,11 +40,32 @@
 
         //Hardcoded the following data entries: pollType, category, createdby
         $scope.CreateGroup = function ($event) {
+            var alert_text = "";
             $event.preventDefault();
+            /*if ($scope.groups_details.indexOf($scope.groupTitle)>=0) {
+                alert("Group name exists");
+            }
+            else {
+                alert("Group name doesn't exist");
+            }*/
+            for (var grp in $scope.groups_details) {
+                if ($scope.groups_details[grp].name == $scope.groupTitle) {
+                    $mdDialog.show(
+                    $mdDialog.alert()
+                      .parent(angular.element(document.querySelector('#popupContainer')))
+                      .clickOutsideToClose(true)
+                      .title('Group Name already exists. Please enter a new name')
+                      .textContent(alert_text)
+                      .ariaLabel('alert')
+                      .ok('Ok')
+                  );
+                    return;
+                }
+            }
             var Group = { name: $scope.groupTitle, createdby: 1 };
-            var groupDetails = { group: Group, UserList:$scope.members};
+            var groupDetails = { group: Group, UserList:$scope.select};
             $scope.CreateGroupStatus = $http.post('api/Groups/PostGroup', groupDetails).then(function success(response) {
-                alert(response);
+                //alert(response);
                 var alert_text = "";
                 if (response.data) {
                     alert_text = "Group is created Successfully";
@@ -58,10 +81,28 @@
                       .ariaLabel('alert')
                       .ok('Ok')
                   );
+                $location.path('/home');
             }, function error(response) {
                 alert(response);
                 $location.path('/error');
             });
         };
+
+        $scope.LoadMembers = function () {
+            $http.get('api/User/GetUsers').then(function success(response) {
+                //alert("Load Members GroupController");
+                $scope.userDetails = response.data;
+            }, function error(response) {
+                alert(response);
+                $location.path('/error');
+            });
+
+            $http.get('api/Groups/GetGroups').then(function success(response) {
+                $scope.groups_details = response.data;
+            }, function error(response) {
+                alert(response);
+                $location.path('/error');
+            });
+        }
     }
 })();

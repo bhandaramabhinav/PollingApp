@@ -52,5 +52,10 @@ namespace WhatsUrSay.Controllers
                 return false;
             }
         }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return objUserRepository.GetUsers();
+        }
     }
 }
