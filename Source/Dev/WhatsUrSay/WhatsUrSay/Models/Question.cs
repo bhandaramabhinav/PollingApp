@@ -25,10 +25,10 @@ namespace WhatsUrSay.Models
         public string description { get; set; }
         public int activity_id { get; set; }
     
-        public virtual Activity Activity { get; set; }
+        public  Activity Activity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answer> Answers { get; set; }
+        public  ICollection<Answer> Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_Answer> User_Answer { get; set; }
+        public  ICollection<User_Answer> User_Answer { get; set; }
     }
 }
