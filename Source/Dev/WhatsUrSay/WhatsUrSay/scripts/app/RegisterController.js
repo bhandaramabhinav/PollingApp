@@ -25,11 +25,12 @@
                       .parent(angular.element(document.querySelector('#popupContainer')))
                       .clickOutsideToClose(true)
                       .title('Error')
-                      .textContent(alert_text)
-                      .ariaLabel('Passwords should match.')
+                      .textContent('Passwords should match.')
+                      .ariaLabel('alert')
                       .ok('Ok')
 
                   );
+                return;
             }
             var user = { emailId: $scope.user.emailId, password: $scope.user.password, name: $scope.user.name };
             $scope.LoginStatus = $http.post('api/Login/AddUser', user).then(function success(response) {
