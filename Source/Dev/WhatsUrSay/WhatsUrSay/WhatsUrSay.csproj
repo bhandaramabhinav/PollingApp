@@ -2008,7 +2008,8 @@
     </Compile>
     <Compile Include="Models\UserAnswersList.cs" />
     <Compile Include="Models\UserDetails.cs" />
-    <Compile Include="Models\UserInput.cs" />
+    <Compile Include="Models\UserLoginInput.cs" />
+    <Compile Include="Models\UserRegistrationInput.cs" />
     <Compile Include="Models\User_Answer.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
