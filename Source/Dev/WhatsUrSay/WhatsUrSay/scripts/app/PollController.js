@@ -19,7 +19,7 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.pollTitle = "";
         $scope.description = "";
         $scope.question = "";
-        $scope.pollType = "Private";
+        $scope.pollType = "";
         $scope.groupNames = "";
 
         $scope.userId = "1";
@@ -60,13 +60,28 @@ Reason for component existence:         Used for creating a poll and getting the
 
         //Hardcoded the following data entries: pollType, category, createdby
         $scope.CreatePoll = function ($event) {
+            var alert_text = "";
             $event.preventDefault();
+            for (var p in $scope.pollsFromDb) {
+                if ($scope.pollsFromDb[p].heading == $scope.pollTitle) {
+                    $mdDialog.show(
+                    $mdDialog.alert()
+                      .parent(angular.element(document.querySelector('#popupContainer')))
+                      .clickOutsideToClose(true)
+                      .title('Poll Name already exists. Please enter a new name')
+                      .textContent(alert_text)
+                      .ariaLabel('alert')
+                      .ok('Ok')
+                  );
+                    return;
+                }
+            }
             if ($scope.pollType == "public") {
                 $scope.pollType = 1;
             } else if ($scope.pollType == "private") {
                 $scope.pollType = 2;
             }
-            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: 1, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.groups };
+            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: 1, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.select };
             $scope.CreatePollStatus = $http.post('api/ActivityGroupDetails/PostPoll', activity).then(function success(response) {
                 //alert(response);
                 var alert_text = "";
@@ -84,6 +99,7 @@ Reason for component existence:         Used for creating a poll and getting the
                       .ariaLabel('alert')
                       .ok('Ok')
                   );
+                $location.path('/home');
             }, function error(response) {
                 alert(response);
                 $location.path('/error');
@@ -162,6 +178,24 @@ Reason for component existence:         Used for creating a poll and getting the
                 $scope.answersResult = response.data;
             }, function error(response) {
                 alert(response);
+                $location.path('/error');
+            });
+        }
+
+        $scope.LoadDataNecessary = function () {
+            $http.get('api/Groups/GetGroups')
+            .then(function success(response) {
+                $scope.groupDetails = response.data;
+            }
+            , function error(response) {
+                $location.path('/error');
+            });
+
+            $http.get('api/Poll/GetAllPolls')
+            .then(function success(response) {
+                $scope.pollsFromDb = response.data;
+            }
+            , function error(response) {
                 $location.path('/error');
             });
         }

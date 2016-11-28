@@ -36,7 +36,7 @@ namespace WhatsUrSay.Repositories
             Console.WriteLine("<<<<<<Inside GetAll method in controller");
             try
             {
-                return db.Activities.Include(b => b.Answers).Include(b=>b.Questions);
+                return db.Activities.Include(b => b.Answers).Include(b=>b.Questions).Where(b =>b.category == 1);
             }
             catch (Exception e)
             {
@@ -48,7 +48,7 @@ namespace WhatsUrSay.Repositories
 
         public IQueryable<ActivityDTO> GetPolls()
         {
-            var polls = from b in db.Activities
+            var polls = from b in db.Activities where b.category == 1
                         select new ActivityDTO()
                         {
                             heading = b.heading,
