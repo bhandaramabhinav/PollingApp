@@ -42,6 +42,7 @@
         $scope.CreateGroup = function ($event) {
             var alert_text = "";
             $event.preventDefault();
+            //alert("Inside createGroup");
             /*if ($scope.groups_details.indexOf($scope.groupTitle)>=0) {
                 alert("Group name exists");
             }
