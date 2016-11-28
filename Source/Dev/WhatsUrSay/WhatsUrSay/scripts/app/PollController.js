@@ -61,6 +61,7 @@ Reason for component existence:         Used for creating a poll and getting the
         $scope.RemoveGroup = function (group) {
             $scope.groups.pop();
         }
+        $scope.select = [];
 
         //Purpose: To proces the create poll request of clients of our application.
         //Input: $event to prevent the default JS behaviour of the link button.
@@ -89,9 +90,14 @@ Reason for component existence:         Used for creating a poll and getting the
             } else if ($scope.pollType == "private") {
                 $scope.pollType = 2;
             }
-            if ($scope.select == undefined)
-                $scope.select = [];
-            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: $scope.userId, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.select };
+            //if ($scope.select == undefined)
+              //  $scope.select = [];
+            
+            $scope.gL = [];
+            for (var i = 0; i < $scope.select.length; i++) {
+                $scope.gL.push({ name: $scope.select[i] });
+            }
+            var activity = { heading: $scope.pollTitle, description: $scope.description, type: $scope.pollType, category: 1, createdby: $scope.userId, Questions: [{ description: $scope.question }], Answers: $scope.options, Groups: $scope.gL };
             $scope.CreatePollStatus = $http.post('api/ActivityGroupDetails/PostPoll', activity).then(function success(response) {
                 //alert(response);
                 var alert_text = "";
