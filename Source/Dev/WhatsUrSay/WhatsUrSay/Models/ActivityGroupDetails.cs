@@ -14,6 +14,7 @@ namespace WhatsUrSay.Models
         public int type { get; set; }
         public int category { get; set; }
         public int createdby { get; set; }
+        public List<string> selectedGroups { set; get; }
 
         public ICollection<Question> Questions { get; set; } 
         public ICollection<Answer> Answers { get; set; }

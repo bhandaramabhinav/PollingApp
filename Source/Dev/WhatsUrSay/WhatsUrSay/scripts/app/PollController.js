@@ -115,7 +115,7 @@ Reason for component existence:         Used for creating a poll and getting the
                       .ariaLabel('alert')
                       .ok('Ok')
                   );
-                $location.path('/home');
+                $location.path('/dashboard');
             }, function error(response) {
                 alert(response);
                 $location.path('/error');

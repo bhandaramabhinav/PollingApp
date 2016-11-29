@@ -18,6 +18,9 @@ Reason for component existence:         Angular JS application definition..
         }).when('/join', {
             templateUrl: 'features/Login/Register.html',
             controller:'RegisterController'
+        }).when('/dashboard', {
+            templateUrl: 'features/Home/Dashboard.html',
+            controller: 'DashboardController'
         }).when('/error', {
             templateUrl: 'features/Error/Error.html',
         }).when('/createPoll', {

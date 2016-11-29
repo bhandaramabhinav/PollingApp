@@ -12,13 +12,12 @@ Reason for component existence:         To serve Home page and client side funct
             .module('app')
             .controller('HomeController', HomeController);
     //Injecting the Angular JS Scope to be used for model binding between the view and the controller.
-    HomeController.$inject = ['$scope','$localStorage','$sessionStorage','$window'];
+    HomeController.$inject = ['$scope','$localStorage','$sessionStorage','$window','$location'];
 
-    function HomeController($scope, $localStorage, $sessionStorage, $window) {
+    function HomeController($scope, $localStorage, $sessionStorage, $window,$location) {
         $scope.title = 'Home';
         activate();
         function activate() {
-
             if ($sessionStorage.userLoginInfo) {
                 $scope.userInfo = $sessionStorage.userLoginInfo;
             }
@@ -30,6 +29,7 @@ Reason for component existence:         To serve Home page and client side funct
         })
         $scope.LogOut = function () {
             $sessionStorage.userLoginInfo = $scope.userInfo = null;
+            $location.path("/");
         }
     }
 })();

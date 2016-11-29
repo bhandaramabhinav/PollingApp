@@ -15,14 +15,16 @@ Reason for component existence:         To serve Login page and client side func
     LoginController.$inject = ['$scope', '$http','$location','$mdDialog','$localStorage','$sessionStorage','$window'];
 
     function LoginController($scope, $http, $location, $mdDialog, $localStorage, $sessionStorage, $window) {
-        $scope.title = 'Login';
-        $scope.userRoles = [{ id: 0, name: "Basic User" }, { id: 1, name: "Group Leader" }, { id: 3, name: "Admin" }];
+        $scope.title = 'Login';        
         $scope.userName = "";
         $scope.password = "";
         $scope.LoginStatus = false;
         activate();
 
         function activate() {
+            if ($sessionStorage.userLoginInfo) {
+                $scope.userInfo = $sessionStorage.userLoginInfo;
+            }
             
 
         }
@@ -41,9 +43,9 @@ Reason for component existence:         To serve Login page and client side func
                 var alert_text = "";
                 if (response.data) {
                     alert_text = "Login Successfull.";
-                    $sessionStorage.userLoginInfo = { isAuth: true, emailId: $scope.userName, userId: response.data.id };
+                    $sessionStorage.userLoginInfo = { isAuth: true, emailId: $scope.userName, userId: response.data.id,role:response.data.role,name:response.data.name };
                     //alert($sessionStorage.userLoginInfo.userId);
-                    $location.path('/');
+                    $location.path('/dashboard');
                 } else {
                     alert_text = "Please enter valid username and password.";
                 }
