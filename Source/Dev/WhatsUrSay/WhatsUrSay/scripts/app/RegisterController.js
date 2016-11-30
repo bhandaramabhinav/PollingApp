@@ -3,35 +3,48 @@
 
     angular
         .module('app')
-        .controller('LoginController', LoginController);
-    LoginController.$inject = ['$scope', '$http', '$location', '$mdDialog'];
+        .controller('RegisterController', RegisterController);
+    RegisterController.$inject = ['$scope', '$http', '$location', '$mdDialog'];
 
-    function LoginController($scope, $http, $location, $mdDialog) {
-        $scope.title = 'Register';
-        $scope.userRoles = [{ id: "U", name: "Basic User" }, { id: "GL", name: "Group Leader" }, { id: "A", name: "Admin" }];
+    function RegisterController($scope, $http, $location, $mdDialog) {
+        $scope.title = 'Register';        
         $scope.user = {
-
+            emailId:"",password:"",confirmPassword:"",name:""
         };
         activate();
 
         function activate() {
 
         }
-        $scope.Login = function ($event) {
+        $scope.Register = function ($event) {
             $event.preventDefault();
-            var userInfo = { uName: $scope.userName, uPassword: $scope.password }
-            $scope.LoginStatus = $http.post('api/Login/Login', userInfo).then(function success(response) {
+            if ($scope.user.password != $scope.user.confirmPassword)
+            {
+                $mdDialog.show(
+                    $mdDialog.alert()
+                      .parent(angular.element(document.querySelector('#popupContainer')))
+                      .clickOutsideToClose(true)
+                      .title('Error')
+                      .textContent('Passwords should match.')
+                      .ariaLabel('alert')
+                      .ok('Ok')
+
+                  );
+                return;
+            }
+            var user = { emailId: $scope.user.emailId, password: $scope.user.password, name: $scope.user.name };
+            $scope.LoginStatus = $http.post('api/Login/AddUser', user).then(function success(response) {
                 var alert_text = "";
                 if (response.data) {
-                    alert_text = "Login Successfull.";
+                    alert_text = "Registration Successfull, Please login.";
                 } else {
-                    alert_text = "Please enter valid username and password.";
+                    alert_text = "An error occurred while registration please try again later.";
                 }
                 $mdDialog.show(
                     $mdDialog.alert()
                       .parent(angular.element(document.querySelector('#popupContainer')))
                       .clickOutsideToClose(true)
-                      .title('Login')
+                      .title('Registration')
                       .textContent(alert_text)
                       .ariaLabel('alert')
                       .ok('Ok')

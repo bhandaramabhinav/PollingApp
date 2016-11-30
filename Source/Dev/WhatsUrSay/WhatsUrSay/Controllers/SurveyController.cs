@@ -24,7 +24,7 @@ namespace WhatsUrSay.Controllers
     public class SurveyController : ApiController
     {
         //It reads the  Isuvery interface
-            static readonly ISurvey Survey1 = new SurveyResp();
+            SurveyResp Survey1 = new SurveyResp();
 
         //GetAllSurveys api/<controller>
         //Purpose: Invokes 'GetAllSurveys()' method of SurveyRepo.cs that returns all the records of type 'survey' from the 'Survey' table

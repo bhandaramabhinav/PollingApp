@@ -53,7 +53,7 @@ namespace WhatsUrSay.Controllers
             }
         }
 
-        public List<User> GetUsers()
+        public IEnumerable<User> GetUsers()
         {
             return objUserRepository.GetUsers();
         }

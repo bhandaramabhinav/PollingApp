@@ -26,6 +26,6 @@ namespace WhatsUrSay.Interfaces
         //Declarations of the methods Add and Method Find
         User Add(User user);
         User Find(string uName);
-        List<User> GetUsers();
+        IEnumerable<User> GetUsers();
     }
 }

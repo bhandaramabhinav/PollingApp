@@ -10,16 +10,20 @@ Reason for component existence:         Angular JS application definition..
 (function () {
     'use strict';
     //Defining the agularjs application 'app' and the required dependencies for the application.
-    var app = angular.module('app', ['ngRoute', 'ngMaterial']);
+    var app = angular.module('app', ['ngRoute', 'ngMaterial','ngStorage']);
     //Defining the routes identified in the application.
     app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/login', {
             templateUrl: 'features/Login/Login.html',
             controller:'LoginController'
         }).when('/join', {
-            templateUrl:'features/Login/Register.html'
+            templateUrl: 'features/Login/Register.html',
+            controller:'RegisterController'
+        }).when('/dashboard', {
+            templateUrl: 'features/Home/Dashboard.html',
+            controller: 'DashboardController'
         }).when('/error', {
-            templateUrl:'features/Error/Error.html',
+            templateUrl: 'features/Error/Error.html',
         }).when('/createPoll', {
             templateUrl: 'features/Poll/CreatePoll.html'
         }).when('/createSurvey', {

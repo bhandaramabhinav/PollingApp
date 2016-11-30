@@ -1,23 +1,129 @@
-﻿<div>
-    <div>Polls</div>
-    <table>
-        <thead>
+﻿<div ng-cloak="">
+    <md-tabs md-dynamic-height="" md-border-bottom="">
+        <md-tab label="Polls">
+           <md-tabs class="callout" style="margin-top:1rem">
+               <md-tab label="Private">
+                   <table>
+                       <thead>
+                           <tr>
+                               <th>
+                                   Title
+                               </th>
+                               <th>
+                                   Descrption
+                               </th>
+                               <th>
+                                   Actions
+                               </th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr ng-repeat="pPoll in privatePolls">
+                               <td>
+                                   {{pPoll.heading}}
+                               </td>
+                               <td>
+                                   {{pPoll.description}}
+                               </td>
+                               <td>
+                                   <a href="#">
+                                       Participate
+                                   </a>
+                                   <a href="#">
+                                       View
+                                   </a>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+                   <div ng-if="!privatePolls">
+                       No Private Polls Available. 
+                   </div>
+               </md-tab>
+               <md-tab label="Public">
+                   <table>
+                       <thead>
+                           <tr>
+                               <th>
+                                   Title
+                               </th>
+                               <th>
+                                   Descrption
+                               </th>
+                               <th>
+                                   Actions
+                               </th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr ng-repeat="pPoll in publicPolls">
+                               <td>
+                                   {{pPoll.heading}}
+                               </td>
+                               <td>
+                                   {{pPoll.description}}
+                               </td>
+                               <td>
+                                   <a href="#">
+                                       Participate
+                                   </a>
+                                   <a href="#">
+                                       View
+                                   </a>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+                   <div ng-if="!publicPolls">
+                       No Public Polls Available.
+                   </div>
+               </md-tab>
 
-        </thead>
-        <tbody></tbody>
-    </table>
-    <div>Surveys</div>
-    <table>
-        <thead>
+               <md-tab ng-if="userInfo.role==3 || userInfo.role==2" label="Created By Me">
+                   <table>
+                       <thead>
+                           <tr>
+                               <th>
+                                   Title
+                               </th>
+                               <th>
+                                   Descrption
+                               </th>
+                               <th>
+                                   Actions
+                               </th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr ng-repeat="cPoll in createdPolls">
+                               <td>
+                                   {{cPoll.heading}}
+                               </td>
+                               <td>
+                                   {{cPoll.description}}
+                               </td>
+                               <td>                                   
+                                   <a href="#">
+                                       View
+                                   </a>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+                   <div ng-if="!createdPolls">
+                       No Polls craeted by you.
+                   </div>
+               </md-tab>
+           </md-tabs>
+        </md-tab>
+        <md-tab label="Surveys">
+            
+        </md-tab>
+        <md-tab ng-if="userInfo.role==3 || userInfo.role==2" label="Groups">
 
-        </thead>
-        <tbody></tbody>
-    </table>
-    <div ng-if="(user.role==0 || user.role==1)">Groups</div>
-    <table ng-if="(user.role==0 || user.role==1)">
-        <thead>
+        </md-tab>
+        <md-tab ng-if="userInfo.role==3" label="Requests">
 
-        </thead>
-        <tbody></tbody>
-    </table>
+        </md-tab>
+    </md-tabs>
 </div>

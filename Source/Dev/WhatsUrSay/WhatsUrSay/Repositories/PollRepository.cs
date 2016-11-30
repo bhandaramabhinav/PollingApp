@@ -36,7 +36,7 @@ namespace WhatsUrSay.Repositories
             Console.WriteLine("<<<<<<Inside GetAll method in controller");
             try
             {
-                return db.Activities.Include(b => b.Answers).Include(b=>b.Questions);
+                return db.Activities.Include(b => b.Answers).Include(b=>b.Questions).Where(b =>b.category == 1);
             }
             catch (Exception e)
             {
@@ -46,32 +46,59 @@ namespace WhatsUrSay.Repositories
             
         }
 
+        //Purpose: Gets all the records of type 'poll' from the 'Activity' table
+        //Input: None
+        //Output: A list of poll records from the 'Activity' table
+        //        If any exception occurs, the exception message is printed and the exception is thrown
         public IQueryable<ActivityDTO> GetPolls()
         {
-            var polls = from b in db.Activities
-                        select new ActivityDTO()
-                        {
-                            heading = b.heading,
-                            description = b.description,
-                            questionId = b.Questions.FirstOrDefault().id,
-                            question = b.Questions.FirstOrDefault().description,
-                            options = (HashSet<string>)b.Answers.Select(x => x.description)
-                        };
-            return polls;
-    }
+            try
+            {
+                var polls = from b in db.Activities
+                            where b.category == 1
+                            select new ActivityDTO()
+                            {
+                                heading = b.heading,
+                                description = b.description,
+                                questionId = b.Questions.FirstOrDefault().id,
+                                question = b.Questions.FirstOrDefault().description,
+                                options = (HashSet<string>)b.Answers.Select(x => x.description)
+                            };
+                return polls;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error occured: " + e.Message);
+                throw e;
+            }
+        }
 
+        //Purpose: Gets a record from the 'Activity' table whose row id is 'id'
+        //Input: 'id' of the required record
+        //Output: a record from 'Activity' table whose key is 'id'
+        //        If any exception occurs, the exception message is printed and the exception is thrown
         public IQueryable<ActivityDTO> GetPoll(int id)
         {
-            var poll = from b in db.Activities where(b.id == id)
-                        select new ActivityDTO()
-                        {
-                            heading = b.heading,
-                            description = b.description,
-                            questionId = b.Questions.FirstOrDefault().id,
-                            question = b.Questions.FirstOrDefault().description,
-                            options = (HashSet<string>)b.Answers.Select(x => x.description)
-                        };
-            return poll;
+            try
+            {
+                var poll = from b in db.Activities
+                           where (b.id == id)
+                           select new ActivityDTO()
+                           {
+                               heading = b.heading,
+                               description = b.description,
+                               questionId = b.Questions.FirstOrDefault().id,
+                               question = b.Questions.FirstOrDefault().description,
+                               options = (HashSet<string>)b.Answers.Select(x => x.description)
+                           };
+                return poll;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error occured: " + e.Message);
+                throw e;
+            }
+
         }
 
         //Purpose: Gets a record from the 'Activity' table whose row id is 'id'
@@ -118,12 +145,15 @@ namespace WhatsUrSay.Repositories
             {
                 LinkedList<Activity_Group> grps = new LinkedList<Activity_Group>();
                 //Activity_Group ag = new Activity_Group();
-                foreach (Group g in act.Groups)
+                if (act.Groups != null)
                 {
-                    Activity_Group ag = new Activity_Group();
-                    ag.group_id = (db.Groups.Where(group => group.name == g.name).FirstOrDefault()).id;
-                    grps.AddLast(ag);
-                    //grps.Add(ag);
+                    foreach (Group g in act.Groups)
+                    {
+                        Activity_Group ag = new Activity_Group();
+                        ag.group_id = (db.Groups.Where(group => group.name == g.name).FirstOrDefault()).id;
+                        grps.AddLast(ag);
+                        //grps.Add(ag);
+                    }
                 }
 
                 Activity activity = new Activity();

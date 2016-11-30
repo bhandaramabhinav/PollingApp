@@ -26,9 +26,9 @@ namespace WhatsUrSay.Models
         public int activity_id { get; set; }
         public Nullable<int> count { get; set; }
     
-        public Activity Activity { get; set; } //virtual
-        public Question Question { get; set; } //virtual
+        public  Activity Activity { get; set; }
+        public  Question Question { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<User_Answer> User_Answer { get; set; } //virtual
+        public  ICollection<User_Answer> User_Answer { get; set; }
     }
 }

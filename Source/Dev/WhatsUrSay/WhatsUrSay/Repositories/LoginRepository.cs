@@ -27,23 +27,23 @@ namespace WhatsUrSay.Repositories
         //Input: Strings uName, uPassword for the Login method
         //Output: Returns 'true' upon successfully finding of record in the table
         //        In case of 'null' input, the method throws 'ArgumentNullException'
-        public bool Login(string uName, string uPassword)
+        public User Login(string uName, string uPassword)
         {
             UserRepository objUserRepository = new UserRepository();
             User user = objUserRepository.Find(uName);
             if (user == null)
             {
-                return false;
+                return null;
             }
             else
             {
                 if(String.Equals(user.pwd, uPassword))
                 {
-                    return true;
+                    return user;
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }            
         }

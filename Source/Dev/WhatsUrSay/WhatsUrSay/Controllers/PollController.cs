@@ -2,7 +2,7 @@
 Component :                             A Web Api controller that invokes the methods defined in 'PollRepository.cs' to serve the client requests in performing 'insert' and 'read' operations on the 'Activity' table of our project's database (DSE)
 Author:                                 Sreedevi Koppula
 Use of the component in system design:  Serves the requests of the clients
-Written and revised:                    11/5/2016
+Written and revised:                    11/25/2016
 Reason for component existence:         To serve the requests of the clients in performing 'insert' and 'read' operations on the 'Activity' table 
 Component usage of data structures, algorithms and control(if any): 
     The component contains the below methods:
@@ -30,8 +30,14 @@ namespace WhatsUrSay.Controllers
         //Output: A list of poll records from the 'Activity' table
         public IQueryable<ActivityDTO> GetAllPolls()
         {
-            // return repo.GetAll();
-            return repo.GetPolls();
+            try
+            {
+                return repo.GetPolls();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         //Purpose: Invokes 'Get(int id)' method of PollRepository.cs that returns a record from the 'Activity' table whose key is 'id'
@@ -39,8 +45,14 @@ namespace WhatsUrSay.Controllers
         //Output: a record from 'Activity' table whose key is 'id'
         public IQueryable<ActivityDTO> GetPoll(int id)
         {
-            // return repo.Get(id);
-            return repo.GetPoll(id);
+            try
+            {
+                return repo.GetPoll(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         //Purpose: Invokes 'Add(Activity activity) method of 'PollRepository.cs' that adds an object 'activity' in the 'Activity' table
@@ -50,10 +62,6 @@ namespace WhatsUrSay.Controllers
         {
             try
             {
-                //Activity act = new Activity();
-                
-               // Console.WriteLine(activity);
-                //return act;
                 return repo.Add(activity);
             }catch(Exception ex)
             {

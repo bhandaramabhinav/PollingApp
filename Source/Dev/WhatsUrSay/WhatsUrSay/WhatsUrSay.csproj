@@ -785,7 +785,6 @@
     <Content Include="Content\foundation-icons\svgs\fi-yen.svg" />
     <Content Include="Content\foundation-icons\svgs\fi-zoom-in.svg" />
     <Content Include="Content\foundation-icons\svgs\fi-zoom-out.svg" />
-    <Content Include="Content\img\business-poll-survey2-2401.jpg" />
     <Content Include="Content\img\demonstrated-results.jpg" />
     <Content Include="Content\img\groups.png" />
     <Content Include="Content\img\polls.jpg" />
@@ -1088,7 +1087,7 @@
     <Content Include="features\Login\Register.html" />
     <Content Include="features\Poll\CreatePoll.html" />
     <Content Include="features\Poll\ParticipateInPoll.html" />
-    <Content Include="features\Poll\ViewPoll.html" />
+    <Content Include="features\Poll\ViewPollResults.html" />
     <Content Include="features\Survey\CreateSurvey.html" />
     <Content Include="features\Survey\ParticpateSurvey.html" />
     <Content Include="features\Survey\ViewSurveyResults.html" />
@@ -1134,6 +1133,7 @@
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />
     <Content Include="scripts\app\app.js" />
+    <Content Include="scripts\app\DashboardController.js" />
     <Content Include="scripts\app\EditGroupController.js" />
     <Content Include="scripts\app\GroupController.js" />
     <Content Include="scripts\app\HomeController.js" />
@@ -1961,6 +1961,7 @@
     <Compile Include="Controllers\ActivityDTOController.cs" />
     <Compile Include="Controllers\ActivityGroupDetailsController.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -1975,6 +1976,7 @@
     <Compile Include="Interfaces\IActivityDTORepository.cs" />
     <Compile Include="Interfaces\IActivityGroupDetailsRepository.cs" />
     <Compile Include="Interfaces\IAnswer.cs" />
+    <Compile Include="Interfaces\IDashBoardRepository.cs" />
     <Compile Include="Interfaces\IGroupsRepository.cs" />
     <Compile Include="Interfaces\ILoginRepository.cs" />
     <Compile Include="Interfaces\IPollRepository.cs" />
@@ -1995,6 +1997,8 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DashboardInput.cs" />
+    <Compile Include="Models\DashboardOutput.cs" />
     <Compile Include="Models\Group.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
@@ -2003,6 +2007,7 @@
     <Compile Include="Models\Question.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RequestInput.cs" />
     <Compile Include="Models\SurveyDetails.cs" />
     <Compile Include="Models\Type.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
@@ -2012,7 +2017,8 @@
     </Compile>
     <Compile Include="Models\UserAnswersList.cs" />
     <Compile Include="Models\UserDetails.cs" />
-    <Compile Include="Models\UserInput.cs" />
+    <Compile Include="Models\UserLoginInput.cs" />
+    <Compile Include="Models\UserRegistrationInput.cs" />
     <Compile Include="Models\User_Answer.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
@@ -2043,6 +2049,7 @@
     <Compile Include="Repositories\ActivityDTORespository.cs" />
     <Compile Include="Repositories\ActivityGroupDetailsRepository.cs" />
     <Compile Include="Repositories\AnswerResp.cs" />
+    <Compile Include="Repositories\DashboardRepository.cs" />
     <Compile Include="Repositories\GroupsRepository.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\PollAnswerDetailsRepository.cs" />

@@ -43,7 +43,7 @@ namespace WhatsUrSay
 
 
             }
-            return Db1.Activities;
+            return Db1.Activities.Where(e => e.category == 2);
             }
 
 

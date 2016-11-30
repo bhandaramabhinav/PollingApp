@@ -12,13 +12,24 @@ Reason for component existence:         To serve Home page and client side funct
             .module('app')
             .controller('HomeController', HomeController);
     //Injecting the Angular JS Scope to be used for model binding between the view and the controller.
-    HomeController.$inject = ['$scope'];
+    HomeController.$inject = ['$scope','$localStorage','$sessionStorage','$window','$location'];
 
-    function HomeController($scope) {
+    function HomeController($scope, $localStorage, $sessionStorage, $window,$location) {
         $scope.title = 'Home';
         activate();
         function activate() {
-
+            if ($sessionStorage.userLoginInfo) {
+                $scope.userInfo = $sessionStorage.userLoginInfo;
+            }
+        }
+        $scope.$watch(function () { return $sessionStorage.userLoginInfo }, function (newVal,oldVal) {
+            if (oldVal !== newVal) {
+                $scope.userInfo = $sessionStorage.userLoginInfo;
+            }
+        })
+        $scope.LogOut = function () {
+            $sessionStorage.userLoginInfo = $scope.userInfo = null;
+            $location.path("/");
         }
     }
 })();

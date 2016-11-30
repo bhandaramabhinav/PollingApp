@@ -26,9 +26,9 @@ namespace WhatsUrSay.Models
         public int createdby { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<Activity_Group> Activity_Group { get; set; } //virtual
-        public User User { get; set; } //virtual
+        public  ICollection<Activity_Group> Activity_Group { get; set; }
+        public  User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<User_Group> User_Group { get; set; } //virtual
+        public  ICollection<User_Group> User_Group { get; set; }
     }
 }

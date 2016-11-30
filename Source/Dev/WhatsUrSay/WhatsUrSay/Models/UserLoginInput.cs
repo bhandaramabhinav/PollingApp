@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WhatsUrSay.Models
 {
-    public class UserInput
+    public class UserLoginInput
     {
         public string uName { get; set; }
         public string uPassword { get; set; }

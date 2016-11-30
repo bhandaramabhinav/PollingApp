@@ -18,7 +18,7 @@ namespace WhatsUrSay.Models
         public int user_id { get; set; }
         public int group_id { get; set; }
     
-        public Group Group { get; set; }//virtual
-        public User User { get; set; }//virtual
+        public  Group Group { get; set; }
+        public  User User { get; set; }
     }
 }

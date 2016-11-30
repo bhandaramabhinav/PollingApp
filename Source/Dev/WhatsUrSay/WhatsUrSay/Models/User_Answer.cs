@@ -20,9 +20,9 @@ namespace WhatsUrSay.Models
         public int question_id { get; set; }
         public int answer_id { get; set; }
     
-        public Activity Activity { get; set; } //virtual
-        public Answer Answer { get; set; }//virtual
-        public Question Question { get; set; }//virtual
-        public User User { get; set; }//virtual
+        public  Activity Activity { get; set; }
+        public  Answer Answer { get; set; }
+        public  Question Question { get; set; }
+        public  User User { get; set; }
     }
 }

@@ -11,7 +11,7 @@ Component usage of data structures, algorithms and control (if any):
     The user can click on 'Cancel' button to cancel the poll creation
 -->
 <form name="pollForm">
-    <div class="primary callout" ng-controller="PollController">
+    <div class="primary callout" ng-controller="PollController" ng-init="LoadDataNecessary()">
         <div class="row">
             <div class="large-12 columns">
                 <label>
@@ -63,7 +63,7 @@ Component usage of data structures, algorithms and control (if any):
                 <div class="large-12 columns">
                     <label>
                         Poll Type <small>required</small>
-                        <select id="pollType" name="pollType" ng-model="pollType" ng-change="TypeChanged()">
+                        <select id="pollType" name="pollType" ng-model="pollType" ng-change="TypeChanged()" ng-required="true">
                             <option value="private">Private</option>
                             <option value="public">Public</option>
                         </select>
@@ -77,7 +77,10 @@ Component usage of data structures, algorithms and control (if any):
                         (At least 1 group name is required. Click on the '+' to add Group)<br/>
                         <!--<input type="text" placeholder="Enter the names of groups" ng-model="groupNames"/>-->
                     </label>
-                    
+                    <select ng-required="(pollType=='private')" name="multipleSelect" id="multipleSelect" ng-model="select" multiple>
+                        <option ng-repeat="group in groupDetails" value="{{group.name}}">{{group.name}}</option>
+                    </select>
+                    <!--
                     <ul>
                         <li ng-repeat="group in groups track by $index" style="list-style-type:none;">
                             <input type="text" ng-model="group.name" ng-required="true"/>
@@ -90,7 +93,7 @@ Component usage of data structures, algorithms and control (if any):
                             Remove Group  <i class="fi-minus" ng-click="RemoveGroup(group)"></i>
                         </li>
                     </ul>
-                        
+                        -->
                 </div>
             </div>
         

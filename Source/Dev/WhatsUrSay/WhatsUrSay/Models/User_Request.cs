@@ -19,6 +19,6 @@ namespace WhatsUrSay.Models
         public string description { get; set; }
         public int status { get; set; }
     
-        public User User { get; set; }//virtual
+        public  User User { get; set; }
     }
 }
