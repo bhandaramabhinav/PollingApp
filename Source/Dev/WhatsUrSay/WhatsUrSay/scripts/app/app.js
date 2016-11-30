@@ -1,4 +1,5 @@
-﻿/*
+﻿/// <reference path="C:\Users\Goud's\Source\Repos\SEProject\SEProject\Source\Dev\WhatsUrSay\WhatsUrSay\features/Group/EditUserGroup.html" />
+/*
 Component :                             An AngularJS module definition that is used to define the angular js application used in the application and the different routes
                                         identified in the application.
 Author:                                 Abhinav Bhandaram
@@ -24,7 +25,7 @@ Reason for component existence:         Angular JS application definition..
         }).when('/createSurvey', {
             templateUrl: 'features/Survey/CreateSurvey.html'
         }).when('/createGroup', {
-            templateUrl: 'features/Group/CreateGroup.html',
+            templateUrl: 'features/Group/EditUserGroup.html',
         }).when('/participatePoll', {
             templateUrl: 'features/Poll/ParticipateInPoll.html',
         }).when('/participateSurvey', {
@@ -33,6 +34,8 @@ Reason for component existence:         Angular JS application definition..
             templateUrl: 'features/Survey/ViewSurveyResults.html',
         }).when('/viewPollResults',{
             templateUrl: 'features/Poll/ViewPollResults.html',
+        }).when('/editGroup', {
+            templateUrl: 'features/Group/EditUserGroup.html',
         }).otherwise({
             templateUrl: 'features/Home/Home.html',
             controller:'HomeController'

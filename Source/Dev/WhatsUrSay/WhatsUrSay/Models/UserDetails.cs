@@ -22,7 +22,7 @@ namespace WhatsUrSay.Models
         /// Properties to hold user data
         /// </summary>
        public string emailId { get; set; }
-       //public int Id { get; set; }
+       public int Id { get; set; }
  
     }
 }

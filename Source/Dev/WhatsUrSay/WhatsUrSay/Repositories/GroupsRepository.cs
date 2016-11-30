@@ -168,6 +168,57 @@ namespace WhatsUrSay.Repositories
 
         }
 
+
+        public List<Group> getGroupsByCreatedUserId(int UserId)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+
+            List<Group> groups;
+                try
+            {
+                groups = db.Groups.Where(e => e.createdby == UserId).ToList<Group>();
+                foreach(var group in groups)
+                {
+                                 
+                    db.Entry(group).Collection(e => e.User_Group).Load();
+                    foreach (var usergroup in group.User_Group)
+                    {
+                         db.Entry(usergroup).Reference(e => e.User).Load();
+
+                    }
+
+          
+                    
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+
+            return groups;
+        }
+
+
+        public void DeleteAddUsersFromGroup(UserGroup group)
+        {
+           
+
+            foreach (int id in group.UserIdsDelete)
+            {
+                User_Group userGroup = db.User_Group.First(e => e.user_id == id&&e.group_id==group.GroupId);
+
+                db.User_Group.Remove(userGroup);
+            }
+
+            foreach (int id in group.UserIdsAdd)
+            {
+                User_Group userGroup = new User_Group() { user_id = id, group_id = group.GroupId };
+                db.User_Group.Add(userGroup);
+            }
+
+            db.SaveChanges();
+        }
         /// <summary>
         /// Finds if group exists
         /// </summary>

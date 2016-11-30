@@ -56,5 +56,20 @@ namespace WhatsUrSay.Repositories
             }            
             return objEntities.Users.Where(user => user.emailId == uName).FirstOrDefault();
         }
+
+        public List<User> GetUsers()
+        {
+            List<User> users;
+            try
+            {
+                users= objEntities.Users.ToList();
+            }
+            catch(Exception )
+            {
+                throw;
+            }
+
+            return users;
+        }
     }
 }
