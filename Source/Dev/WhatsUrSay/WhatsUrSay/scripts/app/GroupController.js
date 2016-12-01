@@ -5,9 +5,9 @@
         .module('app')
         .controller('GroupController', GroupController);
     //Injecting the Angular JS Scope and required modules to be used for model binding between the view and the controller, making http requests etc.
-    GroupController.$inject = ['$scope', '$http', '$location', '$mdDialog'];
+    GroupController.$inject = ['$scope', '$http', '$location', '$mdDialog', '$localStorage', '$sessionStorage', '$window'];
 
-    function GroupController($scope, $http, $location, $mdDialog) {
+    function GroupController($scope, $http, $location, $mdDialog, $localStorage, $sessionStorage, $window, $filter) {
         $scope.title = 'Group';
         $scope.groupTitle = "";
         $scope.userDetails = "";
@@ -15,6 +15,11 @@
         activate();
 
         function activate() {
+            if ($sessionStorage.userLoginInfo) {
+                $scope.userInfo = $sessionStorage.userLoginInfo;
+            } else {
+                $location.path('/login');
+            }
 
         }
 
@@ -64,20 +69,17 @@
                 }
             }*/
             $scope.uL = [];
-            var Group = { name: $scope.groupTitle, createdby: 1 };
+            var Group = { name: $scope.groupTitle, createdby: $scope.userInfo.userId };
             for (var i=0; i < $scope.select.length; i++) {
                 $scope.uL.push({ emailId: $scope.select[i] });
             }
             var groupDetails = { group: Group, UserList:$scope.uL};
-            $scope.CreateGroupStatus = $http.post('api/Groups/PostGroup', groupDetails).then(function success(response) {
+            $scope.CreateGroupStatus = $http.post('WhatsUrSay/api/Groups/PostGroup', groupDetails).then(function success(response) {
                 //alert(response);
                 var alert_text = "";
                 if (response.data) {
                     alert_text = "Group is created Successfully";
-                } else {
-                    alert_text = "Group creation failed";
-                }
-                $mdDialog.show(
+                    $mdDialog.show(
                     $mdDialog.alert()
                       .parent(angular.element(document.querySelector('#popupContainer')))
                       .clickOutsideToClose(true)
@@ -86,7 +88,21 @@
                       .ariaLabel('alert')
                       .ok('Ok')
                   );
-                $location.path('/home');
+                    $location.path('/dashboard');
+                } else {
+                    alert_text = "Group creation failed";
+                    $mdDialog.show(
+                    $mdDialog.alert()
+                      .parent(angular.element(document.querySelector('#popupContainer')))
+                      .clickOutsideToClose(true)
+                      .title('Group Creation')
+                      .textContent(alert_text)
+                      .ariaLabel('alert')
+                      .ok('Ok')
+                  );
+                }
+                
+               
             }, function error(response) {
                 alert(response);
                 $location.path('/error');
@@ -94,7 +110,7 @@
         };
 
         $scope.LoadMembers = function () {
-            $http.get('api/User/GetUsers').then(function success(response) {
+            $http.get('WhatsUrSay/api/User/GetUsers').then(function success(response) {
                 //alert("Load Members GroupController");
                 $scope.userDetails = response.data;
             }, function error(response) {

@@ -13,9 +13,9 @@ Reason for component existence:         Used for creating a survey and getting t
         .module('app')
         .controller('SurveyController', SurveyController);
     //Injecting the Angular JS Scope and required modules to be used for model binding between the view and the controller, making http requests etc.
-    SurveyController.$inject = ['$scope', '$http', '$location', '$mdDialog'];
+    SurveyController.$inject = ['$scope', '$http', '$location', '$mdDialog', '$routeParams', '$localStorage', '$sessionStorage', '$window'];
 
-    function SurveyController($scope, $http, $location, $mdDialog) {
+    function SurveyController($scope, $http, $location, $mdDialog, $routeParams, $localStorage, $sessionStorage, $window) {
         $scope.title = 'Survey';
         $scope.surveyTitle = "";
         $scope.description = "";
@@ -24,7 +24,16 @@ Reason for component existence:         Used for creating a survey and getting t
         $scope.questions = [{ description: "", Answers: [{ description: "", count: 0 }, { description: "", count: 0 }] }]
 
         $scope.displayGroups = false;
-        
+        if ($sessionStorage.userLoginInfo) {
+            $scope.userInfo = $sessionStorage.userLoginInfo;
+        } else {
+            $location.path('/login');
+        }
+        $scope.$watch(function () { return $sessionStorage.userLoginInfo }, function (newVal, oldVal) {
+            if (oldVal !== newVal) {
+                $scope.userInfo = $sessionStorage.userLoginInfo;
+            }
+        })
         $scope.AddQuestion = function () {
         
             $scope.questions.push({ description: "", Answers: [{ description: "", count: 0 }, { description: "", count: 0 }] });
@@ -68,7 +77,7 @@ Reason for component existence:         Used for creating a survey and getting t
         }
 
         $scope.LoadGroups = function () {
-            $http.get('api/Groups/GetGroups')
+            $http.get('WhatsUrSay/api/Groups/GetGroups')
             .then(function success(response) {
                 var data = response.data;
                 for (var i = 0; i < data.length; i++) {
@@ -122,17 +131,14 @@ Reason for component existence:         Used for creating a survey and getting t
 
                 }
             }
-            var activity = { heading: $scope.surveyTitle, description: $scope.description, type: $scope.surveyType, category: 2, createdby: 1, Questions: $scope.questions, Activity_Group: $scope.selectedGroups };
-            $scope.LoginStatus = $http.post('api/Survey/PostSurvey', activity).then(function success(response) {
+            var activity = { heading: $scope.surveyTitle, description: $scope.description, type: $scope.surveyType, category: 2, createdby: $scope.userInfo.userId, Questions: $scope.questions, Activity_Group: $scope.selectedGroups };
+            $scope.LoginStatus = $http.post('WhatsUrSay/api/Survey/PostSurvey', activity).then(function success(response) {
                 console.log("success");
                 //alert(response);
                 var alert_text = "";
                 if (response.data) {
                     alert_text = "Survey is created Successfully";
-                } else {
-                    alert_text = "Survey creation failed";
-                }
-                $mdDialog.show(
+                    $mdDialog.show(
                     $mdDialog.alert()
                       .parent(angular.element(document.querySelector('#popupContainer')))
                       .clickOutsideToClose(true)
@@ -141,7 +147,21 @@ Reason for component existence:         Used for creating a survey and getting t
                       .ariaLabel('alert')
                       .ok('Ok')
                   );
-                $location.path('/home');
+                    $location.path('/dashboard');
+                } else {
+                    alert_text = "Survey creation failed";
+                    $mdDialog.show(
+                    $mdDialog.alert()
+                      .parent(angular.element(document.querySelector('#popupContainer')))
+                      .clickOutsideToClose(true)
+                      .title('Survey Creation')
+                      .textContent(alert_text)
+                      .ariaLabel('alert')
+                      .ok('Ok')
+                  );
+                }
+                
+               
             },function error(response) {
                 alert(response);
                 $location.path('/error');

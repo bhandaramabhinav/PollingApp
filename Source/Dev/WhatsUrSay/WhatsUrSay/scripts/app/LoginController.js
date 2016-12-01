@@ -39,17 +39,16 @@ Reason for component existence:         To serve Login page and client side func
         $scope.Login = function ($event) {
             $event.preventDefault();
             var userInfo = { uName: $scope.userName, uPassword: $scope.password }
-            $scope.LoginStatus = $http.post('api/Login/Login', userInfo).then(function success(response) {
+            $scope.LoginStatus = $http.post('WhatsUrSay/api/Login/Login', userInfo).then(function success(response) {
                 var alert_text = "";
                 if (response.data) {
-                    alert_text = "Login Successfull.";
+                    //alert_text = "Login Successfull.";
                     $sessionStorage.userLoginInfo = { isAuth: true, emailId: $scope.userName, userId: response.data.id,role:response.data.role,name:response.data.name };
                     //alert($sessionStorage.userLoginInfo.userId);
                     $location.path('/dashboard');
                 } else {
                     alert_text = "Please enter valid username and password.";
-                }
-                $mdDialog.show(                    
+                    $mdDialog.show(
                     $mdDialog.alert()
                       .parent(angular.element(document.querySelector('#popupContainer')))
                       .clickOutsideToClose(true)
@@ -57,8 +56,10 @@ Reason for component existence:         To serve Login page and client side func
                       .textContent(alert_text)
                       .ariaLabel('alert')
                       .ok('Ok')
-                      
+
                   );
+                }
+                
 
             }, function error(response) {
                 $location.path('/error');

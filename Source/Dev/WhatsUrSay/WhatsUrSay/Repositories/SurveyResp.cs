@@ -31,17 +31,16 @@ namespace WhatsUrSay
         //Output: A list of poll records from the 'Activity' table
         public IEnumerable<Activity> GetAll()
             {
-            Db1.Configuration.LazyLoadingEnabled = false;
+            //Db1.Configuration.LazyLoadingEnabled = false;
             // TO DO : Code to get the list of all the records in database
-            foreach (var act in Db1.Activities)
+            var activities = Db1.Activities.ToList();
+            foreach (var act in activities)
             {
-                Db1.Entry(act).Collection(p => p.Questions).Load();
-                 foreach (var question in act.Questions )
+                act.Questions = Db1.Questions.Where(ques => ques.activity_id == act.id).ToList();
+                foreach(var question in act.Questions)
                 {
-                    Db1.Entry(question).Collection(p => p.Answers).Load();
+                    act.Answers = Db1.Answers.Where(ans => ans.question_id == question.id && ans.activity_id == act.id).ToList();
                 }
-
-
             }
             return Db1.Activities.Where(e => e.category == 2);
             }

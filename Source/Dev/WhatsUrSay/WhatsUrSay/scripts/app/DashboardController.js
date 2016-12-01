@@ -21,13 +21,53 @@ Reason for component existence:         To serve Dashboard page and client side 
             if ($sessionStorage.userLoginInfo) {
                 $scope.userInfo = $sessionStorage.userLoginInfo;
                 var userInfo={userId:$scope.userInfo.userId,role:$scope.role};
-                $scope.LoginStatus = $http.post('api/Dashboard/GetDashboard', userInfo).then(function success(response) {
+                $scope.LoginStatus = $http.post('WhatsUrSay/api/Dashboard/GetDashboard', userInfo).then(function success(response) {
                     $scope.dashBoardDetails = response.data;
                     $scope.publicPolls = $scope.dashBoardDetails.publicActivities.filter((item) =>item.category == 1);
                     $scope.publicSurveys = $scope.dashBoardDetails.publicActivities.filter((item) =>item.category == 2);
-                    $scope.createdPolls = $scope.dashBoardDetails.createdActitvities;
-                    $scope.privatePolls = $scope.dashBoardDetails.privateActivities.filter((item) =>item.category == 2);
-
+                    $scope.createdPolls = $scope.dashBoardDetails.createdActitvities.filter((item)=>item.category==1);
+                    $scope.privatePolls = $scope.dashBoardDetails.privateActivities.filter((item) =>item.category == 1);
+                    $scope.privateSurveys = $scope.dashBoardDetails.privateActivities.filter((item) =>item.category == 2);
+                    $scope.createdSurveys = $scope.dashBoardDetails.createdActitvities.filter((item) =>item.category == 2);
+                    $scope.user_groups = $scope.dashBoardDetails.user_groups;
+                    $scope.groups = $scope.dashBoardDetails.groups;
+                    $scope.userActivity = $scope.dashBoardDetails.uswerAnswer;
+                    angular.forEach($scope.publicPolls, function (item) {
+                        angular.forEach($scope.userActivity[$scope.userInfo.userId], function (item2) {
+                            if (item.id == item2) {
+                                item.participated = true;
+                            } else {
+                                item.participated = false;
+                            }
+                        });
+                    });
+                    angular.forEach($scope.privatePolls, function (item) {
+                        angular.forEach($scope.userActivity[$scope.userInfo.userId], function (item2) {
+                            if (item.id == item2) {
+                                item.participated = true;
+                            } else {
+                                item.participated = false;
+                            }
+                        });
+                    });
+                    angular.forEach($scope.publicSurveys, function (item) {
+                        angular.forEach($scope.userActivity[$scope.userInfo.userId], function (item2) {
+                            if (item.id == item2) {
+                                item.participated = true;
+                            } else {
+                                item.participated = false;
+                            }
+                        });
+                    });
+                    angular.forEach($scope.privateSurveys, function (item) {
+                        angular.forEach($scope.userActivity[$scope.userInfo.userId], function (item2) {
+                            if (item.id == item2) {
+                                item.participated = true;
+                            } else {
+                                item.participated = false;
+                            }
+                        });
+                    });
                 }, function error(response) {
                     $location.path('/error');
                 });

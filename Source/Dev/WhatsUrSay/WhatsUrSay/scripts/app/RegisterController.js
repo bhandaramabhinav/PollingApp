@@ -33,14 +33,11 @@
                 return;
             }
             var user = { emailId: $scope.user.emailId, password: $scope.user.password, name: $scope.user.name };
-            $scope.LoginStatus = $http.post('api/Login/AddUser', user).then(function success(response) {
+            $scope.LoginStatus = $http.post('WhatsUrSay/api/Login/AddUser', user).then(function success(response) {
                 var alert_text = "";
                 if (response.data) {
                     alert_text = "Registration Successfull, Please login.";
-                } else {
-                    alert_text = "An error occurred while registration please try again later.";
-                }
-                $mdDialog.show(
+                    $mdDialog.show(
                     $mdDialog.alert()
                       .parent(angular.element(document.querySelector('#popupContainer')))
                       .clickOutsideToClose(true)
@@ -50,6 +47,21 @@
                       .ok('Ok')
 
                   );
+                    $location.path('/login');
+                } else {
+                    alert_text = "An error occurred while registration please try again later.";
+                    $mdDialog.show(
+                    $mdDialog.alert()
+                      .parent(angular.element(document.querySelector('#popupContainer')))
+                      .clickOutsideToClose(true)
+                      .title('Registration')
+                      .textContent(alert_text)
+                      .ariaLabel('alert')
+                      .ok('Ok')
+
+                  );
+                }
+                
 
             }, function error(response) {
                 $location.path('/Error');

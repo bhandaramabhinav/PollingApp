@@ -13,32 +13,32 @@ Reason for component existence:         Angular JS application definition..
     //Defining the routes identified in the application.
     app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/login', {
-            templateUrl: 'features/Login/Login.html',
+            templateUrl: 'WhatsUrSay/features/Login/Login.html',
             controller:'LoginController'
         }).when('/join', {
-            templateUrl: 'features/Login/Register.html',
+            templateUrl: 'WhatsUrSay/features/Login/Register.html',
             controller:'RegisterController'
         }).when('/dashboard', {
-            templateUrl: 'features/Home/Dashboard.html',
+            templateUrl: 'WhatsUrSay/features/Home/Dashboard.html',
             controller: 'DashboardController'
         }).when('/error', {
-            templateUrl: 'features/Error/Error.html',
+            templateUrl: 'WhatsUrSay/features/Error/Error.html',
         }).when('/createPoll', {
-            templateUrl: 'features/Poll/CreatePoll.html'
+            templateUrl: 'WhatsUrSay/features/Poll/CreatePoll.html'
         }).when('/createSurvey', {
-            templateUrl: 'features/Survey/CreateSurvey.html'
+            templateUrl: 'WhatsUrSay/features/Survey/CreateSurvey.html'
         }).when('/createGroup', {
-            templateUrl: 'features/Group/CreateGroup.html',
-        }).when('/participatePoll', {
-            templateUrl: 'features/Poll/ParticipateInPoll.html',
-        }).when('/participateSurvey', {
-            templateUrl: 'features/Survey/ParticpateSurvey.html',
-        }).when('/viewSurveyResults', {
-            templateUrl: 'features/Survey/ViewSurveyResults.html',
-        }).when('/viewPollResults',{
-            templateUrl: 'features/Poll/ViewPollResults.html',
+            templateUrl: 'WhatsUrSay/features/Group/CreateGroup.html',
+        }).when('/participatePoll/:id', {
+            templateUrl: 'WhatsUrSay/features/Poll/ParticipateInPoll.html',
+        }).when('/participateSurvey/:id', {
+            templateUrl: 'WhatsUrSay/features/Survey/ParticpateSurvey.html',
+        }).when('/viewSurveyResults/:id', {
+            templateUrl: 'WhatsUrSay/features/Survey/ViewSurveyResults.html',
+        }).when('/viewPollResults/:id',{
+            templateUrl: 'WhatsUrSay/features/Poll/ViewPollResults.html',
         }).otherwise({
-            templateUrl: 'features/Home/Home.html',
+            templateUrl: 'WhatsUrSay/features/Home/Home.html',
             controller:'HomeController'
         })
 

@@ -4,6 +4,9 @@ html, body {
   font-family: 'Roboto', sans-serif; 
   height:100%;
 }
+.disabled{
+    cursor:not-allowed;
+}
 .wrap{
     width:100%;
     min-height:100%;
