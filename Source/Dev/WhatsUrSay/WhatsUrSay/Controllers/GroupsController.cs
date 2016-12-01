@@ -148,7 +148,49 @@ namespace WhatsUrSay.Controllers
             return Ok(group);
         }
 
+        /// <summary>
+        /// This method returns groups by created UserId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns> List of groups</returns>
+        [ResponseType(typeof(List<Group>))]
+        public IHttpActionResult GetGroupsByCreatedUserId([FromUri] int userId)
+        {
+            List<Group> groups;
+            try
+            {
+                 groups = groupRepository.getGroupsByCreatedUserId(userId);
+
+             
+            }
+            catch(Exception)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+
+                return Ok(groups);
+
+        }
+
       
+        public IHttpActionResult PostDeleteAddUsersInGroup(UserGroup userGroup)
+        {
+            
+            try
+            {
+
+                groupRepository.DeleteAddUsersFromGroup(userGroup);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+
+            return StatusCode(HttpStatusCode.OK);
+
+        }
+
+
 
     }
 }

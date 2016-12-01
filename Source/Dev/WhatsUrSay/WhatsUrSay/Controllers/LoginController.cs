@@ -35,10 +35,22 @@ namespace WhatsUrSay.Controllers
         //Purpose: To proces the login requests of clients into our application.
         //Input: 'userInfo' object of type 'UserInput.cs'
         //Output: a boolean variable representing the status of the login request.
-        public dynamic Login(UserInput userInfo)
+        public dynamic Login(UserLoginInput userInfo)
         {
             ILoginRepository objLoginRepository = new LoginRepository();
             var result= objLoginRepository.Login(userInfo.uName, userInfo.uPassword);
+            return result;
+        }
+        public dynamic AddUser(UserRegistrationInput userInput)
+        {
+            IUserRepository objUserRepository = new UserRepository();
+            User user = new User();
+            user.emailId = userInput.emailId;
+            user.name = userInput.name;
+            user.pwd = userInput.password;
+            user.role = 1;
+            user.status = "active";
+            var result = objUserRepository.Add(user);
             return result;
         }
 

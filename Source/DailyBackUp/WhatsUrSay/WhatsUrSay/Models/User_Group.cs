@@ -16,6 +16,9 @@ namespace WhatsUrSay.Models
     {
         public int id { get; set; }
         public int user_id { get; set; }
-        public string group_ids { get; set; }
+        public int group_id { get; set; }
+    
+        public  Group Group { get; set; }
+        public  User User { get; set; }
     }
 }

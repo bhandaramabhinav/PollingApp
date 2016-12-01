@@ -26,10 +26,16 @@ namespace WhatsUrSay.Models
         }
     
         public virtual DbSet<Activity> Activities { get; set; }
-        public virtual DbSet<Group> Groups { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Activity_Group> Activity_Group { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Type> Types { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<User_Answer> User_Answer { get; set; }
         public virtual DbSet<User_Group> User_Group { get; set; }
+        public virtual DbSet<User_Request> User_Request { get; set; }
+        public virtual DbSet<User_Roles> User_Roles { get; set; }
     }
 }
