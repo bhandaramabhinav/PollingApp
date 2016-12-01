@@ -1078,6 +1078,7 @@
     <Content Include="Content\__MACOSX\foundation-icons\svgs\._fi-yen.svg" />
     <Content Include="Content\__MACOSX\foundation-icons\svgs\._fi-zoom-in.svg" />
     <Content Include="Content\__MACOSX\foundation-icons\svgs\._fi-zoom-out.svg" />
+    <Content Include="features\Admin\RequestGroupLeaderShip.html" />
     <Content Include="features\Error\Error.html" />
     <Content Include="features\Group\CreateGroup.html" />
     <Content Include="features\Home\Dashboard.html" />
@@ -1135,6 +1136,7 @@
     <Content Include="scripts\app\DashboardController.js" />
     <Content Include="scripts\app\GroupController.js" />
     <Content Include="scripts\app\HomeController.js" />
+    <Content Include="scripts\app\LeaderShipController.js" />
     <Content Include="scripts\app\LoginController.js" />
     <Content Include="scripts\app\ParticipateSurveyController.js" />
     <Content Include="scripts\app\PollController.js" />
@@ -1961,6 +1963,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeaderShipController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PollAnswerDetailsController.cs" />
     <Compile Include="Controllers\PollController.cs" />
@@ -1974,6 +1977,7 @@
     <Compile Include="Interfaces\IAnswer.cs" />
     <Compile Include="Interfaces\IDashBoardRepository.cs" />
     <Compile Include="Interfaces\IGroupsRepository.cs" />
+    <Compile Include="Interfaces\ILeaderShipRepository.cs" />
     <Compile Include="Interfaces\ILoginRepository.cs" />
     <Compile Include="Interfaces\IPollRepository.cs" />
     <Compile Include="Interfaces\IQuestionRepository.cs" />
@@ -1999,6 +2003,7 @@
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GroupDetails.cs" />
+    <Compile Include="Models\GroupLeaderShipInput.cs" />
     <Compile Include="Models\PollAnswerDetails.cs" />
     <Compile Include="Models\Question.cs">
       <DependentUpon>WhatsUrSayDataContext.tt</DependentUpon>
@@ -2047,6 +2052,7 @@
     <Compile Include="Repositories\AnswerResp.cs" />
     <Compile Include="Repositories\DashboardRepository.cs" />
     <Compile Include="Repositories\GroupsRepository.cs" />
+    <Compile Include="Repositories\LeaderShipRepository.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\PollAnswerDetailsRepository.cs" />
     <Compile Include="Repositories\PollRepository.cs" />

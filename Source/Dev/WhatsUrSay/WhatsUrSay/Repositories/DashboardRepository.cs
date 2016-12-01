@@ -25,6 +25,7 @@ namespace WhatsUrSay.Repositories
             var userGroups = objEntities.User_Group.Where(group => group.user_id == userInfo.userId).ToList();            
             var user_answer = objEntities.User_Answer.Where(usanswr => usanswr.user_id == userInfo.userId).ToList();            
             var user_activity = this.getDistinct(user_answer);
+
             if (userGroups != null)
             {
                 foreach (var userGroup in userGroups)
@@ -48,7 +49,8 @@ namespace WhatsUrSay.Repositories
                     privateActivities.Add(activity);
                 }
             }
-            if (userInfo.role != 2)
+            
+            if (userInfo.role != 1)
             {
                 userCreatedGroups = objEntities.Groups.Where(grp => grp.createdby == userInfo.userId).ToList();
             }

@@ -9,16 +9,16 @@ Reason for component existence:         Angular JS application definition..
 (function () {
     'use strict';
     //Defining the agularjs application 'app' and the required dependencies for the application.
-    var app = angular.module('app', ['ngRoute', 'ngMaterial','ngStorage']);
+    var app = angular.module('app', ['ngRoute', 'ngMaterial', 'ngStorage']);
     //Defining the routes identified in the application.
     app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/login', {
             templateUrl: 'WhatsUrSay/features/Login/Login.html',
-            controller:'LoginController'
+            controller: 'LoginController'
         }).when('/join', {
             templateUrl: 'WhatsUrSay/features/Login/Register.html',
-            controller:'RegisterController'
-        }).when('/dashboard', {
+            controller: 'RegisterController'
+        }).when('/dashboard/', {
             templateUrl: 'WhatsUrSay/features/Home/Dashboard.html',
             controller: 'DashboardController'
         }).when('/error', {
@@ -35,13 +35,25 @@ Reason for component existence:         Angular JS application definition..
             templateUrl: 'WhatsUrSay/features/Survey/ParticpateSurvey.html',
         }).when('/viewSurveyResults/:id', {
             templateUrl: 'WhatsUrSay/features/Survey/ViewSurveyResults.html',
-        }).when('/viewPollResults/:id',{
+        }).when('/viewPollResults/:id', {
             templateUrl: 'WhatsUrSay/features/Poll/ViewPollResults.html',
+        }).when('/leadershiprequest', {
+            templateUrl: 'WhatsUrSay/features/Admin/RequestGroupLeaderShip.html',
+            controller: "LeaderShipController"
         }).otherwise({
             templateUrl: 'WhatsUrSay/features/Home/Home.html',
-            controller:'HomeController'
+            controller: 'HomeController'
         })
 
     }]);
+    app.directive('myRefresh', function ($location, $route) {
+        return function (scope, element, attrs) {
+            element.bind('click', function () {
+                if (element[0] && element[0].href && element[0].href === $location.absUrl()) {
+                    $route.reload();
+                }
+            });
+        }
+    });
 
 })();
