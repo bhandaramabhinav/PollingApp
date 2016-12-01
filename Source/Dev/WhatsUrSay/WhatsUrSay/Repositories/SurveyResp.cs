@@ -24,37 +24,36 @@ namespace WhatsUrSay
 {
     public class SurveyResp : ISurvey
     {
-            DSEEntities Db1 = new DSEEntities();
+        DSEEntities Db1 = new DSEEntities();
 
         //Purpose: Gets all the records of type 'poll' from the 'Activity' table
         //Input: None
         //Output: A list of poll records from the 'Activity' table
         public IEnumerable<Activity> GetAll()
-            {
-            Db1.Configuration.LazyLoadingEnabled = false;
+        {
+            //Db1.Configuration.LazyLoadingEnabled = false;
             // TO DO : Code to get the list of all the records in database
-            foreach (var act in Db1.Activities)
+            var activities = Db1.Activities.ToList();
+            foreach (var act in activities)
             {
-                Db1.Entry(act).Collection(p => p.Questions).Load();
-                 foreach (var question in act.Questions )
+                act.Questions = Db1.Questions.Where(ques => ques.activity_id == act.id).ToList();
+                foreach (var question in act.Questions)
                 {
-                    Db1.Entry(question).Collection(p => p.Answers).Load();
+                    act.Answers = Db1.Answers.Where(ans => ans.question_id == question.id && ans.activity_id == act.id).ToList();
                 }
-
-
             }
             return Db1.Activities.Where(e => e.category == 2);
-            }
+        }
 
 
         //Purpose: Gets a record from the 'Activity' table whose row id is 'id'
         //Input: 'id' of the required record
         //Output: a record from 'Activity' table whose key is 'id'
         public Activity Get(int id)
-            {
-                // TO DO : Code to find a record in database
-                return Db1.Activities.Find(id);
-            }
+        {
+            // TO DO : Code to find a record in database
+            return Db1.Activities.Find(id);
+        }
 
 
 
@@ -62,19 +61,19 @@ namespace WhatsUrSay
         //Input: 'activity' object of type 'Activity.cs'
         //Output: Returns the object 'activity' upon its successful addition in the table
         public Activity Add(Activity Act)
+        {
+            if (Act == null)
             {
-                if (Act == null)
-                {
-                    throw new ArgumentNullException("Activity");
-                }
+                throw new ArgumentNullException("Activity");
+            }
 
-                // TO DO : Code to save record into database
-                Db1.Activities.Add(Act);
+            // TO DO : Code to save record into database
+            Db1.Activities.Add(Act);
             foreach (var question in Act.Questions)
-                 {
-                    question.activity_id = Act.id;
-                    Db1.Questions.Add(question);
-                foreach(var answer in question.Answers )
+            {
+                question.activity_id = Act.id;
+                Db1.Questions.Add(question);
+                foreach (var answer in question.Answers)
                 {
                     answer.question_id = question.id;
                     answer.activity_id = question.activity_id;
@@ -82,7 +81,7 @@ namespace WhatsUrSay
 
                 }
 
-                 }
+            }
             if (Act.Activity_Group != null)
             {
                 foreach (var group in Act.Activity_Group)
@@ -91,45 +90,45 @@ namespace WhatsUrSay
                     Db1.Activity_Group.Add(group);
                 }
             }
-                Db1.SaveChanges();
-                return Act;
-            }
+            Db1.SaveChanges();
+            return Act;
+        }
 
         //Purpose: Updates the row whose key is updated.id with the details of object 'updated' in the 'Activity' table
         //Input: 'updated' object of type 'Activity.cs'
         //Output: Returns 'true' upon the successful updation of record in the table
-       //        In case of 'null' input, the method throws 'ArgumentNullException'
+        //        In case of 'null' input, the method throws 'ArgumentNullException'
         public bool Update(Activity Act)
+        {
+            if (Act == null)
             {
-                if (Act == null)
-                {
-                    throw new ArgumentNullException("Activity");
-                }
-
-                // TO DO : Code to update record into database
-                var Survey1 = Db1.Activities.Single(a => a.id == Act.id);
-                Survey1.heading = Act.heading;
-                Survey1.description= Act.description;
-                Survey1.type= Act.type;
-                Survey1.category = Act.category;
-               // Survey1.group_ids = Act.group_ids;
-                Db1.SaveChanges();
-            
-                return true;
+                throw new ArgumentNullException("Activity");
             }
+
+            // TO DO : Code to update record into database
+            var Survey1 = Db1.Activities.Single(a => a.id == Act.id);
+            Survey1.heading = Act.heading;
+            Survey1.description = Act.description;
+            Survey1.type = Act.type;
+            Survey1.category = Act.category;
+            // Survey1.group_ids = Act.group_ids;
+            Db1.SaveChanges();
+
+            return true;
+        }
 
         //Purpose: Deletes the row whose key 'id' in the 'Activity' table
         //Input: 'id' of the activity that needs to be deleted
         //Output: Returns 'true' upon the successful deletion of record from the table
         public bool Delete(int id)
-            {
-                // TO DO : Code to remove the records from database
-                Activity products = Db1.Activities.Find(id);
-                Db1.Activities.Remove(products);
-                Db1.SaveChanges();
-                return true;
-            }
-        
+        {
+            // TO DO : Code to remove the records from database
+            Activity products = Db1.Activities.Find(id);
+            Db1.Activities.Remove(products);
+            Db1.SaveChanges();
+            return true;
+        }
+
 
     }
 }
