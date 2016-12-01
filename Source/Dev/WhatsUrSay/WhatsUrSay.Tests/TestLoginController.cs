@@ -14,11 +14,11 @@ namespace WhatsUrSay.Tests
     {
         [TestMethod]
 
-      public void TestLogin_Controller()
+        public void TestLogin_Controller()
         {
             var testLogin = GetTestLogin();
             var controller = new LoginController(testLogin);
-            UserInput user = new UserInput();
+            UserLoginInput user = new UserLoginInput();
             user.uName = testLogin[0].name;
             user.uPassword = testLogin[0].pwd;
             var result = controller.Login(user);
