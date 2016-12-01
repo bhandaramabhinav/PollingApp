@@ -25,7 +25,15 @@ namespace WhatsUrSay.Controllers
     public class UserController : ApiController
     {
         static readonly IUserRepository objUserRepository = new UserRepository();
-        
+        private List<User> testUser;
+
+        public UserController() { }
+
+        public UserController(List<User> testUser)
+        {
+            this.testUser = testUser;
+        }
+
 
         // GET api/<controller>/5
         //Purpose: Invokes 'Get(string uNmae)' method 

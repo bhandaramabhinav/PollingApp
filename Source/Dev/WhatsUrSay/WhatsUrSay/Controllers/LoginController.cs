@@ -24,6 +24,14 @@ namespace WhatsUrSay.Controllers
 {
     public class LoginController : ApiController
     {
+        private List<User> testLogin;
+
+        public LoginController(List<User> testLogin)
+        {
+            this.testLogin = testLogin;
+        }
+
+
         //Purpose: To proces the login requests of clients into our application.
         //Input: 'userInfo' object of type 'UserInput.cs'
         //Output: a boolean variable representing the status of the login request.

@@ -30,6 +30,14 @@ namespace WhatsUrSay.Controllers
     public class GroupsController : ApiController
     {
         GroupsRepository groupRepository = new GroupsRepository();
+        private List<Group> testGroup;
+
+        public GroupsController() { }
+
+        public GroupsController(List<Group> testGroup)
+        {
+            this.testGroup = testGroup;
+        }
 
         // GET: api/Groups
         /// <summary>

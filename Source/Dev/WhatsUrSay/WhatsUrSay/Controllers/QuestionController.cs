@@ -23,6 +23,22 @@ namespace WhatsUrSay.Controllers
     public class QuestionController : ApiController
     {
         QuestionRepository repo = new QuestionRepository();
+        private List<Activity> testQuestion;
+        private List<Question> testQuestion1;
+
+        public QuestionController() { }
+
+        public QuestionController(List<Question> testQuestion1)
+        {
+            this.testQuestion1 = testQuestion1;
+        }
+
+        public List<Question> PostQuestion()
+        {
+            throw new NotImplementedException();
+        }
+
+
 
         //Purpose: Invokes 'Add(Question question)' method of 'QuestionRepository.cs' that adds an object 'question' in the 'Question' table
         //Input: 'question' object of type 'Question.cs'
