@@ -29,6 +29,7 @@ namespace WhatsUrSay.Controllers
     {
         //  It reads the IAnswer interface.
          AnswerResp Answer1 = new AnswerResp();
+        public AnswerController() { }
 
         //GETAnswers api/<controller>
         //Purpose: Invokes 'GetAnswers()' method of AnswerRepo.cs that returns all the records of type 'answer' from the 'Answer' table

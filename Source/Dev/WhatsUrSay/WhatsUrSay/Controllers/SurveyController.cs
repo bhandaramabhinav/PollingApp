@@ -24,16 +24,23 @@ namespace WhatsUrSay.Controllers
     public class SurveyController : ApiController
     {
         //It reads the  Isuvery interface
-            SurveyResp Survey1 = new SurveyResp();
+        static readonly ISurvey Survey1 = new SurveyResp();
+        private List<Activity> list;
+
+        public SurveyController() { }
+        public SurveyController(List<Activity> list)
+        {
+            this.list = list;
+        }
 
         //GetAllSurveys api/<controller>
         //Purpose: Invokes 'GetAllSurveys()' method of SurveyRepo.cs that returns all the records of type 'survey' from the 'Survey' table
         //Input: None
         //Output: A list of answer records from the 'Survey' table
         public IEnumerable<Activity> GetAllSurveys()
-            {
-                return Survey1.GetAll();
-            }
+        {
+            return Survey1.GetAll();
+        }
 
         /// <summary>
         /// Return Activity for given activity Id
@@ -41,7 +48,7 @@ namespace WhatsUrSay.Controllers
         /// <param name="activityId"></param>
         /// <returns></returns>
         public Activity GetSurvey([FromUri]int activityId)
-        {           
+        {
             Activity activity = Survey1.GetAll().First(e => e.id == activityId);
             return activity;
         }
@@ -51,12 +58,8 @@ namespace WhatsUrSay.Controllers
         //Input: 'activity' object of type 'Activity.cs'
         //Output: Returns the object 'activity' upon its successful addition in the table
         public Activity PostSurvey(Activity newSurvey)
-            {
-                return Survey1.Add(newSurvey);
-            }
-
-       
-
-
+        {
+            return Survey1.Add(newSurvey);
+        }
     }
 }
