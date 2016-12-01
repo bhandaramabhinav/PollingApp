@@ -320,12 +320,12 @@
                 </md-tab>
             </md-tabs>
         </md-tab>
-        <!--<md-tab ng-if="userInfo.role==3" label="Requests">
-            <table ng-if="privateSurveys.length!=0">
+        <md-tab ng-if="userInfo.role==3" label="Requests">
+            <table ng-if="userrequests.length!=0">
                         <thead>
                             <tr>
                                 <th>
-                                    Title
+                                    User Id
                                 </th>
                                 <th>
                                     Descrption
@@ -336,27 +336,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="pSurvey in privateSurveys">
+                            <tr ng-repeat="request in userrequests">
                                 <td>
-                                    {{pSurvey.heading}}
+                                    {{request.user_id}}
                                 </td>
                                 <td>
-                                    {{pSurvey.description}}
+                                    {{request.description}}
                                 </td>
                                 <td>
-                                    <a ng-if="!pSurvey.participated" href="#/participateSurvey/{{pSurvey.id}}">
-                                        Participate
+                                    <a my-refresh ng-if="request.status==0" ng-click="approveRequest(request.id,request.description,$event)">
+                                        Approve
                                     </a>
-                                    <a ng-if="!pSurvey.participated" href="#/participateSurvey/{{pSurvey.id}}">
-                                        Participate
-                                    </a>
+                                    <span ng-if="request.status==1">
+                                        Approved
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <div ng-if="privateSurveys.length==0">
-                        No Private Surveys Available.
+                    <div ng-if="userrequests.length==0">
+                        No Requests Available.
                     </div>
-        </md-tab>-->
+        </md-tab>
     </md-tabs>
 </div>

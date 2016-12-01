@@ -53,9 +53,11 @@
                     </a>
                     <md-menu-content width="4">
                         <ul>
-                            <li ng-if="userInfo.isAuth && userInfo.role==1"><a href="#">Request Group Leadership</a></li>
-                            <li><a href="#">Profile!</a></li>
+                            <li ng-if="userInfo.isAuth && userInfo.role==1"><a href="#/leadershiprequest">Request Group Leadership</a></li>
+                            <li><a href="#/dashboard">Dashboard</a></li>
+                            @*<li><a href="#">Profile!</a></li>*@
                             <li><a ng-click="LogOut()">Log Out!</a></li>
+
                         </ul>
                     </md-menu-content>
                 </md-menu>
@@ -99,6 +101,7 @@
     <script src="~/scripts/app/ParticipateSurveyController.js"></script>
     <script src="~/scripts/app/RegisterController.js"></script>
     <script src="~/scripts/app/DashboardController.js"></script>
+    <script src="~/scripts/app/LeaderShipController.js"></script>
     <script>$(document).ready(function () { $(document).foundation(); });</script>
 </body>
 </html>
