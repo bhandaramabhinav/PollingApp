@@ -14,8 +14,21 @@ namespace WhatsUrSay.Models
     
     public partial class Question
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Question()
+        {
+            this.Answers = new HashSet<Answer>();
+            this.User_Answer = new HashSet<User_Answer>();
+        }
+    
         public int id { get; set; }
         public string description { get; set; }
         public int activity_id { get; set; }
+    
+        public  Activity Activity { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public  ICollection<Answer> Answers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public  ICollection<User_Answer> User_Answer { get; set; }
     }
 }

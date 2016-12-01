@@ -14,9 +14,21 @@ namespace WhatsUrSay.Models
     
     public partial class Group
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Group()
+        {
+            this.Activity_Group = new HashSet<Activity_Group>();
+            this.User_Group = new HashSet<User_Group>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
-        public string user_ids { get; set; }
-        public string created_by { get; set; }
+        public int createdby { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public  ICollection<Activity_Group> Activity_Group { get; set; }
+        public  User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public  ICollection<User_Group> User_Group { get; set; }
     }
 }
