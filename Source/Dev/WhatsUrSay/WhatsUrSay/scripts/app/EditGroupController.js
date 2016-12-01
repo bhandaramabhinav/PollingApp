@@ -5,9 +5,9 @@
         .module('app')
         .controller('EditGroupController', EditGroupController);
     //Injecting the Angular JS Scope and required modules to be used for model binding between the view and the controller, making http requests etc.
-    EditGroupController.$inject = ['$scope', '$http', '$location', '$mdDialog'];
+    EditGroupController.$inject = ['$scope', '$http', '$location', '$mdDialog', '$routeParams', '$localStorage', '$sessionStorage', '$window'];
 
-    function EditGroupController($scope, $http, $location, $mdDialog) {
+    function EditGroupController($scope, $http, $location, $mdDialog, $routeParams, $localStorage, $sessionStorage, $window) {
         
         $scope.ConvertToObject= function ()
         {
@@ -39,7 +39,7 @@
         {
             $scope.title = 'Select Group to Edit';
             $scope.groupTitle = "";
-            $scope.userId = "1";
+            $scope.userId = $routeParams.id;
             $scope.groups = []
             //$scope.selectedGroup;
             $scope.deletedUsers = [];
